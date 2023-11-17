@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
@@ -10,7 +9,43 @@ interface Props {
     currentYear: number;
 }
 
-const AppView: FC<Props> = ({ currentYear }) => {
+const RankingView: FC<Props> = ({ currentYear }) => {
+    const data = [
+        {
+            id: 1,
+            nombre: "Bootcamp A",
+            pais: "USA",
+            modalidad: "Presencial",
+            score: 90,
+            insignias: 3,
+        },
+        {
+            id: 2,
+            nombre: "Bootcamp B",
+            pais: "España",
+            modalidad: "Online",
+            score: 85,
+            insignias: 2,
+        },
+        {
+            id: 3,
+            nombre: "Bootcamp C",
+            pais: "México",
+            modalidad: "Presencial",
+            score: 88,
+            insignias: 4,
+        },
+        {
+            id: 4,
+            nombre: "Bootcamp D",
+            pais: "Argentina",
+            modalidad: "Online",
+            score: 78,
+            insignias: 1,
+        },
+        // Agrega más datos según sea necesario
+    ];
+
     return (
         <div>
             {/* Navbar */}
@@ -67,63 +102,37 @@ const AppView: FC<Props> = ({ currentYear }) => {
                 </div>
             </nav>
 
-            {/* Card de Directorio de Bootcamps */}
-            <div className="container mt-4">
-                <div className="card">
-                    <div className="card-header">
-                        <h5 className="card-title">Directorio de Bootcamps</h5>
-                    </div>
-                    <div className="card-body">
-                        <div className="mb-3">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Buscar Bootcamps"
-                            />
-                        </div>
-
-                        <div className="d-flex justify-content-between">
-                            <button className="btn btn-outline-secondary">
-                                Filtros
-                            </button>
-                            <button className="btn btn-primary">Agregar</button>
-                        </div>
-
-                        {/* Cartas de Bootcamps */}
-                        <div className="row mt-4">
-                            {[1, 2, 3, 4].map((bootcampId) => (
-                                <div key={bootcampId} className="col-md-3 mb-4">
-                                    <div className="card">
-                                        <div className="card-header">
-                                            <h5 className="card-title">
-                                                Nombre del Bootcamp
-                                            </h5>
-                                            <div className="rating">
-                                                {[1, 2, 3, 4, 5].map((star) => (
-                                                    <FontAwesomeIcon
-                                                        key={star}
-                                                        icon={faStar}
-                                                        className="star"
-                                                    />
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <textarea
-                                                className="form-control"
-                                                rows={4}
-                                                placeholder="Detalles"
-                                            ></textarea>
-                                        </div>
-                                        <div className="card-footer">
-                                            <button className="btn btn-info">
-                                                Ver más info
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+            {/* Ranking */}
+            <div className="card">
+                <div className="card-header">
+                    <h3>Ranking de Bootcamps</h3>
+                </div>
+                <div className="card-body">
+                    <div className="table-responsive">
+                        <table className="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>País</th>
+                                    <th>Modalidad</th>
+                                    <th>Score</th>
+                                    <th>Insignias</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((item) => (
+                                    <tr key={item.id}>
+                                        <td>{item.id}</td>
+                                        <td>{item.nombre}</td>
+                                        <td>{item.pais}</td>
+                                        <td>{item.modalidad}</td>
+                                        <td>{item.score}</td>
+                                        <td>{item.insignias}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -141,4 +150,4 @@ const AppView: FC<Props> = ({ currentYear }) => {
     );
 };
 
-export default AppView;
+export default RankingView;
