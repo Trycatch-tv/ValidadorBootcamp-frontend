@@ -25,7 +25,7 @@ const AppView: FC<Props> = ({ currentYear }) => {
                 </CardHeader>
                 <CardContent>
                     <div className="flex gap-3">
-                        <Input id="name" placeholder="Name of your project" />
+                        <Input className="max-w-[440px]" id="name" placeholder="Name of your project" />
                         <div className="flex justify-content-between gap-2">
                             <Button size={"sm"} className="text-xs" variant="outline">
                                 <Filter className="mr-2 h-4 w-4" />

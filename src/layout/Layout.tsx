@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
       {/* Header */}
       <Header />
       {/* Main */}
-      <main className="container container-lg pt-20 pb-20">
+      <main className="container container-lg pt-16 pb-36">
         {/* Content */}
         {children}
       </main>
