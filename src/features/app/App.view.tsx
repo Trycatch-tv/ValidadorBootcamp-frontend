@@ -2,7 +2,7 @@ import { FC } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
+import Navbar from "../../layout/Navbar";
 
 library.add(faStar);
 
@@ -14,58 +14,7 @@ const AppView: FC<Props> = ({ currentYear }) => {
     return (
         <div>
             {/* Navbar */}
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container">
-                    <a className="navbar-brand" href="/">
-                        Validador de Bootcamps {currentYear}
-                    </a>
-
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse " id="navbarNav">
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <a className="nav-link" href="/">
-                                    Inicio
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/ranking">
-                                    Ranking de Bootcamps
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/backoffice">
-                                    Backoffice
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/profile">
-                                    Usuario{" "}
-                                    <LazyLoadComponent>
-                                        <img
-                                            src={`https://picsum.photos/30`}
-                                            alt="Perfil"
-                                            className="rounded-full"
-                                            style={{ borderRadius: "50%" }}
-                                        />
-                                    </LazyLoadComponent>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <Navbar currentYear={currentYear} />
 
             {/* Card de Directorio de Bootcamps */}
             <div className="container mt-4">
@@ -116,9 +65,12 @@ const AppView: FC<Props> = ({ currentYear }) => {
                                             ></textarea>
                                         </div>
                                         <div className="card-footer">
-                                            <button className="btn btn-info">
+                                            <a
+                                                className="btn btn-info"
+                                                href="/bootcamp/view/1"
+                                            >
                                                 Ver más info
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
