@@ -3,86 +3,85 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
-import Layout from "@/layout/Layout";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Avatar, AvatarImage, Badge, Card, CardContent, CardHeader } from "@/components/ui";
+import { Header } from "@/components/header";
+
+
 
 const BootcampProfileView: React.FC = () => {
     const data = [
         {
             url: "https://picsum.photos/100",
-            comentario: "Comentario 1",
+            comentario: "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         },
         {
             url: "https://picsum.photos/100",
-            comentario: "Comentario 2",
+            comentario: "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         },
         {
             url: "https://picsum.photos/100",
-            comentario: "Comentario 3",
+            comentario: "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         },
         {
             url: "https://picsum.photos/100",
-            comentario: "Comentario 4",
+            comentario: "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        },
+        {
+            url: "https://picsum.photos/100",
+            comentario: "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         },
         // Agrega más datos según sea necesario
     ];
 
     return (
-        <Layout>
+        <>
+            <Header/>
+            <div className="container container-lg pt-16 pb-20">
 
-            <div className="container mt-4">
                 {/* Card principal */}
-                <div className="card">
-                    <div className="card-header">
-                        <h3>Perfil del Bootcamp</h3>
-                    </div>
-                    <div className="card-body">
-                        <div className="d-flex flex-wrap align-items-center justify-content-center mb-4">
-                            {/* Imagen con LazyLoad */}
+                    <div className="flex flex-wrap align-items-center gap-4 justify-between mb-4">
+                        {/* Imagen con LazyLoad */}
+                        <div className="flex gap-4" >
                             <LazyLoadComponent>
-                                <img
-                                    src={`https://picsum.photos/60`}
-                                    alt="Bootcamp"
-                                    className="rounded-full mb-2"
-                                    style={{ borderRadius: "50%" }}
-                                />
+                                <Avatar className="h-14 w-14">
+                                    <AvatarImage src={`https://picsum.photos/60`}></AvatarImage>
+                                </Avatar>
                             </LazyLoadComponent>
 
-                            <div className="text-center mb-2">
-                                <h4 className="mb-1">Nombre del Bootcamp</h4>
-                                <span className="badge rounded-pill bg-success">
-                                    Online
-                                </span>{" "}
-                                <button className="btn btn-success" disabled>
-                                    Reputación: Alto
-                                </button>
+                            <div className="">
+                                <h4 className="mb-1 font-semibold">Nombre del Bootcamp</h4>
+                                <Badge variant={"secondary"}>Online</Badge>
                             </div>
                         </div>
-                        {/* Descripción y Insignias */}
-                        <div className="alert alert-dismissible alert-warning">
-                            <h4 className="alert-heading">¡Descripción!</h4>
-                            <p className="mb-0">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Nullam in ligula at est
-                                ultrices laoreet. Nullam fringilla, mi a rhoncus
-                                efficitur, mauris ligula consectetur metus, eu
-                                facilisis eros tellus a arcu. Curabitur eget
-                                nunc eget elit posuere accumsan. Quisque auctor
-                                augue et eros bibendum, et scelerisque metus
-                                suscipit. Proin auctor, elit vitae imperdiet
-                                eleifend, tellus nulla consequat massa, sit amet
-                                ullamcorper ligula turpis et libero. Nunc nec
-                                erat id metus scelerisque suscipit eu ac justo.
-                                Vivamus nec nisl justo. Vestibulum id augue
-                                ligula. Integer vulputate lacus vel lectus
-                                fermentum, vel cursus arcu dictum. Phasellus
-                                venenatis nisl vel odio tincidunt, a lacinia mi
-                                consequat. .
-                            </p>
-                        </div>
-                        <div className="mb-4 text-center">
+                        <Badge className="h-[22px] text-gray-700 bg-green-300" variant={"secondary"}>
+                            Reputación: Alto
+                        </Badge>
+                    </div>
+                    {/* Descripción y Insignias */}
+                    <div >
+                        <h4 className=" font-semibold my-8">Descripcion</h4>
+                        <p className="text-muted-foreground ">
+                            Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit. Nullam in ligula at est
+                            ultrices laoreet. Nullam fringilla, mi a rhoncus
+                            efficitur, mauris ligula consectetur metus, eu
+                            facilisis eros tellus a arcu. Curabitur eget
+                            nunc eget elit posuere accumsan. Quisque auctor
+                            augue et eros bibendum, et scelerisque metus
+                            suscipit. Proin auctor, elit vitae imperdiet
+                            eleifend, tellus nulla consequat massa, sit amet
+                            ullamcorper ligula turpis et libero. Nunc nec
+                            erat id metus scelerisque suscipit eu ac justo.
+                            Vivamus nec nisl justo. Vestibulum id augue
+                            ligula. Integer vulputate lacus vel lectus
+                            fermentum, vel cursus arcu dictum. Phasellus
+                            venenatis nisl vel odio tincidunt, a lacinia mi
+                            consequat. .
+                        </p>
+                        <div className="my-8 ">
                             {/*  predeterminado de 4 */}
-                            <div className="rating">
-                                Insignias{" "}
+                            <div className="flex gap-2 items-center">
+                                <span className="font-semibold text-black">Insignias</span>
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <FontAwesomeIcon
                                         key={star}
@@ -92,49 +91,59 @@ const BootcampProfileView: React.FC = () => {
                                 ))}
                             </div>
                         </div>
+                    </div>
 
-                        {/* Subcard Reviews */}
-                        <div className="row">
-                            {data.map((item, index) => (
-                                // Subcard
-                                <div
-                                    key={index}
-                                    className="col-12 col-md-6 mb-2"
-                                >
-                                    <div className="card text-center">
-                                        <div className="card-body">
-                                            <img
-                                                src={item.url}
-                                                alt={`Usuario ${index + 1}`}
-                                                className="rounded-circle mb-2"
-                                            />
-                                            <p>{item.comentario}</p>
+                    {/* Subcard Reviews */}
+                    <h4 className=" font-semibold my-8">Reviews</h4>
+                    <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3  justify-center">
+                        {data.map((item, index) => (
+                            // Subcard
+                            <Card
+                                className="min-w-[250px] max-w-[350px]"
+                                key={index}
+                            >
+                                <CardHeader>
+                                    <div className="flex justify-between">
+                                        <span className="text-sm text-muted-foreground">{new Date().toLocaleDateString()}</span>
+                                        <div className="flex gap-2">
+                                            <p className="text-xs text-muted-foreground">Name</p>
+                                            <Avatar>
+                                                <AvatarImage src={`https://picsum.photos/60`}></AvatarImage>
+                                            </Avatar>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Subcard Contenido */}
-                        <div className="card mb-4">
-                            <div className="card-body">
-                                <h5>Contenido</h5>
-                                <p>Información detallada sobre el Bootcamp</p>
-                            </div>
-                        </div>
-                        {/* Subcard Términos y Condiciones */}
-                        <div className="card">
-                            <div className="card-body">
-                                <h5>Términos y Condiciones</h5>
-                                <p>
-                                    Cualquier cosa sobre términos y condiciones.
-                                </p>
-                            </div>
-                        </div>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-sm text-muted-foreground">{item.comentario}</p>
+                                </CardContent>
+                            </Card>
+                        ))}
                     </div>
-                </div>
+
+                    <div className="my-8">
+                        {/* Subcard Contenido */}
+                        <Accordion type="single" collapsible className="w-full">
+
+                            <AccordionItem value="item-1">
+                                <AccordionTrigger>Contenido</AccordionTrigger>
+                                <AccordionContent>
+                                    Información detallada sobre el Bootcamp
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                        <Accordion type="single" collapsible className="w-full">
+                            {/* Subcard Términos y Condiciones */}
+
+                            <AccordionItem value="item-2">
+                                <AccordionTrigger>Términos y Condiciones</AccordionTrigger>
+                                <AccordionContent>
+                                    Cualquier cosa sobre términos y condiciones.
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
             </div>
-        </Layout>
+        </>
     );
 };
 
