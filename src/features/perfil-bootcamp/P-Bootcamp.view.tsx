@@ -2,8 +2,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Navbar from "../../layout/Navbar";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import Layout from "@/layout/Layout";
 
 const BootcampProfileView: React.FC = () => {
     const data = [
@@ -27,9 +27,7 @@ const BootcampProfileView: React.FC = () => {
     ];
 
     return (
-        <div>
-            {/* Navbar */}
-            <Navbar currentYear={0} />
+        <Layout>
 
             <div className="container mt-4">
                 {/* Card principal */}
@@ -136,7 +134,7 @@ const BootcampProfileView: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     );
 };
 

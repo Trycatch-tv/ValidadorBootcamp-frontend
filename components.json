@@ -11,6 +11,6 @@
   },
   "aliases": {
     "components": "@/components",
-    "utils": "src/utils"
+    "utils": "@/utils/CssHelpers/utils"
   }
 }
