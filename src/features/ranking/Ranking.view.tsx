@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Navbar from "../../layout/Navbar";
+import Layout from "@/layout/Layout";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui";
 
 library.add(faStar);
 
@@ -47,59 +48,43 @@ const RankingView: FC<Props> = ({ currentYear }) => {
     ];
 
     return (
-        <div>
-            {/* Navbar */}
-            <Navbar currentYear={currentYear} />
-
-            <div className="container mt-4">
-                {/* Ranking */}
-                <div className="card">
-                    <div className="card-header">
-                        <h3>Ranking de Bootcamps</h3>
-                    </div>
-                    <div className="card-body">
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nombre</th>
-                                        <th>País</th>
-                                        <th>Modalidad</th>
-                                        <th>Score</th>
-                                        <th>Insignias</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data.map((item) => (
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
-                                            <td>{item.nombre}</td>
-                                            <td>{item.pais}</td>
-                                            <td>{item.modalidad}</td>
-                                            <td>{item.score}</td>
-                                            <td>{item.insignias}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+        <Layout>
+            {/* Ranking */}
+            <div>
+                <div>
+                    <h3 className="font-semibold text-lg">Ranking de Bootcamps</h3>
                 </div>
-
-                {/* Footer */}
-                <footer className="bg-gray-800 text-white py-4 bg-dark fixed-bottom">
-                    <div className="container text-center">
-                        <p>
-                            &copy; {new Date().getFullYear()} Validador Bootcamp
-                        </p>
-                    </div>
-                </footer>
-
-                {/* Contenido de la aplicación */}
-                {/* ... */}
+                <div className="mt-4">
+                    <Table className="table table-bordered table-striped">
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>#</TableHead>
+                                <TableHead>Nombre</TableHead>
+                                <TableHead>País</TableHead>
+                                <TableHead>Modalidad</TableHead>
+                                <TableHead>Score</TableHead>
+                                <TableHead>Insignias</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {data.map((item) => (
+                                <TableRow key={item.id}>
+                                    <TableCell>{item.id}</TableCell>
+                                    <TableCell>{item.nombre}</TableCell>
+                                    <TableCell>{item.pais}</TableCell>
+                                    <TableCell>{item.modalidad}</TableCell>
+                                    <TableCell>{item.score}</TableCell>
+                                    <TableCell>{item.insignias}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
-        </div>
+
+            {/* Contenido de la aplicación */}
+            {/* ... */}
+        </Layout>
     );
 };
 

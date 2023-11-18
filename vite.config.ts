@@ -1,3 +1,4 @@
+import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 // import vitest from 'vitest'; // Importa Vitest
@@ -13,4 +14,9 @@ export default defineConfig({
       // Configuración de Vitest, si es necesario
     // }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 });
