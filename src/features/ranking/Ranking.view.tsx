@@ -49,7 +49,6 @@ const RankingView: FC<Props> = () => {
       score: 78,
       insignias: 1,
     },
-    // Agrega más datos según sea necesario
   ]
 
   return (
@@ -86,9 +85,6 @@ const RankingView: FC<Props> = () => {
           </Table>
         </div>
       </div>
-
-      {/* Contenido de la aplicación */}
-      {/* ... */}
     </Layout>
   )
 }
