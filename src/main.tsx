@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import AppContainer from "./features/app/App.container.tsx"
 import ProfileBootcampContainer from "./features/bootcamps/profile/profile.bootcamp.container.tsx"
+import HomeContainer from "./features/home/Home.container.tsx"
 import RankingContainer from "./features/ranking/Ranking.container.tsx"
 import "./index.css"
 
@@ -13,7 +13,7 @@ if (rootElement) {
     <BrowserRouter>
       <React.StrictMode>
         <Routes>
-          <Route path="/" element={<AppContainer />} />
+          <Route path="/" element={<HomeContainer />} />
           <Route path="/ranking" element={<RankingContainer />} />
           <Route
             path="/bootcamp/view/1"
