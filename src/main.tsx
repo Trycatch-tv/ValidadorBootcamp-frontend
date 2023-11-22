@@ -16,7 +16,7 @@ if (rootElement) {
           <Route path="/" element={<HomeContainer />} />
           <Route path="/ranking" element={<RankingContainer />} />
           <Route
-            path="/bootcamp/view/1"
+            path="/bootcamp/:id"
             element={<ProfileBootcampContainer />}
           />
         </Routes>
