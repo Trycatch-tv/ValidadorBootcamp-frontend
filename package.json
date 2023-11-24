@@ -10,7 +10,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest --ui"
+    "test": "vitest --ui",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
@@ -48,7 +49,7 @@
     "@vitejs/plugin-react": "^4.0.3",
     "@vitest/ui": "^0.34.6",
     "autoprefixer": "^10.4.16",
-    "cypress": "^13.5.1",
+    "cypress": "^13.6.0",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
