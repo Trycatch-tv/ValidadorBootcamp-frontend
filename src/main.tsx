@@ -5,6 +5,7 @@ import ProfileBootcampContainer from "./features/bootcamps/profile/profile.bootc
 import HomeContainer from "./features/home/Home.container.tsx"
 import RankingContainer from "./features/ranking/Ranking.container.tsx"
 import "./index.css"
+import SigninContainer from "./features/auth/signin/signin.auth.container.tsx"
 
 const rootElement = document.getElementById("root")
 
@@ -15,6 +16,7 @@ if (rootElement) {
         <Routes>
           <Route path="/" element={<HomeContainer />} />
           <Route path="/ranking" element={<RankingContainer />} />
+          <Route path="/signin" element={<SigninContainer />} />
           <Route
             path="/bootcamp/:id"
             element={<ProfileBootcampContainer />}
