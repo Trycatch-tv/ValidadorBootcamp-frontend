@@ -24,7 +24,7 @@ const routes: NavbarLinkProps[] = [
     path: "/ranking",
   },
   {
-    name: "backoffice",
+    name: "Backoffice",
     path: "/backoffice",
   },
 ]
