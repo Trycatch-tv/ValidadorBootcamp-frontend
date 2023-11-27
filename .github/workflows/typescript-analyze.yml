@@ -1,0 +1,26 @@
+#Workflow name
+name: typescript analyze
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  ts-analysis:
+    timeout-minutes: 3
+    runs-on: ubuntu-runner-l
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 17.3
+      - name: 💊Install dependencies
+        run: yarn
+      - name: Run Pre-ts check script
+        run: node .github/pre-ts-check.mjs
+      - name: TypeScript type checking
+        run: yarn tsc --noEmit
