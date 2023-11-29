@@ -10,7 +10,7 @@ interface Props {
 const SigninView:FC<Props> = ({showPassword,setShowPassword}) => {
     return (
         <section>
-            <div className='container container-lg pt-16  w-full mx-auto flex justify-center min-h-screen'>
+            <div className='container container-lg pt-16 w-full mx-auto flex justify-center min-h-screen'>
                 {/* container form para del login */}
                 <div className='lg:flex-1 flex-col flex items-center justify-center'>
                     <div className='w-full'>
@@ -18,7 +18,7 @@ const SigninView:FC<Props> = ({showPassword,setShowPassword}) => {
                             <small className='text-gray-400 text-2xl'>Bienvenidos a</small>
                             <h2 className='text-4xl font-semibold max-w-md'>Validador de bootcamp </h2>
                         </div>
-                        <form className='max-w-md  w-full'>
+                        <form className='max-w-md min-w-[350px] w-full'>
                             <div className='my-5'>
                                 <label className='text-gray-700 text-xs font-semibold block my-1'>Usuario</label>
                                 <Input type="email" placeholder="Enter your email" />
@@ -45,7 +45,7 @@ const SigninView:FC<Props> = ({showPassword,setShowPassword}) => {
                                 <span className='h-[2px] w-full bg-gray-200 my-1' />
                             </div>
                             <Button className='w-full' variant={"outline"}>Continua con Google</Button>
-                            <p className='text-xs mt-10 text-center'>No tienes una cuenta? <Link className='text-blue-500' to='#'>Registrate</Link></p>
+                            <p className='text-xs mt-10 text-center'>No tienes una cuenta? <Link className='text-blue-500' to='/signup'>Registrate</Link></p>
                         </form>
                     </div>
                 </div>
