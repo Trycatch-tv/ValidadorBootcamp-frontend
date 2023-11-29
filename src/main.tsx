@@ -6,6 +6,7 @@ import HomeContainer from "./features/home/Home.container.tsx"
 import RankingContainer from "./features/ranking/Ranking.container.tsx"
 import "./index.css"
 import SigninContainer from "./features/auth/signin/signin.auth.container.tsx"
+import SignupContainer from "./features/auth/signup/signup.auth.container.tsx"
 
 const rootElement = document.getElementById("root")
 
@@ -17,6 +18,7 @@ if (rootElement) {
           <Route path="/" element={<HomeContainer />} />
           <Route path="/ranking" element={<RankingContainer />} />
           <Route path="/signin" element={<SigninContainer />} />
+          <Route path="/signup" element={<SignupContainer />} />
           <Route
             path="/bootcamp/:id"
             element={<ProfileBootcampContainer />}
