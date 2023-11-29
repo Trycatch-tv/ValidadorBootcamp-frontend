@@ -100,7 +100,7 @@ const SignupView: FC<Props> = ({
                 </div>
               </div>
               <div className="my-5">
-                <Button className="w-full">Inicia sesión</Button>
+                <Button className="w-full">Registrarse</Button>
               </div>
               <div className="flex items-center justify-center gap-4 my-5">
                 <span className="h-[2px] w-full bg-gray-200 my-1" />
