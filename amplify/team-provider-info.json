@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-glasscamp-dev-180717-authRole",
+      "UnauthRoleArn": "arn:aws:iam::916751302466:role/amplify-glasscamp-dev-180717-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::916751302466:role/amplify-glasscamp-dev-180717-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-glasscamp-dev-180717-deployment",
+      "UnauthRoleName": "amplify-glasscamp-dev-180717-unauthRole",
+      "StackName": "amplify-glasscamp-dev-180717",
+      "StackId": "arn:aws:cloudformation:ap-south-1:916751302466:stack/amplify-glasscamp-dev-180717/ab737b10-8f03-11ee-bede-02b626c3d3ec",
+      "AmplifyAppId": "d3awgsy0hr1s60"
+    },
+    "categories": {
+      "function": {
+        "glasscamp9d1aaec0": {
+          "deploymentBucketName": "amplify-glasscamp-dev-180717-deployment",
+          "s3Key": "amplify-builds/glasscamp9d1aaec0-7267395a32744c453975-build.zip"
+        }
+      },
+      "api": {
+        "api99ab5efb": {}
+      }
+    }
+  }
+}
