@@ -1,2 +1,1 @@
-export {default as Header} from "./Header"
-export { default as NavBar} from "./Navbar"
+export { default as Header } from "./Header";
