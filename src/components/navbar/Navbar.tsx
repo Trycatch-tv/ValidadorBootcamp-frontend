@@ -12,6 +12,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "../ui"
+import { useState } from 'react';
 
 interface NavbarLinkProps {
   name: string
@@ -23,17 +24,20 @@ const routes: NavbarLinkProps[] = [
     name: "Ranking de bootcamps",
     path: "/ranking",
   },
-  {
-    name: "Backoffice",
-    path: "/backoffice",
-  },
 ]
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+// Function to handle dropdown click
+const handleDropdownClick = () => {
+ setDropdownOpen(!dropdownOpen);
+};
+
   return (
-    <nav className="flex container mx-auto items-center container-lg justify-between">
+    <nav className="relative flex container mx-auto items-center container-lg justify-between mb-4">
       <Link to={"/"}>
         <h1 className="font-semibold">Validador de Bootcamps</h1>
       </Link>
@@ -72,10 +76,10 @@ const Navbar: FC<NavbarProps> = () => {
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
-      <ul className="hidden md:flex  items-center">
+     
         {routes.map((route, index) => {
           return (
-            <li key={index}>
+            <div key={index}>
               <Link to={route.path}>
                 <Button
                   className="text-xs text-gray-500"
@@ -85,10 +89,39 @@ const Navbar: FC<NavbarProps> = () => {
                   {route.name}
                 </Button>
               </Link>
-            </li>
+            </div>
           )
         })}
-        <li>
+        <div>
+          <button 
+            id="dropdownDefaultButton" 
+            className="relative z-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+            type="button" 
+            onClick={handleDropdownClick}
+          >
+            Backoffice 
+            <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          </button>
+
+        <div id="dropdown" className={`absolute top-[50px] left-auto right-15 z-50 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 ${dropdownOpen ? '' : 'hidden'}`}>
+          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+            <li>
+              <a href="/backoffice/ranking" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking</a>
+            </li>
+            <li>
+              <a href="/backoffice/bootcamp" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bootcamps</a>
+            </li>
+            <li>
+              <a href="/backoffice/reports" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reports</a>
+            </li>
+            <li>
+              <a href="/backoffice/users" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Users</a>
+            </li>
+          </ul>
+        </div>
+       </div>
           <Link to={"/profile"}>
             <Avatar>
               <LazyLoadComponent>
@@ -96,8 +129,6 @@ const Navbar: FC<NavbarProps> = () => {
               </LazyLoadComponent>
             </Avatar>
           </Link>
-        </li>
-      </ul>
     </nav>
   )
 }
