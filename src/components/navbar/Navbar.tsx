@@ -20,10 +20,6 @@ interface NavbarLinkProps {
 
 const routes: NavbarLinkProps[] = [
   {
-    name: "Ranking de bootcamps",
-    path: "/ranking",
-  },
-  {
     name: "Backoffice",
     path: "/backoffice",
   },
