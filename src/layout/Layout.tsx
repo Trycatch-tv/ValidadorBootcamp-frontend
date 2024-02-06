@@ -1,7 +1,6 @@
-import React from 'react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-
+import FooterContainer from "@/components/footer/footer.container"
+import NavbarContainer from "@/components/navbar/navbar.container"
+import React from "react"
 
 interface Props {
   children: React.ReactNode
@@ -9,16 +8,10 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className='relative min-h-screen'>
-      {/* Header */}
-      <Header />
-      {/* Main */}
-      <main className="container container-lg pt-16 pb-36">
-        {/* Content */}
-        {children}
-      </main>
-      {/* Footer */}
-      <Footer/>
+    <div className="relative min-h-screen bg-gray-50">
+      <NavbarContainer />
+      <main className="container container-lg pt-16 pb-36">{children}</main>
+      <FooterContainer />
     </div>
   )
 }
