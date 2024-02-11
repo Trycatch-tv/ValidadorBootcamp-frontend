@@ -9,7 +9,7 @@ import HomeContainer from "./features/home/Home.container.tsx"
 import RankingContainer from "./features/ranking/Ranking.container.tsx"
 import AdminUsersContainer from "./features/users/admin/admin.users.container.tsx"
 import "./index.css"
-import ReportsBackofficeView from "./features/backoffice/reports/reports.backoffice.view.tsx";
+import ReportsBackofficeContainer from "./features/backoffice/reports/reports.backoffice.container";
 
 const rootElement = document.getElementById("root")
 
@@ -26,7 +26,7 @@ if (rootElement) {
           <Route path="bootcamp/:id" element={<ProfileBootcampContainer />} />
           <Route path="backoffice" element={<BackofficeContainer />} />
           <Route path="bootcamp/:id" element={<ProfileBootcampContainer />} />
-          <Route path="reports" element={<ReportsBackofficeView />} />
+          <Route path="reports" element={<ReportsBackofficeContainer />} />
         </Routes>
       </React.StrictMode>
     </BrowserRouter>
