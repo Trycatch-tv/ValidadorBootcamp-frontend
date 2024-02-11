@@ -10,6 +10,7 @@ import RankingContainer from "./features/ranking/Ranking.container.tsx"
 import AdminUsersContainer from "./features/users/admin/admin.users.container.tsx"
 import "./index.css"
 
+
 const rootElement = document.getElementById("root")
 
 if (rootElement) {

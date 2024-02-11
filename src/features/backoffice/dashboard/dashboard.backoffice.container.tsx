@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import BackofficeView from "./dashboard.backoffice.view"
 
+
 const DashboardBackofficeContainer = () => {
-    return(
+  return (
         <>
             <BackofficeView/>
         </>
-    )
+    
+  )
 }
 
 export default DashboardBackofficeContainer
