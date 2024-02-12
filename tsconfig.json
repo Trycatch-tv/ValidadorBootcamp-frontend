@@ -21,13 +21,13 @@
     "noFallthroughCasesInSwitch": true,
 
      // alias paths
+     "baseUrl": "./", 
      "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["src/*"] 
     }
    
   },
-  "include": ["src/**/*.tsx", "src/**/*.jsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/declarations.d.ts"],
+  "exclude": ["node_modules", ".vscode"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
