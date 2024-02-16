@@ -1,20 +1,44 @@
-import { Button, Input } from "@/components/ui";
-import { Eye, EyeOff } from "lucide-react";
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Button, Input } from "@/components/ui"
+import { Eye, EyeOff } from "lucide-react"
+import { FC } from "react"
+import { Link } from "react-router-dom"
 
 interface Props {
-  showPassword: boolean;
-  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  confirmPassword: boolean;
-  setConfirmPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  showPassword: boolean
+  onClickShowPassword?: () => void
+  showConfirmPassword: boolean
+  onClickShowConfirmPassword?: () => void
+  email: string
+  onChangeEmail?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  first_name?: string
+  onChangeFirstName?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  last_name?: string
+  onChangeLastName?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  password?: string
+  onChangePassword?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  confirmPassword?: string
+  onChangeConfirmPassword?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  showPasswordError?: boolean
+  onclickSignup?: () => void
 }
 
 const SignupView: FC<Props> = ({
   showPassword,
-  setShowPassword,
+  onClickShowPassword,
+  showConfirmPassword,
+  onClickShowConfirmPassword,
+  email,
+  onChangeEmail,
+  first_name,
+  onChangeFirstName,
+  last_name,
+  onChangeLastName,
+  password,
+  onChangePassword,
   confirmPassword,
-  setConfirmPassword,
+  onChangeConfirmPassword,
+  showPasswordError,
+  onclickSignup,
 }) => {
   return (
     <section>
@@ -33,20 +57,38 @@ const SignupView: FC<Props> = ({
                 <label className="text-gray-700 text-xs font-semibold block my-1">
                   Correo
                 </label>
-                <Input type="email" placeholder="email@email.com" required />
+                <Input
+                  type="email"
+                  placeholder="email@email.com"
+                  onChange={onChangeEmail}
+                  value={email}
+                  required
+                />
               </div>
               <div className="grid md:grid-cols-2 md:gap-4">
                 <div className="md:my-5 my-3">
                   <label className="text-gray-700 text-xs font-semibold block my-1">
                     Nombre
                   </label>
-                  <Input type="text" placeholder="Nombre" required />
+                  <Input
+                    type="text"
+                    placeholder="Nombre"
+                    value={first_name}
+                    onChange={onChangeFirstName}
+                    required
+                  />
                 </div>
                 <div className="md:my-5 my-3">
                   <label className="text-gray-700 text-xs font-semibold block my-1">
                     Apellido
                   </label>
-                  <Input type="text" placeholder="Apellido" required />
+                  <Input
+                    type="text"
+                    placeholder="Apellido"
+                    value={last_name}
+                    onChange={onChangeLastName}
+                    required
+                  />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 md:gap-4 ">
@@ -60,15 +102,17 @@ const SignupView: FC<Props> = ({
                       className="border-none px-0"
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
+                      value={password}
+                      onChange={onChangePassword}
                     />
                     {showPassword ? (
                       <Eye
-                        onClick={() => setShowPassword(!showPassword)}
+                        onClick={onClickShowPassword}
                         className="h-4 text-gray-500 cursor-pointer"
                       />
                     ) : (
                       <EyeOff
-                        onClick={() => setShowPassword(!showPassword)}
+                        onClick={onClickShowPassword}
                         className="h-4 text-gray-500 cursor-pointer"
                       />
                     )}
@@ -82,32 +126,55 @@ const SignupView: FC<Props> = ({
                     <Input
                       name="confirmPassword"
                       className="border-none px-0"
-                      type={confirmPassword ? "text" : "password"}
+                      type={showConfirmPassword ? "text" : "password"}
+                      value={confirmPassword}
+                      onChange={onChangeConfirmPassword}
                       placeholder=" Enter your password"
                     />
-                    {confirmPassword ? (
+                    {showConfirmPassword ? (
                       <Eye
-                        onClick={() => setConfirmPassword(!confirmPassword)}
+                        onClick={onClickShowConfirmPassword}
                         className="h-4 text-gray-500 cursor-pointer"
                       />
                     ) : (
                       <EyeOff
-                        onClick={() => setConfirmPassword(!confirmPassword)}
+                        onClick={onClickShowConfirmPassword}
                         className="h-4 text-gray-500 cursor-pointer"
                       />
                     )}
                   </div>
                 </div>
+                {showPasswordError ? (
+                  <span className="text-sm text-red-500">
+                    Las contraseñas no coinciden
+                  </span>
+                ) : null}
               </div>
               <div className="my-5">
-                <Button className="w-full">Registrarse</Button>
+                <Button
+                  type="button"
+                  className="w-full"
+                  disabled={
+                    !email ||
+                    !first_name ||
+                    !last_name ||
+                    !password ||
+                    !confirmPassword ||
+                    showPasswordError
+                      ? true
+                      : false
+                  }
+                  onClick={onclickSignup}
+                >
+                  Registrarse
+                </Button>
               </div>
               <div className="flex items-center justify-center gap-4 my-5">
                 <span className="h-[2px] w-full bg-gray-200 my-1" />
                 <p className="text-gray-400 text-xs">O</p>
                 <span className="h-[2px] w-full bg-gray-200 my-1" />
               </div>
-              <Button className="w-full" variant={"outline"}>
+              <Button type="button" className="w-full" variant={"outline"}>
                 Continua con Google
               </Button>
               <p className="text-xs mt-10 text-center">
@@ -132,7 +199,7 @@ const SignupView: FC<Props> = ({
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default SignupView;
+export default SignupView
