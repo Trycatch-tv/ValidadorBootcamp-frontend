@@ -18,13 +18,12 @@ if (rootElement) {
       <React.StrictMode>
         <Routes>
           <Route path="/" element={<HomeContainer />} />
-          <Route path="ranking" element={<RankingContainer />} />
           <Route path="signin" element={<SigninContainer />} />
           <Route path="signup" element={<SignupContainer />} />
-          <Route path="admin/users" element={<AdminUsersContainer />} />
+          <Route path="ranking" element={<RankingContainer />} />
           <Route path="bootcamp/:id" element={<ProfileBootcampContainer />} />
           <Route path="backoffice" element={<BackofficeContainer />} />
-          <Route path="bootcamp/:id" element={<ProfileBootcampContainer />} />
+          <Route path="backoffice/users" element={<AdminUsersContainer />} />
         </Routes>
       </React.StrictMode>
     </BrowserRouter>

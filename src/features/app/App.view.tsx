@@ -10,7 +10,7 @@ interface Props {}
 const AppView: FC<Props> = () => {
   return (
     <Layout>
-      <h1>Validador de Bootcamps</h1>
+      <h1>GlassCamp</h1>
     </Layout>
   )
 }

@@ -1,5 +1,5 @@
 // En BootcampProfileView.tsx
-import { Header } from "@/components/header"
+import NavbarContainer from "@/components/navbar/navbar.container"
 import {
   Accordion,
   AccordionContent,
@@ -24,7 +24,7 @@ interface PropsInterface {
 const ProfileBootcampView: FC<PropsInterface> = ({ comments }) => {
   return (
     <>
-      <Header />
+      <NavbarContainer />
       <div className="container container-lg pt-16 pb-20">
         {/* Card principal */}
         <div className="flex flex-wrap align-items-center gap-4 justify-between mb-4">
