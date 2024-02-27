@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthController } from "../../../controllers/auth/auth.controller"
+import { showAlert } from "../../../utils/alerts/alert.util"
 import SignupView from "./signup.auth.view"
 
 const SignupContainer = () => {
@@ -61,11 +62,15 @@ const SignupContainer = () => {
         email,
       }
       const response = await authController.signUp(signUpDto)
-      if (response.data.isActive) {
-        alert(`Usuario creado correctamente ${email}`)
+      if (response.data.is_active) {
+        showAlert(
+          "Usuario Creado",
+          `Usuario creado correctamente ${email}`,
+          "success"
+        )
         navigate("/signin")
       } else {
-        alert(`Error al crear el usuario ${email}`)
+        showAlert("Error", `Error al crear el usuario ${email}`, "error")
       }
     } catch (error) {
       console.log(error)

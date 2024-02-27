@@ -7,17 +7,20 @@ import {
   TableRow,
 } from "@/components/ui"
 import Layout from "@/layout/Layout"
+import { BootcampModel } from "@/models/bootcamp.model"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { ShieldCheck } from "lucide-react"
 import { FC } from "react"
 
 library.add(faStar)
 
 interface Props {
-  ranking: any
+  ranking: BootcampModel[]
+  getAvatarBootcamp: (id: string) => string
 }
 
-const RankingView: FC<Props> = ({ ranking }) => {
+const RankingView: FC<Props> = ({ ranking, getAvatarBootcamp }) => {
   return (
     <Layout>
       {/* Ranking */}
@@ -30,22 +33,40 @@ const RankingView: FC<Props> = ({ ranking }) => {
             <TableHeader>
               <TableRow>
                 <TableHead>#</TableHead>
+                <TableHead>Logo</TableHead>
                 <TableHead>Nombre</TableHead>
                 <TableHead>País</TableHead>
                 <TableHead>Modalidad</TableHead>
                 <TableHead>Score</TableHead>
-                <TableHead>Insignias</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {ranking.map((item) => (
+              {ranking.map((item, index) => (
                 <TableRow key={item.id}>
-                  <TableCell>{item.id}</TableCell>
-                  <TableCell>{item.nombre}</TableCell>
-                  <TableCell>{item.pais}</TableCell>
-                  <TableCell>{item.modalidad}</TableCell>
-                  <TableCell>{item.score}</TableCell>
-                  <TableCell>{item.insignias}</TableCell>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    <img
+                      src={getAvatarBootcamp(item.id)}
+                      alt={item.name}
+                      datatype="image/png"
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex flex-row items-center">
+                      {item.name}
+                      {item.is_verified ? (
+                        <ShieldCheck className="size-3.5 text-blue-400 fill-blue-200 ml-0.5" />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell className="capitalize">
+                    {item.country_name}
+                  </TableCell>
+                  <TableCell className="capitalize">{item.mode}</TableCell>
+                  <TableCell>{item.score.toFixed(4)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
