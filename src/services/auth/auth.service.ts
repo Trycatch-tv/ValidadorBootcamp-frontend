@@ -1,3 +1,4 @@
+import { SignInDto } from "@/dtos/auth/signin.dto"
 import { SignUpDto } from "@/dtos/auth/signup.dto"
 import { AuthRepository } from "../../repositories/auth/auth.repository"
 
@@ -7,5 +8,9 @@ export class AuthService {
 
   async signUp(signUpDto: SignUpDto) {
     return this.authRepository.signUp(signUpDto)
+  }
+
+  async signIn(signInDto: SignInDto) {
+    return this.authRepository.signIn(signInDto)
   }
 }
