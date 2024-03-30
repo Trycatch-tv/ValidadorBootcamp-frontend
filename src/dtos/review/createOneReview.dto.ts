@@ -1,4 +1,4 @@
-export interface CreateOneDto {
+export interface CreateOneReviewDto {
   bootcamp_id: string
   user_id: string
   title: string

@@ -18,7 +18,7 @@ interface Props {
   onSubmit: () => void
 }
 
-const AddBootcampView: FC<Props> = ({
+const AddReviewView: FC<Props> = ({
   title,
   onChangeTitle,
   description,
@@ -137,4 +137,4 @@ const AddBootcampView: FC<Props> = ({
   )
 }
 
-export default AddBootcampView
+export default AddReviewView
