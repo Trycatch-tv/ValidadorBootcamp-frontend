@@ -25,6 +25,7 @@ const SigninContainer = () => {
     const signInDto = { email, password }
     const signInRepose = await authController.signIn(signInDto)
     if (signInRepose.data.isLogedIn) {
+      localStorage.setItem("userid", signInRepose.data.id)
       showAlert("Bienvenido", "Has iniciado sesión correctamente", "success")
       navigate("/")
     } else {

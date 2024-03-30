@@ -25,4 +25,13 @@ export class BootcampRepository {
   findOneAvatar(id: string): string {
     return `http://localhost:3000/bootcamps/avatar/${id}`
   }
+
+  async findOne(id: string): Promise<BootcampModel> {
+    const getOneResponse = await this.httpClient.get(`/${id}`)
+    return getOneResponse.data
+  }
+
+  findOneTermsAndConditions(id: string): string {
+    return `http://localhost:3000/bootcamps/terms-and-conditions/${id}`
+  }
 }
