@@ -20,4 +20,12 @@ export class BootcampService {
   findOneAvatar(id: string): string {
     return this.bootcampRepository.findOneAvatar(id)
   }
+
+  async findOne(id: string): Promise<BootcampModel> {
+    return this.bootcampRepository.findOne(id)
+  }
+
+  findOneTermsAndConditions(id: string): string {
+    return this.bootcampRepository.findOneTermsAndConditions(id)
+  }
 }
