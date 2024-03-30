@@ -18,6 +18,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import ListProgramContainer from "@/features/program/list/list.program.container"
+import AddReviewContainer from "@/features/review/add/add.review.container"
 import CardReviewContainer from "@/features/review/card/card.review.container"
 import { BootcampModel } from "@/models/bootcamp.model"
 import { ReviewModel } from "@/models/review.model"
@@ -42,7 +44,6 @@ import {
 import { FC } from "react"
 import { LazyLoadComponent } from "react-lazy-load-image-component"
 import { Link } from "react-router-dom"
-import AddBootcampContainer from "../../review/add/add.bootcamp.container"
 
 interface PropsInterface {
   bootcamp: BootcampModel
@@ -185,7 +186,7 @@ const ProfileBootcampView: FC<PropsInterface> = ({
               <DialogHeader>
                 <DialogTitle>Agregar Review</DialogTitle>
                 <DialogDescription>
-                  <AddBootcampContainer
+                  <AddReviewContainer
                     bootcampId={bootcamp.id}
                     closeDialog={closeDialog}
                   />
@@ -205,9 +206,11 @@ const ProfileBootcampView: FC<PropsInterface> = ({
           {/* Subcard Contenido */}
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Contenido</AccordionTrigger>
+              <AccordionTrigger>
+                Programas (Falta agregar el campo precio al programa)
+              </AccordionTrigger>
               <AccordionContent>
-                Información detallada sobre el Bootcamp
+                <ListProgramContainer bootcampId={bootcamp.id} />
               </AccordionContent>
             </AccordionItem>
           </Accordion>

@@ -1,15 +1,15 @@
 import { ReviewController } from "@/controllers/review/review.controller"
 import { showAlert } from "@/utils/alerts/alert.util"
 import { FC, useState } from "react"
-import { CreateOneDto } from "../../../dtos/review/createOne.dto"
-import AddBootcampView from "./add.bootcamp.view"
+import { CreateOneReviewDto } from "../../../dtos/review/createOneReview.dto"
+import AddBootcampView from "./add.review.view"
 
 interface Props {
   bootcampId: string
   closeDialog: () => void
 }
 
-const AddBootcampContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
+const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [scoreOverall, setScoreOverall] = useState(0)
@@ -40,7 +40,7 @@ const AddBootcampContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
   }
 
   const handlerSubmit = async () => {
-    const createOneDto = {
+    const createOneReviewDto = {
       bootcamp_id: bootcampId,
       user_id: userId,
       title,
@@ -48,9 +48,9 @@ const AddBootcampContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
       score_overall: scoreOverall,
       score_curriculum: scoreCurriculum,
       score_job_support: scoreJobSupport,
-    } satisfies CreateOneDto
+    } satisfies CreateOneReviewDto
 
-    const response = await reviewController.createOne(createOneDto)
+    const response = await reviewController.createOne(createOneReviewDto)
 
     if (response) {
       showAlert("Reseña", "Reseña creada", "success")
@@ -79,4 +79,4 @@ const AddBootcampContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
   )
 }
 
-export default AddBootcampContainer
+export default AddReviewContainer
