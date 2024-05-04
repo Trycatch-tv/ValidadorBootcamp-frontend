@@ -7,4 +7,8 @@ export class ProgramController {
   async findManyByBootcampId(id: string) {
     return this.programService.findManyByBootcampId(id)
   }
+
+  findOneContent(id: string) {
+    return this.programService.findOneContent(id)
+  }
 }

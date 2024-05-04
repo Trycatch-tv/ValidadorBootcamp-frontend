@@ -7,4 +7,8 @@ export class ProgramService {
   async findManyByBootcampId(id: string) {
     return this.programRepository.findManyByBootcampId(id)
   }
+
+  findOneContent(id: string) {
+    return this.programRepository.findOneContent(id)
+  }
 }

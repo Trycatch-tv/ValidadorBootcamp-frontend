@@ -202,7 +202,7 @@ const ProfileBootcampView: FC<PropsInterface> = ({
               <CardReviewContainer review={review} />
             ))}
         </div>
-        <div className="my-8">
+        <div className="my-8 ">
           {/* Subcard Contenido */}
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
@@ -220,25 +220,37 @@ const ProfileBootcampView: FC<PropsInterface> = ({
             <AccordionItem value="item-2">
               <AccordionTrigger>Términos y Condiciones</AccordionTrigger>
               <AccordionContent>
-                <Dialog>
-                  <DialogTrigger>
-                    <Button size="xs">
-                      <BookmarkIcon width="16" height="16" className="mr-1" />{" "}
-                      Ver
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Términos y Condiciones</DialogTitle>
-                      <DialogDescription>
-                        <iframe
-                          src={termsAndConditions}
-                          style={{ width: "34vw", height: "80vh" }}
-                        ></iframe>
-                      </DialogDescription>
-                    </DialogHeader>
-                  </DialogContent>
-                </Dialog>
+                <div className="w-full">
+                  <div className="w-full mt-2">
+                    <div className="px-2 py-2.5 flex flex-col items-center justify-center">
+                      <Dialog>
+                        <DialogTrigger>
+                          <Button size="xs">
+                            <BookmarkIcon
+                              width="16"
+                              height="16"
+                              className="mr-1"
+                            />
+                            <span className="ml-2">
+                              Ver Términos y Condiciones
+                            </span>
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Términos y Condiciones</DialogTitle>
+                            <DialogDescription className="w-screen h-11/12">
+                              <iframe
+                                src={termsAndConditions}
+                                style={{ width: "28vw", height: "80vh" }}
+                              ></iframe>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

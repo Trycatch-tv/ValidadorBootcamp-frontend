@@ -11,4 +11,8 @@ export class ProgramRepository {
     const getManyReviewsResponse = await this.httpClient.get(`/bootcamp/${id}`)
     return getManyReviewsResponse.data
   }
+
+  findOneContent(id: string): string {
+    return `http://localhost:3000/programs/content/${id}`
+  }
 }
