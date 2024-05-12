@@ -2,8 +2,10 @@ import { SignInDto } from "@/dtos/auth/signin.dto"
 import { SignUpDto } from "@/dtos/auth/signup.dto"
 import HttpClient from "../../utils/HttpClient/HttpClient.util"
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export class AuthRepository {
-  private httpClient: HttpClient = new HttpClient("http://localhost:3000/users")
+  private httpClient: HttpClient = new HttpClient(`${apiUrl}/users`)
   constructor() {}
 
   async signUp(signUpDto: SignUpDto) {

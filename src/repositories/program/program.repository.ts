@@ -1,9 +1,11 @@
 import { ProgramModel } from "../../models/program.model"
 import HttpClient from "../../utils/HttpClient/HttpClient.util"
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export class ProgramRepository {
   private httpClient: HttpClient = new HttpClient(
-    "http://localhost:3000/programs"
+    `${apiUrl}/programs`
   )
   constructor() {}
 
@@ -13,6 +15,6 @@ export class ProgramRepository {
   }
 
   findOneContent(id: string): string {
-    return `http://localhost:3000/programs/content/${id}`
+    return `${apiUrl}/programs/content/${id}`
   }
 }
