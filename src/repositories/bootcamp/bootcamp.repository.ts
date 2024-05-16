@@ -1,9 +1,11 @@
 import { BootcampModel } from "@/models/bootcamp.model"
 import HttpClient from "../../utils/HttpClient/HttpClient.util"
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export class BootcampRepository {
   private httpClient: HttpClient = new HttpClient(
-    "http://localhost:3000/bootcamps"
+    `${apiUrl}/bootcamps`
   )
   constructor() {}
 
@@ -23,7 +25,7 @@ export class BootcampRepository {
   }
 
   findOneAvatar(id: string): string {
-    return `http://localhost:3000/bootcamps/avatar/${id}`
+    return `${apiUrl}/bootcamps/avatar/${id}`
   }
 
   async findOne(id: string): Promise<BootcampModel> {
@@ -32,6 +34,6 @@ export class BootcampRepository {
   }
 
   findOneTermsAndConditions(id: string): string {
-    return `http://localhost:3000/bootcamps/terms-and-conditions/${id}`
+    return `${apiUrl}/bootcamps/terms-and-conditions/${id}`
   }
 }
