@@ -1,9 +1,11 @@
 import { ReviewModel } from "../../models/review.model"
 import HttpClient from "../../utils/HttpClient/HttpClient.util"
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export class ReviewRepository {
   private httpClient: HttpClient = new HttpClient(
-    "http://localhost:3000/reviews"
+    `${apiUrl}/reviews`
   )
   constructor() {}
 
