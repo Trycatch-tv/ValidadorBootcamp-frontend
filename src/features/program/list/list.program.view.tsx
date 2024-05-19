@@ -9,9 +9,17 @@ interface Props {
 const ListProgramView: FC<Props> = ({ programs }) => {
   return (
     <div className="flex flex-row gap-4 ">
-      {programs.map((program) => (
-        <CardProgramContainer key={program.id} program={program} />
-      ))}
+      {programs &&
+        programs.map((program) => (
+          <CardProgramContainer key={program.id} program={program} />
+        ))}
+      {!programs && (
+        <div className="flex items-center justify-center w-full">
+          <p className="bg-gray-100 py-3 px-2.5 rounded-md">
+            No hay programas disponibles
+          </p>
+        </div>
+      )}
     </div>
   )
 }
