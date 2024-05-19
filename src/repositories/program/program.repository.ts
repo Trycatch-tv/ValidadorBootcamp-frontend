@@ -4,13 +4,13 @@ import HttpClient from "../../utils/HttpClient/HttpClient.util"
 const apiUrl = import.meta.env.VITE_API_URL
 
 export class ProgramRepository {
-  private httpClient: HttpClient = new HttpClient(
-    `${apiUrl}/programs`
-  )
+  private httpClient: HttpClient = new HttpClient(`${apiUrl}/programs`)
   constructor() {}
 
   async findManyByBootcampId(id: string): Promise<ProgramModel[]> {
-    const getManyReviewsResponse = await this.httpClient.get(`/bootcamp/${id}`)
+    const getManyReviewsResponse = await this.httpClient.get(
+      `/bootcamp/many/${id}`
+    )
     return getManyReviewsResponse.data
   }
 
