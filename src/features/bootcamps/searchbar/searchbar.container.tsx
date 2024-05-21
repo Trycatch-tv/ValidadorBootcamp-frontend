@@ -14,8 +14,8 @@ const SearchBarContainer = () => {
     setKeyValue(keyValue)
   }
   const handleSearch = async () => {
-    const bootcamps = await bootcampController.search(keyValue)
-    setBootcamps(bootcamps)
+    const getSearchBootcamps = await bootcampController.search(keyValue)
+    setBootcamps(getSearchBootcamps)
     // TODO: Pendiente enviar el resultado al storage de Zustand (cuando esté implementado)
     console.log(bootcamps)
   }
