@@ -1,7 +1,7 @@
-import { FC } from "react"
+import type { FC } from "react";
 
 interface PropsInterface {
-  year: number
+  year: number;
 }
 
 const FooterView: FC<PropsInterface> = ({ year }) => {
@@ -15,14 +15,14 @@ const FooterView: FC<PropsInterface> = ({ year }) => {
               <img
                 className="h-10 w-10"
                 src="https://trycatch.tv/_astro/nibble.a3d0ce1e.png"
-              ></img>
+              />
             </p>
             <p className="text-xs">&copy; {year} GlassCamp</p>
           </div>
         </footer>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FooterView
+export default FooterView;

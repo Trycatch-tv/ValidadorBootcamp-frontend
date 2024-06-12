@@ -1,8 +1,6 @@
-import {create} from "zustand"
-import { ProductsState } from "./products.store.interface"
+import { create } from "zustand";
+import type { ProductsState } from "./products.store.interface";
 
 export const useProductStore = create<ProductsState>(() => ({
-    products: [],
-}))
-
-
+  products: [],
+}));

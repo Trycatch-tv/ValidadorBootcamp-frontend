@@ -1,9 +1,9 @@
-import FooterContainer from "@/components/footer/footer.container"
-import NavbarContainer from "@/components/navbar/navbar.container"
-import React from "react"
+import FooterContainer from "@/components/footer/footer.container";
+import NavbarContainer from "@/components/navbar/navbar.container";
+import type React from "react";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const Layout = ({ children }: Props) => {
@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
       <main className="container container-lg pt-16 pb-36">{children}</main>
       <FooterContainer />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

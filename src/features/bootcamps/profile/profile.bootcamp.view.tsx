@@ -1,5 +1,5 @@
 // En BootcampProfileView.tsx
-import NavbarContainer from "@/components/navbar/navbar.container"
+import NavbarContainer from "@/components/navbar/navbar.container";
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +9,7 @@ import {
   AvatarImage,
   Badge,
   Button,
-} from "@/components/ui"
+} from "@/components/ui";
 import {
   Dialog,
   DialogContent,
@@ -17,20 +17,20 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import ListProgramContainer from "@/features/program/list/list.program.container"
-import AddReviewContainer from "@/features/review/add/add.review.container"
-import CardReviewContainer from "@/features/review/card/card.review.container"
-import { BootcampModel } from "@/models/bootcamp.model"
-import { ReviewModel } from "@/models/review.model"
-import { faStar } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+} from "@/components/ui/dialog";
+import ListProgramContainer from "@/features/program/list/list.program.container";
+import AddReviewContainer from "@/features/review/add/add.review.container";
+import CardReviewContainer from "@/features/review/card/card.review.container";
+import type { BootcampModel } from "@/models/bootcamp.model";
+import type { ReviewModel } from "@/models/review.model";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@radix-ui/react-tooltip"
+} from "@radix-ui/react-tooltip";
 import {
   BookmarkIcon,
   Facebook,
@@ -40,19 +40,19 @@ import {
   ListOrdered,
   MessageSquarePlus,
   ShieldCheck,
-} from "lucide-react"
-import { FC } from "react"
-import { LazyLoadComponent } from "react-lazy-load-image-component"
-import { Link } from "react-router-dom"
+} from "lucide-react";
+import type { FC } from "react";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 
 interface PropsInterface {
-  bootcamp: BootcampModel
-  avatar: string
-  reviews: ReviewModel[]
-  termsAndConditions: string
-  isDialogOpen: boolean
-  closeDialog: () => void
-  setDialogOpen: (value: boolean) => void
+  bootcamp: BootcampModel;
+  avatar: string;
+  reviews: ReviewModel[];
+  termsAndConditions: string;
+  isDialogOpen: boolean;
+  closeDialog: () => void;
+  setDialogOpen: (value: boolean) => void;
 }
 
 const ProfileBootcampView: FC<PropsInterface> = ({
@@ -257,7 +257,7 @@ const ProfileBootcampView: FC<PropsInterface> = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProfileBootcampView
+export default ProfileBootcampView;

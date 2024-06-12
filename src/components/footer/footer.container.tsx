@@ -1,12 +1,12 @@
-import FooterView from "./footer.view"
+import FooterView from "./footer.view";
 
 const FooterContainer = () => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
   return (
     <>
       <FooterView year={year} />
     </>
-  )
-}
+  );
+};
 
-export default FooterContainer
+export default FooterContainer;

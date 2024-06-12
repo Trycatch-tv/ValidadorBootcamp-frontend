@@ -1,9 +1,9 @@
-import { ProgramModel } from "@/models/program.model"
-import { FC } from "react"
-import CardProgramContainer from "../card/card.program.container"
+import type { ProgramModel } from "@/models/program.model";
+import type { FC } from "react";
+import CardProgramContainer from "../card/card.program.container";
 
 interface Props {
-  programs: ProgramModel[]
+  programs: ProgramModel[];
 }
 
 const ListProgramView: FC<Props> = ({ programs }) => {
@@ -21,7 +21,7 @@ const ListProgramView: FC<Props> = ({ programs }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ListProgramView
+export default ListProgramView;

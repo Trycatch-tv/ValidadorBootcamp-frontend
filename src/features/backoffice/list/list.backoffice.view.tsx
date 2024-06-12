@@ -1,8 +1,8 @@
-import { FC } from "react"
-import PanelBackofficeContainer from "../panel/panel.backoffice.container"
+import type { FC } from "react";
+import PanelBackofficeContainer from "../panel/panel.backoffice.container";
 
 interface Props {
-  panels: any
+  panels: any;
 }
 
 const ListBackofficeView: FC<Props> = ({ panels }) => {
@@ -12,7 +12,7 @@ const ListBackofficeView: FC<Props> = ({ panels }) => {
         <PanelBackofficeContainer panel={panel} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ListBackofficeView
+export default ListBackofficeView;

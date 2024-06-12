@@ -1,8 +1,8 @@
-import axios, { AxiosInstance } from "axios"
+import axios, { type AxiosInstance } from "axios";
 
 export default class HttpClient {
-  private http: AxiosInstance
-  private token: string | null = null
+  private http: AxiosInstance;
+  private token: string | null = null;
 
   constructor(baseURL: string) {
     this.http = axios.create({
@@ -10,15 +10,15 @@ export default class HttpClient {
       headers: {
         "Content-Type": "application/json",
       },
-    })
+    });
   }
 
   setToken(token: string) {
-    this.token = token
+    this.token = token;
   }
 
   getAuthHeader() {
-    return this.token ? { Authorization: `Bearer ${this.token}` } : {}
+    return this.token ? { Authorization: `Bearer ${this.token}` } : {};
   }
 
   async get(url: string, config = {}) {
@@ -27,7 +27,7 @@ export default class HttpClient {
       headers: {
         ...this.getAuthHeader(),
       },
-    })
+    });
   }
 
   async post(url: string, data = {}, config = {}) {
@@ -36,7 +36,7 @@ export default class HttpClient {
       headers: {
         ...this.getAuthHeader(),
       },
-    })
+    });
   }
 
   async put(url: string, data = {}, config = {}) {
@@ -45,7 +45,7 @@ export default class HttpClient {
       headers: {
         ...this.getAuthHeader(),
       },
-    })
+    });
   }
 
   async patch(url: string, data = {}, config = {}) {
@@ -54,7 +54,7 @@ export default class HttpClient {
       headers: {
         ...this.getAuthHeader(),
       },
-    })
+    });
   }
 
   async delete(url: string, config = {}) {
@@ -63,6 +63,6 @@ export default class HttpClient {
       headers: {
         ...this.getAuthHeader(),
       },
-    })
+    });
   }
 }

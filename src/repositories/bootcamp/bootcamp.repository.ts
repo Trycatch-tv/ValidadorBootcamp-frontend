@@ -1,39 +1,37 @@
-import { BootcampModel } from "@/models/bootcamp.model"
-import HttpClient from "../../utils/HttpClient/HttpClient.util"
+import type { BootcampModel } from "@/models/bootcamp.model";
+import HttpClient from "../../utils/HttpClient/HttpClient.util";
 
-const apiUrl = import.meta.env.VITE_API_URL
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export class BootcampRepository {
-  private httpClient: HttpClient = new HttpClient(
-    `${apiUrl}/bootcamps`
-  )
+  private httpClient: HttpClient = new HttpClient(`${apiUrl}/bootcamps`);
   constructor() {}
 
   async findAll(): Promise<BootcampModel[]> {
-    const getAllResponse = await this.httpClient.get("/list")
-    return getAllResponse.data
+    const getAllResponse = await this.httpClient.get("/list");
+    return getAllResponse.data;
   }
 
   async search(key: string): Promise<BootcampModel[]> {
-    const searchResponse = await this.httpClient.get(`/search/${key}`)
-    return searchResponse.data
+    const searchResponse = await this.httpClient.get(`/search/${key}`);
+    return searchResponse.data;
   }
 
   async findAllByScore(): Promise<BootcampModel[]> {
-    const getAllByScoreResponse = await this.httpClient.get("/ranking/list")
-    return getAllByScoreResponse.data
+    const getAllByScoreResponse = await this.httpClient.get("/ranking/list");
+    return getAllByScoreResponse.data;
   }
 
   findOneAvatar(id: string): string {
-    return `${apiUrl}/bootcamps/avatar/${id}`
+    return `${apiUrl}/bootcamps/avatar/${id}`;
   }
 
   async findOne(id: string): Promise<BootcampModel> {
-    const getOneResponse = await this.httpClient.get(`/${id}`)
-    return getOneResponse.data
+    const getOneResponse = await this.httpClient.get(`/${id}`);
+    return getOneResponse.data;
   }
 
   findOneTermsAndConditions(id: string): string {
-    return `${apiUrl}/bootcamps/terms-and-conditions/${id}`
+    return `${apiUrl}/bootcamps/terms-and-conditions/${id}`;
   }
 }

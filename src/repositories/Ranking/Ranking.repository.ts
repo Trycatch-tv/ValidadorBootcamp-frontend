@@ -1,6 +1,5 @@
 export class RankingRepository {
-    getYear() {
-      return new Date().getFullYear()
-    }
+  getYear() {
+    return new Date().getFullYear();
   }
-  
+}

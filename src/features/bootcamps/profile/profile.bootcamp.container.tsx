@@ -1,55 +1,55 @@
-import { BootcampController } from "@/controllers/bootcamp/bootcamp.controller"
-import { ReviewController } from "@/controllers/review/review.controller"
-import { BootcampModel } from "@/models/bootcamp.model"
-import { ReviewModel } from "@/models/review.model"
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import ProfileBootcampView from "./profile.bootcamp.view"
+import { BootcampController } from "@/controllers/bootcamp/bootcamp.controller";
+import { ReviewController } from "@/controllers/review/review.controller";
+import type { BootcampModel } from "@/models/bootcamp.model";
+import type { ReviewModel } from "@/models/review.model";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ProfileBootcampView from "./profile.bootcamp.view";
 
 const ProfileBootcampContainer = () => {
-  const { id } = useParams<{ id: string }>() as { id: string }
-  const bootcampController = new BootcampController()
-  const reviewController = new ReviewController()
+  const { id } = useParams<{ id: string }>() as { id: string };
+  const bootcampController = new BootcampController();
+  const reviewController = new ReviewController();
 
   const [bootcamp, setBootcamp] = useState<BootcampModel>(
-    new Object() as BootcampModel
-  )
+    new Object() as BootcampModel,
+  );
   const [reviews, setComments] = useState<ReviewModel[]>(
-    new Object() as ReviewModel[]
-  )
+    new Object() as ReviewModel[],
+  );
 
-  const [isDialogOpen, setDialogOpen] = useState(false)
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
-  const closeDialog = () => setDialogOpen(false)
+  const closeDialog = () => setDialogOpen(false);
 
-  const [termsAndConditions, setTermsAndConditions] = useState<string>("")
+  const [termsAndConditions, setTermsAndConditions] = useState<string>("");
 
-  const getBootcampAvatar = bootcampController.findOneAvatar(id)
+  const getBootcampAvatar = bootcampController.findOneAvatar(id);
   const getBootcamp = async () => {
-    const bootcamp = await bootcampController.findOne(id)
-    setBootcamp(bootcamp)
-  }
+    const bootcamp = await bootcampController.findOne(id);
+    setBootcamp(bootcamp);
+  };
 
   const getReviews = async () => {
-    const reviews = await reviewController.findAllByBootcampId(id)
-    setComments(reviews)
-  }
+    const reviews = await reviewController.findAllByBootcampId(id);
+    setComments(reviews);
+  };
 
   const getTermsAndConditions = () => {
-    setTermsAndConditions(bootcampController.findOneTermsAndConditions(id))
-  }
+    setTermsAndConditions(bootcampController.findOneTermsAndConditions(id));
+  };
 
   useEffect(() => {
-    getBootcamp()
-    getReviews()
-    getTermsAndConditions()
-  }, [id])
+    getBootcamp();
+    getReviews();
+    getTermsAndConditions();
+  }, [id]);
 
   useEffect(() => {
     if (isDialogOpen === false) {
-      getReviews()
+      getReviews();
     }
-  }, [isDialogOpen])
+  }, [isDialogOpen]);
 
   return (
     <>
@@ -63,7 +63,7 @@ const ProfileBootcampContainer = () => {
         setDialogOpen={setDialogOpen}
       />
     </>
-  )
-}
+  );
+};
 
-export default ProfileBootcampContainer
+export default ProfileBootcampContainer;

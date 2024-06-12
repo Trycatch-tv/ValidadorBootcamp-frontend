@@ -1,43 +1,43 @@
-import { ReviewController } from "@/controllers/review/review.controller"
-import { showAlert } from "@/utils/alerts/alert.util"
-import { FC, useState } from "react"
-import { CreateOneReviewDto } from "../../../dtos/review/createOneReview.dto"
-import AddBootcampView from "./add.review.view"
+import { ReviewController } from "@/controllers/review/review.controller";
+import { showAlert } from "@/utils/alerts/alert.util";
+import { type FC, useState } from "react";
+import type { CreateOneReviewDto } from "../../../dtos/review/createOneReview.dto";
+import AddBootcampView from "./add.review.view";
 
 interface Props {
-  bootcampId: string
-  closeDialog: () => void
+  bootcampId: string;
+  closeDialog: () => void;
 }
 
 const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [scoreOverall, setScoreOverall] = useState(0)
-  const [scoreCurriculum, setScoreCurriculum] = useState(0)
-  const [scoreJobSupport, setScoreJobSupport] = useState(0)
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [scoreOverall, setScoreOverall] = useState(0);
+  const [scoreCurriculum, setScoreCurriculum] = useState(0);
+  const [scoreJobSupport, setScoreJobSupport] = useState(0);
 
-  const userId = localStorage.getItem("userid") as string
-  const reviewController = new ReviewController()
+  const userId = localStorage.getItem("userid") as string;
+  const reviewController = new ReviewController();
 
   const handlerTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
-  }
+    setTitle(e.target.value);
+  };
 
   const handlerDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value)
-  }
+    setDescription(e.target.value);
+  };
 
   const handlerScoreOverall = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setScoreOverall(Number(e.target.value))
-  }
+    setScoreOverall(Number(e.target.value));
+  };
 
   const handlerScoreCurriculum = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setScoreCurriculum(Number(e.target.value))
-  }
+    setScoreCurriculum(Number(e.target.value));
+  };
 
   const handlerScoreJobSupport = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setScoreJobSupport(Number(e.target.value))
-  }
+    setScoreJobSupport(Number(e.target.value));
+  };
 
   const handlerSubmit = async () => {
     const createOneReviewDto = {
@@ -48,17 +48,17 @@ const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
       score_overall: scoreOverall,
       score_curriculum: scoreCurriculum,
       score_job_support: scoreJobSupport,
-    } satisfies CreateOneReviewDto
+    } satisfies CreateOneReviewDto;
 
-    const response = await reviewController.createOne(createOneReviewDto)
+    const response = await reviewController.createOne(createOneReviewDto);
 
     if (response) {
-      showAlert("Reseña", "Reseña creada", "success")
-      closeDialog()
+      showAlert("Reseña", "Reseña creada", "success");
+      closeDialog();
     } else {
-      showAlert("Error", "Error creando reseña", "error")
+      showAlert("Error", "Error creando reseña", "error");
     }
-  }
+  };
 
   return (
     <>
@@ -76,7 +76,7 @@ const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
         onSubmit={handlerSubmit}
       />
     </>
-  )
-}
+  );
+};
 
-export default AddReviewContainer
+export default AddReviewContainer;

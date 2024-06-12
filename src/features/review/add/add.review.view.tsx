@@ -1,21 +1,21 @@
-import { Button, Input } from "@/components/ui"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Info } from "lucide-react"
-import { FC } from "react"
+import { Button, Input } from "@/components/ui";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Info } from "lucide-react";
+import type { FC } from "react";
 
 interface Props {
-  title: string
-  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void
-  description: string
-  onChangeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  scoreOverall: number
-  onChangeScoreOverall: (e: React.ChangeEvent<HTMLInputElement>) => void
-  scoreCurriculum: number
-  onChangeScoreCurriculum: (e: React.ChangeEvent<HTMLInputElement>) => void
-  scoreJobSupport: number
-  onChangeScoreJobSupport: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onSubmit: () => void
+  title: string;
+  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  description: string;
+  onChangeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  scoreOverall: number;
+  onChangeScoreOverall: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  scoreCurriculum: number;
+  onChangeScoreCurriculum: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  scoreJobSupport: number;
+  onChangeScoreJobSupport: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
 const AddReviewView: FC<Props> = ({
@@ -134,7 +134,7 @@ const AddReviewView: FC<Props> = ({
         </Button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default AddReviewView
+export default AddReviewView;

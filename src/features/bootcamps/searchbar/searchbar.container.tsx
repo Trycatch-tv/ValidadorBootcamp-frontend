@@ -1,24 +1,24 @@
-import { BootcampController } from "@/controllers/bootcamp/bootcamp.controller"
-import { BootcampModel } from "@/models/bootcamp.model"
-import { useState } from "react"
-import SearchBarView from "./searchbar.view"
+import { BootcampController } from "@/controllers/bootcamp/bootcamp.controller";
+import type { BootcampModel } from "@/models/bootcamp.model";
+import { useState } from "react";
+import SearchBarView from "./searchbar.view";
 
 const SearchBarContainer = () => {
-  const bootcampController = new BootcampController()
+  const bootcampController = new BootcampController();
 
-  const [keyValue, setKeyValue] = useState("")
-  const [bootcamps, setBootcamps] = useState<BootcampModel[]>([])
+  const [keyValue, setKeyValue] = useState("");
+  const [bootcamps, setBootcamps] = useState<BootcampModel[]>([]);
 
   const handleChangeKey = (keyValue: string) => {
-    console.log(keyValue)
-    setKeyValue(keyValue)
-  }
+    console.log(keyValue);
+    setKeyValue(keyValue);
+  };
   const handleSearch = async () => {
-    const getSearchBootcamps = await bootcampController.search(keyValue)
-    setBootcamps(getSearchBootcamps)
+    const getSearchBootcamps = await bootcampController.search(keyValue);
+    setBootcamps(getSearchBootcamps);
     // TODO: Pendiente enviar el resultado al storage de Zustand (cuando esté implementado)
-    console.log(bootcamps)
-  }
+    console.log(bootcamps);
+  };
 
   return (
     <>
@@ -28,7 +28,7 @@ const SearchBarContainer = () => {
         onClickSearch={handleSearch}
       />
     </>
-  )
-}
+  );
+};
 
-export default SearchBarContainer
+export default SearchBarContainer;

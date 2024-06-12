@@ -1,14 +1,14 @@
-import { CardContent, CardHeader } from "@/components/ui"
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { faStar } from "@fortawesome/free-solid-svg-icons"
-import { FC } from "react"
-import Layout from "../../layout/Layout"
-import ListBootcampContainer from "../bootcamps/list/list.bootcamp.container"
-import SearchBarContainer from "../bootcamps/searchbar/searchbar.container"
+import { CardContent, CardHeader } from "@/components/ui";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import type { FC } from "react";
+import Layout from "../../layout/Layout";
+import ListBootcampContainer from "../bootcamps/list/list.bootcamp.container";
+import SearchBarContainer from "../bootcamps/searchbar/searchbar.container";
 
-library.add(faStar)
+library.add(faStar);
 
-interface Props {}
+type Props = {};
 
 const HomeView: FC<Props> = () => {
   return (
@@ -23,7 +23,7 @@ const HomeView: FC<Props> = () => {
         </CardContent>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default HomeView
+export default HomeView;

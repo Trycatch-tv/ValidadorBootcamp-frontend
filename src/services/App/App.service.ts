@@ -1,13 +1,13 @@
-import { AppRepository } from "../../repositories/App/App.repository"
+import { AppRepository } from "../../repositories/App/App.repository";
 
 export default class AppService {
-  private appRepository: AppRepository
+  private appRepository: AppRepository;
 
   constructor() {
-    this.appRepository = new AppRepository()
+    this.appRepository = new AppRepository();
   }
 
   getYear() {
-    return this.appRepository.getYear()
+    return this.appRepository.getYear();
   }
 }

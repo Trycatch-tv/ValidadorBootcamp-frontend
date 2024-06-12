@@ -5,19 +5,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
-import Layout from "@/layout/Layout"
-import { BootcampModel } from "@/models/bootcamp.model"
-import { library } from "@fortawesome/fontawesome-svg-core"
-import { faStar } from "@fortawesome/free-solid-svg-icons"
-import { ShieldCheck } from "lucide-react"
-import { FC } from "react"
+} from "@/components/ui";
+import Layout from "@/layout/Layout";
+import type { BootcampModel } from "@/models/bootcamp.model";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { ShieldCheck } from "lucide-react";
+import type { FC } from "react";
 
-library.add(faStar)
+library.add(faStar);
 
 interface Props {
-  ranking: BootcampModel[]
-  getAvatarBootcamp: (id: string) => string
+  ranking: BootcampModel[];
+  getAvatarBootcamp: (id: string) => string;
 }
 
 const RankingView: FC<Props> = ({ ranking, getAvatarBootcamp }) => {
@@ -74,7 +74,7 @@ const RankingView: FC<Props> = ({ ranking, getAvatarBootcamp }) => {
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default RankingView
+export default RankingView;

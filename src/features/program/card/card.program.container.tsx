@@ -1,29 +1,29 @@
-import { ProgramController } from "@/controllers/program/program.controller"
-import { ProgramModel } from "@/models/program.model"
-import { FC, useEffect, useState } from "react"
-import CardProgramView from "./card.program.view"
+import { ProgramController } from "@/controllers/program/program.controller";
+import type { ProgramModel } from "@/models/program.model";
+import { type FC, useEffect, useState } from "react";
+import CardProgramView from "./card.program.view";
 
 interface Props {
-  program: ProgramModel
+  program: ProgramModel;
 }
 
 const CardProgramContainer: FC<Props> = ({ program }) => {
-  const [programContent, setProgramContent] = useState("")
+  const [programContent, setProgramContent] = useState("");
 
-  const programController = new ProgramController()
+  const programController = new ProgramController();
 
   const getProgramContent = () => {
-    setProgramContent(programController.findOneContent(program.id))
-  }
+    setProgramContent(programController.findOneContent(program.id));
+  };
 
   useEffect(() => {
-    getProgramContent()
-  }, [])
+    getProgramContent();
+  }, []);
   return (
     <>
       <CardProgramView program={program} programContent={programContent} />
     </>
-  )
-}
+  );
+};
 
-export default CardProgramContainer
+export default CardProgramContainer;

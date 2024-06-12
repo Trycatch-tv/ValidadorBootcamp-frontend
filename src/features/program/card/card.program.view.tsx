@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui"
+} from "@/components/ui";
 import {
   Dialog,
   DialogContent,
@@ -13,14 +13,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { ProgramModel } from "@/models/program.model"
-import { Album } from "lucide-react"
-import { FC } from "react"
+} from "@/components/ui/dialog";
+import type { ProgramModel } from "@/models/program.model";
+import { Album } from "lucide-react";
+import type { FC } from "react";
 
 interface Props {
-  program: ProgramModel
-  programContent: string
+  program: ProgramModel;
+  programContent: string;
 }
 const CardProgramView: FC<Props> = ({ program, programContent }) => {
   return (
@@ -73,7 +73,7 @@ const CardProgramView: FC<Props> = ({ program, programContent }) => {
         </CardContent>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default CardProgramView
+export default CardProgramView;

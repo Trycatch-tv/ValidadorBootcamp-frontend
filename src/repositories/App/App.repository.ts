@@ -1,5 +1,5 @@
 export class AppRepository {
   getYear() {
-    return new Date().getFullYear()
+    return new Date().getFullYear();
   }
 }

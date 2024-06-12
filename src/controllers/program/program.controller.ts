@@ -1,14 +1,14 @@
-import { ProgramService } from "../../services/program/program.service"
+import { ProgramService } from "../../services/program/program.service";
 
 export class ProgramController {
-  private programService: ProgramService = new ProgramService()
+  private programService: ProgramService = new ProgramService();
   constructor() {}
 
   async findManyByBootcampId(id: string) {
-    return this.programService.findManyByBootcampId(id)
+    return this.programService.findManyByBootcampId(id);
   }
 
   findOneContent(id: string) {
-    return this.programService.findOneContent(id)
+    return this.programService.findOneContent(id);
   }
 }

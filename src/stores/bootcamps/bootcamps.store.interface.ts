@@ -1,4 +1,3 @@
-
 export interface BootcampsState {
-    bootcamps: any
+  bootcamps: any;
 }

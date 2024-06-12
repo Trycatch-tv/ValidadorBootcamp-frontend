@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC } from "react"
-import Layout from "@/layout/Layout"
 import {
   Button,
   Table,
@@ -9,9 +6,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
+} from "@/components/ui";
+import Layout from "@/layout/Layout";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { FC } from "react";
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 interface PropReports {
   bootcamp_id: string;
@@ -23,9 +23,7 @@ interface PropReports {
   description: string;
 }
 
-
 const ReportsBackofficeView: FC<{ reports: PropReports[] }> = ({ reports }) => {
-    
   return (
     <Layout>
       {/* Report */}
@@ -42,12 +40,12 @@ const ReportsBackofficeView: FC<{ reports: PropReports[] }> = ({ reports }) => {
                 <TableHead>Ubicación</TableHead>
                 <TableHead>Modalidad</TableHead>
                 <TableHead>Título</TableHead>
-                <TableHead>Categoría</TableHead> 
+                <TableHead>Categoría</TableHead>
                 <TableHead>Descripción</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-             {reports.map((report: PropReports, index: number) => (
+              {reports.map((report: PropReports, index: number) => (
                 <TableRow key={report.bootcamp_id}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{report.bootcamp_name}</TableCell>
@@ -58,7 +56,9 @@ const ReportsBackofficeView: FC<{ reports: PropReports[] }> = ({ reports }) => {
                   <TableCell>{report.description}</TableCell>
                   <TableCell>
                     <Link to={`/backoffice/report/${report.bootcamp_id}`}>
-                      <Button size={"sm"} className="text-xs">Administrar</Button>
+                      <Button size={"sm"} className="text-xs">
+                        Administrar
+                      </Button>
                     </Link>
                   </TableCell>
                 </TableRow>
@@ -66,11 +66,10 @@ const ReportsBackofficeView: FC<{ reports: PropReports[] }> = ({ reports }) => {
             </TableBody>
           </Table>
         </div>
-        <div>
-        </div>
+        <div></div>
       </div>
     </Layout>
   );
-}
+};
 
 export default ReportsBackofficeView;
