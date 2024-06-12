@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true ./src",
     "preview": "vite preview",
     "test": "vitest --ui",
     "cypress:run": "cypress run",
@@ -48,6 +48,7 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/react-lazy-load-image-component": "^1.6.3",
@@ -57,9 +58,6 @@
     "@vitest/ui": "^0.34.6",
     "autoprefixer": "^10.4.16",
     "cypress": "^13.6.0",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vitest": "^0.34.6"
