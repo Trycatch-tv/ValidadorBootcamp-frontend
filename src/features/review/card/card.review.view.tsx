@@ -1,11 +1,11 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui"
-import { ReviewModel } from "@/models/review.model"
-import { UserModel } from "@/models/user.model"
-import { FC } from "react"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui";
+import type { ReviewModel } from "@/models/review.model";
+import type { UserModel } from "@/models/user.model";
+import type { FC } from "react";
 
 interface Props {
-  review: ReviewModel
-  user: UserModel
+  review: ReviewModel;
+  user: UserModel;
 }
 
 const CardReviewView: FC<Props> = ({ review, user }) => {
@@ -48,7 +48,7 @@ const CardReviewView: FC<Props> = ({ review, user }) => {
         </CardFooter>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default CardReviewView
+export default CardReviewView;

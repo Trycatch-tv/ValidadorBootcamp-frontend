@@ -1,4 +1,4 @@
-import ListUsersView from "./list.users.view"
+import ListUsersView from "./list.users.view";
 
 const ListUsersContainer = () => {
   const users = [
@@ -42,12 +42,12 @@ const ListUsersContainer = () => {
       created_at: "1970 00:00:00",
       updated_at: "1970 00:00:00",
     },
-  ]
+  ];
   return (
     <>
       <ListUsersView users={users} />
     </>
-  )
-}
+  );
+};
 
-export default ListUsersContainer
+export default ListUsersContainer;

@@ -1,4 +1,4 @@
-import ListBackofficeView from "./list.backoffice.view"
+import ListBackofficeView from "./list.backoffice.view";
 
 const ListBackofficeContainer = () => {
   const panels = [
@@ -14,8 +14,8 @@ const ListBackofficeContainer = () => {
       title: "Reportes",
       route: "backoffice/reports",
     },
-  ]
-  return <ListBackofficeView panels={panels} />
-}
+  ];
+  return <ListBackofficeView panels={panels} />;
+};
 
-export default ListBackofficeContainer
+export default ListBackofficeContainer;

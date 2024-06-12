@@ -1,9 +1,9 @@
-import { FC } from "react"
-import { BootcampModel } from "../../../models/bootcamp.model"
-import CardBootcampContainer from "../card/card.bootcamp.container"
+import type { FC } from "react";
+import type { BootcampModel } from "../../../models/bootcamp.model";
+import CardBootcampContainer from "../card/card.bootcamp.container";
 
 interface Props {
-  bootcamps: BootcampModel[]
+  bootcamps: BootcampModel[];
 }
 const ListBootcampView: FC<Props> = ({ bootcamps }) => {
   return (
@@ -19,7 +19,7 @@ const ListBootcampView: FC<Props> = ({ bootcamps }) => {
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ListBootcampView
+export default ListBootcampView;

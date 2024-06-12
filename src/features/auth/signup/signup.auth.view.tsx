@@ -1,25 +1,25 @@
-import { Button, Input } from "@/components/ui"
-import { Eye, EyeOff } from "lucide-react"
-import { FC } from "react"
-import { Link } from "react-router-dom"
+import { Button, Input } from "@/components/ui";
+import { Eye, EyeOff } from "lucide-react";
+import type { FC } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
-  showPassword: boolean
-  onClickShowPassword?: () => void
-  showConfirmPassword: boolean
-  onClickShowConfirmPassword?: () => void
-  email: string
-  onChangeEmail?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  first_name?: string
-  onChangeFirstName?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  last_name?: string
-  onChangeLastName?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  password?: string
-  onChangePassword?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  confirmPassword?: string
-  onChangeConfirmPassword?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  showPasswordError?: boolean
-  onclickSignup?: () => void
+  showPassword: boolean;
+  onClickShowPassword?: () => void;
+  showConfirmPassword: boolean;
+  onClickShowConfirmPassword?: () => void;
+  email: string;
+  onChangeEmail?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  first_name?: string;
+  onChangeFirstName?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  last_name?: string;
+  onChangeLastName?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  password?: string;
+  onChangePassword?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  confirmPassword?: string;
+  onChangeConfirmPassword?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  showPasswordError?: boolean;
+  onclickSignup?: () => void;
 }
 
 const SignupView: FC<Props> = ({
@@ -199,7 +199,7 @@ const SignupView: FC<Props> = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SignupView
+export default SignupView;

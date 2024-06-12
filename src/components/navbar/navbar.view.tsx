@@ -4,20 +4,20 @@ import {
   MenubarItem,
   MenubarMenu,
   MenubarTrigger,
-} from "@radix-ui/react-menubar"
-import { Menu } from "lucide-react"
-import { FC } from "react"
-import { LazyLoadComponent } from "react-lazy-load-image-component"
-import { Link } from "react-router-dom"
-import { Avatar, AvatarImage, Button } from "../ui"
+} from "@radix-ui/react-menubar";
+import { Menu } from "lucide-react";
+import type { FC } from "react";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
+import { Avatar, AvatarImage, Button } from "../ui";
 
 interface NavbarLinkProps {
-  name: string
-  path: string
+  name: string;
+  path: string;
 }
 
 interface PropsInterface {
-  routes: NavbarLinkProps[]
+  routes: NavbarLinkProps[];
 }
 
 const NavbarView: FC<PropsInterface> = ({ routes }) => {
@@ -46,7 +46,7 @@ const NavbarView: FC<PropsInterface> = ({ routes }) => {
                       </Button>
                     </Link>
                   </MenubarItem>
-                )
+                );
               })}
               <MenubarItem>
                 <Link to={"/profile"}>
@@ -76,7 +76,7 @@ const NavbarView: FC<PropsInterface> = ({ routes }) => {
                   </Button>
                 </Link>
               </li>
-            )
+            );
           })}
           <li>
             <Link to={"/profile"}>
@@ -90,7 +90,7 @@ const NavbarView: FC<PropsInterface> = ({ routes }) => {
         </ul>
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default NavbarView
+export default NavbarView;

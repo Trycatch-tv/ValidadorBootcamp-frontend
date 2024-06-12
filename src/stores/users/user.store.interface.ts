@@ -1,4 +1,3 @@
 export interface UserState {
-    users: any
+  users: any;
 }
-

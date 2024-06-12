@@ -1,11 +1,11 @@
-import { Button, Input } from "@/components/ui"
-import { Filter, Search } from "lucide-react"
-import { FC } from "react"
+import { Button, Input } from "@/components/ui";
+import { Filter, Search } from "lucide-react";
+import type { FC } from "react";
 
 interface Props {
-  keyValue: string
-  onChangeKey: (key: string) => void
-  onClickSearch: () => void
+  keyValue: string;
+  onChangeKey: (key: string) => void;
+  onClickSearch: () => void;
 }
 
 const SearchBarView: FC<Props> = ({ keyValue, onClickSearch, onChangeKey }) => {
@@ -18,7 +18,7 @@ const SearchBarView: FC<Props> = ({ keyValue, onClickSearch, onChangeKey }) => {
           placeholder="Buscar bootcamps..."
           value={keyValue}
           onChange={(e) => {
-            onChangeKey(e.target.value)
+            onChangeKey(e.target.value);
           }}
         />
         <div className="flex justify-content-between gap-2">
@@ -38,7 +38,7 @@ const SearchBarView: FC<Props> = ({ keyValue, onClickSearch, onChangeKey }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SearchBarView
+export default SearchBarView;

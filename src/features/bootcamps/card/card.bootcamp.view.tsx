@@ -5,18 +5,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui"
-import { Star } from "lucide-react"
-import { FC } from "react"
-import { Link } from "react-router-dom"
+} from "@/components/ui";
+import { Star } from "lucide-react";
+import type { FC } from "react";
+import { Link } from "react-router-dom";
 
 type BootcampTypes = {
-  id: number
-  name: string
-  description: string
-}
+  id: number;
+  name: string;
+  description: string;
+};
 interface Props {
-  bootcamp: BootcampTypes
+  bootcamp: BootcampTypes;
 }
 const CardBootcampView: FC<Props> = ({ bootcamp }) => {
   return (
@@ -45,7 +45,7 @@ const CardBootcampView: FC<Props> = ({ bootcamp }) => {
         </Link>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
-export default CardBootcampView
+export default CardBootcampView;

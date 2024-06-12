@@ -1,3 +1,3 @@
 export interface ProductsState {
-    products: any
+  products: any;
 }

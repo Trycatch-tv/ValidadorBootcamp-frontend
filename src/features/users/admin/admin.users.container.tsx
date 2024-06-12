@@ -1,11 +1,11 @@
-import AdminUsersView from "./admin.users.view"
+import AdminUsersView from "./admin.users.view";
 
 const AdminUsersContainer = () => {
-    return(
-        <>
-            <AdminUsersView />
-        </>
-    )
-}
+  return (
+    <>
+      <AdminUsersView />
+    </>
+  );
+};
 
-export default AdminUsersContainer
+export default AdminUsersContainer;

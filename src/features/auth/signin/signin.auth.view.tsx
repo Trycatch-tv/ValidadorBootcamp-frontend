@@ -1,16 +1,16 @@
-import { Button, Input } from "@/components/ui"
-import { Eye, EyeOff } from "lucide-react"
-import { FC } from "react"
-import { Link } from "react-router-dom"
+import { Button, Input } from "@/components/ui";
+import { Eye, EyeOff } from "lucide-react";
+import type { FC } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
-  showPassword: boolean
-  onClickShowPassword: () => void
-  email: string
-  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
-  password: string
-  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onClickSignIn: () => void
+  showPassword: boolean;
+  onClickShowPassword: () => void;
+  email: string;
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  password: string;
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickSignIn: () => void;
 }
 const SigninView: FC<Props> = ({
   showPassword,
@@ -111,7 +111,7 @@ const SigninView: FC<Props> = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default SigninView
+export default SigninView;
