@@ -1,15 +1,12 @@
-import { BootcampController } from "@/controllers/bootcamp/bootcamp.controller"
-import { BootcampModel } from "@/models/bootcamp.model"
-import { useEffect, useState } from "react"
+import { useBootcampStore } from "@/stores/bootcamps/bootcamps.store"
+import { useEffect } from "react"
 import ListBootcampView from "./list.bootcamp.view"
 
 const ListBootcampContainer = () => {
-  const bootcampController = new BootcampController()
-  const [bootcamps, setBootcamps] = useState<BootcampModel[]>([])
+  const { bootcamps, getBootcamps } = useBootcampStore((state) => state)
 
   const getAllBootcamps = async () => {
-    const response = await bootcampController.findAll()
-    setBootcamps(response)
+    getBootcamps()
   }
 
   useEffect(() => {
