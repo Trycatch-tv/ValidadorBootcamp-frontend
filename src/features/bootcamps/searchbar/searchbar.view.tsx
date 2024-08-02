@@ -1,14 +1,20 @@
 import { Button, Input } from "@/components/ui"
-import { Filter, Search } from "lucide-react"
+import { Filter, Paintbrush, Search } from "lucide-react"
 import { FC } from "react"
 
 interface Props {
   keyValue: string
   onChangeKey: (key: string) => void
   onClickSearch: () => void
+  onClickCleanFilter: () => void
 }
 
-const SearchBarView: FC<Props> = ({ keyValue, onClickSearch, onChangeKey }) => {
+const SearchBarView: FC<Props> = ({
+  keyValue,
+  onClickSearch,
+  onChangeKey,
+  onClickCleanFilter,
+}) => {
   return (
     <>
       <div className="flex gap-3">
@@ -31,9 +37,16 @@ const SearchBarView: FC<Props> = ({ keyValue, onClickSearch, onChangeKey }) => {
             <Search className="mr-2 h-4 w-4" />
             Buscar
           </Button>
+          <Button
+            size={"sm"}
+            className="text-xs"
+            variant="outline"
+            onClick={onClickCleanFilter}
+          >
+            <Paintbrush className="mr-2 h-4 w-4" />
+          </Button>
           <Button size={"sm"} className="text-xs" variant="outline">
             <Filter className="mr-2 h-4 w-4" />
-            Filtros
           </Button>
         </div>
       </div>

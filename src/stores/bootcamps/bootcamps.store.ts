@@ -9,6 +9,11 @@ export const useBootcampStore = create<BootcampsState>((set) => ({
     const bootcampsResponse = await bootcampsController.findAll()
     set((state) => ({ bootcamps: bootcampsResponse }))
   },
+  searchBootcamps: async (query: string) => {
+    const bootcampsController = new BootcampController()
+    const bootcampsResponse = await bootcampsController.search(query)
+    set((state) => ({ bootcamps: bootcampsResponse }))
+  },
 }))
 
 export default useBootcampStore
