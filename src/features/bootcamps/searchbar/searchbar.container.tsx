@@ -1,23 +1,30 @@
-import { BootcampController } from "@/controllers/bootcamp/bootcamp.controller"
-import { BootcampModel } from "@/models/bootcamp.model"
-import { useState } from "react"
+import useBootcampStore from "@/stores/bootcamps/bootcamps.store"
+import { useCallback, useState } from "react"
 import SearchBarView from "./searchbar.view"
 
 const SearchBarContainer = () => {
-  const bootcampController = new BootcampController()
+  const { searchBootcamps, getBootcamps } = useBootcampStore((state) => state)
 
   const [keyValue, setKeyValue] = useState("")
-  const [bootcamps, setBootcamps] = useState<BootcampModel[]>([])
 
-  const handleChangeKey = (keyValue: string) => {
-    console.log(keyValue)
-    setKeyValue(keyValue)
-  }
-  const handleSearch = async () => {
-    const getSearchBootcamps = await bootcampController.search(keyValue)
-    setBootcamps(getSearchBootcamps)
-    // TODO: Pendiente enviar el resultado al storage de Zustand (cuando esté implementado)
-    console.log(bootcamps)
+  const handleChangeKey = useCallback(
+    (keyValue: string) => {
+      setKeyValue(keyValue)
+    },
+    [keyValue]
+  )
+
+  const handleSearch = useCallback(async () => {
+    if (keyValue === "") {
+      getBootcamps()
+    } else {
+      searchBootcamps(keyValue)
+    }
+  }, [keyValue])
+
+  const handleCleanFilter = () => {
+    setKeyValue("")
+    getBootcamps()
   }
 
   return (
@@ -26,6 +33,7 @@ const SearchBarContainer = () => {
         keyValue={keyValue}
         onChangeKey={handleChangeKey}
         onClickSearch={handleSearch}
+        onClickCleanFilter={handleCleanFilter}
       />
     </>
   )

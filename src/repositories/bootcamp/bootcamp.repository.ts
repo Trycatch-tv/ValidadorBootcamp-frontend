@@ -4,9 +4,7 @@ import HttpClient from "../../utils/HttpClient/HttpClient.util"
 const apiUrl = import.meta.env.VITE_API_URL
 
 export class BootcampRepository {
-  private httpClient: HttpClient = new HttpClient(
-    `${apiUrl}/bootcamps`
-  )
+  private httpClient: HttpClient = new HttpClient(`${apiUrl}/bootcamps`)
   constructor() {}
 
   async findAll(): Promise<BootcampModel[]> {
@@ -15,8 +13,12 @@ export class BootcampRepository {
   }
 
   async search(key: string): Promise<BootcampModel[]> {
-    const searchResponse = await this.httpClient.get(`/search/${key}`)
-    return searchResponse.data
+    try {
+      const searchResponse = await this.httpClient.get(`/search/${key}`)
+      return searchResponse.data
+    } catch (error) {
+      return []
+    }
   }
 
   async findAllByScore(): Promise<BootcampModel[]> {

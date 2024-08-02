@@ -1,4 +1,7 @@
+import { BootcampModel } from "../../models/bootcamp.model"
 
 export interface BootcampsState {
-    bootcamps: any
+  bootcamps: BootcampModel[]
+  getBootcamps: () => void
+  searchBootcamps: (query: string) => void
 }
