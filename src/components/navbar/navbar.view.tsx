@@ -1,3 +1,4 @@
+import { UserModel } from "@/models/user.model"
 import {
   Menubar,
   MenubarContent,
@@ -18,9 +19,17 @@ interface NavbarLinkProps {
 
 interface PropsInterface {
   routes: NavbarLinkProps[]
+  user: UserModel
+  navigate: any
+  signOut: () => void
 }
 
-const NavbarView: FC<PropsInterface> = ({ routes }) => {
+const NavbarView: FC<PropsInterface> = ({
+  routes,
+  user,
+  navigate,
+  signOut,
+}) => {
   return (
     <>
       <nav className="flex w-full h-14 mx-auto pl-4 pr-4 items-center justify-between bg-gray-900">
@@ -78,15 +87,66 @@ const NavbarView: FC<PropsInterface> = ({ routes }) => {
               </li>
             )
           })}
-          <li>
-            <Link to={"/profile"}>
-              <Avatar>
-                <LazyLoadComponent>
-                  <AvatarImage src="https://picsum.photos/30" alt="@shadcn" />
-                </LazyLoadComponent>
-              </Avatar>
-            </Link>
-          </li>
+          {!user.isLogedIn ? (
+            <>
+              <li>
+                <Button
+                  className="text-xs text-gray-400 hover:text-white"
+                  size={"sm"}
+                  variant={"link"}
+                  onClick={() => {
+                    navigate("/signin")
+                  }}
+                >
+                  Sign In
+                </Button>
+              </li>
+              <li>
+                <Button
+                  className="text-xs text-gray-400 hover:text-white"
+                  size={"sm"}
+                  variant={"link"}
+                  onClick={() => {
+                    navigate("/signup")
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Button
+                  className="text-xs text-gray-400 hover:text-white"
+                  size={"sm"}
+                  variant={"link"}
+                  onClick={() => {
+                    signOut()
+                  }}
+                >
+                  SignOut
+                </Button>
+              </li>
+              <li>
+                <Link to={"/profile"}>
+                  <div className="flex flex-row justify-center items-center">
+                    <span className="text-gray-400 mr-2 text-sm">
+                      {user.first_name}
+                    </span>
+                    <Avatar>
+                      <LazyLoadComponent>
+                        <AvatarImage
+                          src="https://static-00.iconduck.com/assets.00/profile-default-icon-1024x1023-4u5mrj2v.png"
+                          alt={user.first_name}
+                        />
+                      </LazyLoadComponent>
+                    </Avatar>
+                  </div>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </>

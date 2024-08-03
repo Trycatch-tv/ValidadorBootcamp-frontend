@@ -1,6 +1,7 @@
-import {create} from "zustand"
+import { create } from "zustand"
+import { UserModel } from "../../models/user.model"
 import { UserState } from "./user.store.interface"
 
 export const useUserStore = create<UserState>(() => ({
-    users: [],
+  user: new Object() as UserModel,
 }))

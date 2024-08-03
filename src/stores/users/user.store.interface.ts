@@ -1,4 +1,4 @@
+import { UserModel } from "../../models/user.model"
 export interface UserState {
-    users: any
+  user: UserModel
 }
-
