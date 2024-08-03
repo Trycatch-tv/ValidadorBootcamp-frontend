@@ -5,6 +5,7 @@ export interface UserModel {
   email: string
   role: string
   is_active: boolean
+  isLogedIn: boolean
   created_at: Date
   updated_at: Date
 }

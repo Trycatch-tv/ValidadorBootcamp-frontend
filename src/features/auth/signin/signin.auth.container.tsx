@@ -1,6 +1,6 @@
-import { AuthController } from "@/controllers/auth/auth.controller"
+import { useAuthStore } from "@/stores/auth/auth.store"
 import { showAlert } from "@/utils/alerts/alert.util"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import SigninView from "./signin.auth.view"
 
@@ -10,27 +10,27 @@ const SigninContainer = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
-  const authController = new AuthController()
+  const { signIn, isAuth, user } = useAuthStore()
 
   const handlerShowPassword = () => setShowPassword(!showPassword)
 
   const handlerEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value)
 
+  useEffect(() => {
+    if (isAuth()) {
+      showAlert("Bienvenido", "Has iniciado sesión correctamente", "success")
+      navigate("/")
+    } else if (isAuth() === false) {
+      showAlert("error", "Usuario o contraseña incorrectos")
+    }
+  }, [isAuth()])
+
   const handlerPassword = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value)
 
   const handlerSignIn = async () => {
-    const signInDto = { email, password }
-    const signInRepose = await authController.signIn(signInDto)
-    if (signInRepose.data.isLogedIn) {
-      localStorage.setItem("userid", signInRepose.data.id)
-      showAlert("Bienvenido", "Has iniciado sesión correctamente", "success")
-      navigate("/")
-    } else {
-      showAlert("error", "Usuario o contraseña incorrectos")
-    }
+    signIn(email, password)
   }
 
   return (
