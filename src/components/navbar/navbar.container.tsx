@@ -7,10 +7,12 @@ const routes = [
   {
     name: "Ranking",
     path: "/ranking",
+    roles: ["user", "admin"],
   },
   {
     name: "Backoffice",
     path: "/backoffice",
+    roles: ["admin"],
   },
 ]
 

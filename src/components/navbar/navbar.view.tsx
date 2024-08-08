@@ -15,6 +15,7 @@ import { Avatar, AvatarImage, Button } from "../ui"
 interface NavbarLinkProps {
   name: string
   path: string
+  roles: string[]
 }
 
 interface PropsInterface {
@@ -72,21 +73,25 @@ const NavbarView: FC<PropsInterface> = ({
           </MenubarMenu>
         </Menubar>
         <ul className="hidden md:flex  items-center">
-          {routes.map((route, index) => {
-            return (
-              <li key={index}>
-                <Link to={route.path}>
-                  <Button
-                    className="text-xs text-gray-400 hover:text-white"
-                    size={"sm"}
-                    variant={"link"}
-                  >
-                    {route.name}
-                  </Button>
-                </Link>
-              </li>
-            )
-          })}
+          {routes
+            .filter((route) => route.roles.includes(user.role))
+            .map((route, index) => {
+              return (
+                <>
+                  <li key={index}>
+                    <Link to={route.path}>
+                      <Button
+                        className="text-xs text-gray-400 hover:text-white"
+                        size={"sm"}
+                        variant={"link"}
+                      >
+                        {route.name}
+                      </Button>
+                    </Link>
+                  </li>
+                </>
+              )
+            })}
           {!user.isLogedIn ? (
             <>
               <li>
