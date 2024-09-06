@@ -8,6 +8,11 @@ export class UserRepository {
   constructor() {}
 
   async findOne(id: string): Promise<UserModel> {
+    // TODO: En el backend falta agregar la validación en el endpoint para el rol de usuario
+    // y validar que si la petición la hace un admin pueda ver la información, si la hace un usuario
+    // solo pueda ver su información comparando el id del token con el id del usuario que se quiere ver,
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
     const getOneResponse = await this.httpClient.get(`/${id}`)
     return getOneResponse.data
   }

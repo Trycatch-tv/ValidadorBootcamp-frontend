@@ -11,14 +11,21 @@ export const useAuthStore = create(
       isAuth: () => {
         return get().user.isLogedIn
       },
+      token: null,
       signIn: async (email: string, password: string) => {
         const authController = new AuthController()
         const signInResponse = await authController.signIn({ email, password })
         set((state: Partial<AuthState>) => ({ user: signInResponse.data }))
+        set((state: Partial<AuthState>) => ({
+          token: signInResponse.data.token,
+        }))
       },
       signOut: () => {
         set((state: Partial<AuthState>) => ({
           user: new Object() as UserModel,
+        }))
+        set((state: Partial<AuthState>) => ({
+          token: null,
         }))
       },
     }),
