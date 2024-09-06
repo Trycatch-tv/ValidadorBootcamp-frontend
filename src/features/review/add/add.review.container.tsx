@@ -1,4 +1,5 @@
 import { ReviewController } from "@/controllers/review/review.controller"
+import { useAuthStore } from "@/stores/auth/auth.store"
 import { showAlert } from "@/utils/alerts/alert.util"
 import { FC, useState } from "react"
 import { CreateOneReviewDto } from "../../../dtos/review/createOneReview.dto"
@@ -16,7 +17,8 @@ const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
   const [scoreCurriculum, setScoreCurriculum] = useState(0)
   const [scoreJobSupport, setScoreJobSupport] = useState(0)
 
-  const userId = localStorage.getItem("userid") as string
+  const { user } = useAuthStore((state) => state)
+
   const reviewController = new ReviewController()
 
   const handlerTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +44,7 @@ const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
   const handlerSubmit = async () => {
     const createOneReviewDto = {
       bootcamp_id: bootcampId,
-      user_id: userId,
+      user_id: user.id,
       title,
       description,
       score_overall: scoreOverall,
