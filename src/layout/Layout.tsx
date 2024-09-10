@@ -10,7 +10,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div className="relative min-h-screen bg-gray-50">
       <NavbarContainer />
-      <main className="container container-lg pt-16 pb-36">{children}</main>
+      <main className="container ">{children}</main>
       <FooterContainer />
     </div>
   )

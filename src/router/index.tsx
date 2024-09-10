@@ -1,5 +1,6 @@
 import SigninContainer from "@/features/auth/signin/signin.auth.container"
 import SignupContainer from "@/features/auth/signup/signup.auth.container"
+import BootcampsBackofficeContainer from "@/features/backoffice/bootcamps/bootcamps.backoffice.container"
 import DashboardBackofficeContainer from "@/features/backoffice/dashboard/dashboard.backoffice.container"
 import ReportsBackofficeContainer from "@/features/backoffice/reports/reports.backoffice.container"
 import ProfileBootcampContainer from "@/features/bootcamps/profile/profile.bootcamp.container"
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "backoffice",
     element: <DashboardBackofficeContainer />,
+  },
+  {
+    path: "backoffice/bootcamps",
+    element: <BootcampsBackofficeContainer />,
   },
   {
     path: "backoffice/users",
