@@ -3,10 +3,10 @@ import SignupContainer from "@/features/auth/signup/signup.auth.container"
 import BootcampsBackofficeContainer from "@/features/backoffice/bootcamps/bootcamps.backoffice.container"
 import DashboardBackofficeContainer from "@/features/backoffice/dashboard/dashboard.backoffice.container"
 import ReportsBackofficeContainer from "@/features/backoffice/reports/reports.backoffice.container"
+import UsersBackofficeContainer from "@/features/backoffice/users/users.backoffice.container"
 import ProfileBootcampContainer from "@/features/bootcamps/profile/profile.bootcamp.container"
 import HomeContainer from "@/features/home/Home.container"
 import RankingContainer from "@/features/ranking/Ranking.container"
-import AdminUsersContainer from "@/features/users/admin/admin.users.container"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 
 const router = createBrowserRouter([
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   },
   {
     path: "backoffice/users",
-    element: <AdminUsersContainer />,
+    element: <UsersBackofficeContainer />,
   },
   {
     path: "backoffice/reports",
