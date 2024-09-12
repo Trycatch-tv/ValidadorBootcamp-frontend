@@ -8,4 +8,12 @@ export class UserService {
   async findOne(id: string): Promise<UserModel> {
     return await this.userRepository.findOne(id)
   }
+
+  async findAll(): Promise<UserModel[]> {
+    return await this.userRepository.findAll()
+  }
+
+  async search(query: string): Promise<UserModel[]> {
+    return await this.userRepository.search(query)
+  }
 }

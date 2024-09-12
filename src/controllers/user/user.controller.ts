@@ -8,4 +8,12 @@ export class UserController {
   async findOne(id: string): Promise<UserModel> {
     return await this.userService.findOne(id)
   }
+
+  async findAll(): Promise<UserModel[]> {
+    return await this.userService.findAll()
+  }
+
+  async search(query: string): Promise<UserModel[]> {
+    return await this.userService.search(query)
+  }
 }
