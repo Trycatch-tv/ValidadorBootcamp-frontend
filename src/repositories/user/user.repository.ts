@@ -16,4 +16,18 @@ export class UserRepository {
     const getOneResponse = await this.httpClient.get(`/${id}`)
     return getOneResponse.data
   }
+
+  async findAll(): Promise<UserModel[]> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const getAllResponse = await this.httpClient.get("/list")
+    return getAllResponse.data
+  }
+
+  async search(query: string): Promise<UserModel[]> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const searchResponse = await this.httpClient.get(`/search/${query}`)
+    return searchResponse.data
+  }
 }
