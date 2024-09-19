@@ -2,15 +2,25 @@ import { Button, CardContent, CardHeader } from "@/components/ui"
 import { Input } from "@/components/ui/input"
 import Layout from "@/layout/Layout"
 import { UserModel } from "@/models/user.model"
-import { Filter } from "lucide-react"
+import { Filter, Paintbrush, Search } from "lucide-react"
 import { FC } from "react"
 import ListUsersBackofficeContainer from "./list/list.users.backoffice.container"
 
 interface Props {
   users: UserModel[]
+  keyValue: string
+  onChangeKey: (key: string) => void
+  onClickSearch: () => void
+  onClickCleanFilter: () => void
 }
 
-const UsersBackoffceView: FC<Props> = ({ users }) => {
+const UsersBackoffceView: FC<Props> = ({
+  users,
+  keyValue,
+  onChangeKey,
+  onClickSearch,
+  onClickCleanFilter,
+}) => {
   return (
     <>
       <Layout>
@@ -23,14 +33,31 @@ const UsersBackoffceView: FC<Props> = ({ users }) => {
               className="max-w-[440px]"
               id="name"
               placeholder="Buscar usuario... "
+              value={keyValue}
+              onChange={(e) => {
+                onChangeKey(e.target.value)
+              }}
             />
             <div className="flex justify-content-between gap-2">
+              <Button
+                size={"sm"}
+                className="text-xs"
+                variant="outline"
+                onClick={onClickSearch}
+              >
+                <Search className="mr-2 h-4 w-4" />
+                Buscar
+              </Button>
+              <Button
+                size={"sm"}
+                className="text-xs"
+                variant="outline"
+                onClick={onClickCleanFilter}
+              >
+                <Paintbrush className="mr-2 h-4 w-4" />
+              </Button>
               <Button size={"sm"} className="text-xs" variant="outline">
                 <Filter className="mr-2 h-4 w-4" />
-                Filtros
-              </Button>
-              <Button size={"sm"} className="text-xs">
-                Buscar
               </Button>
             </div>
           </div>
