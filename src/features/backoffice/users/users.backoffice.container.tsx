@@ -1,20 +1,45 @@
-import { useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useUserStore } from "../../../stores/users/users.store"
 import UsersBackoffceView from "./users.backoffice.view"
 
 const UsersBackofficeContainer = () => {
-  const { users, getUsers } = useUserStore((state) => state)
+  const { users, getUsers, searchUsers } = useUserStore((state) => state)
 
-  const getAllBootcamps = async () => {
+  const [keyValue, setKeyValue] = useState("")
+
+  const handleChangeKey = useCallback(
+    (keyValue: string) => {
+      setKeyValue(keyValue)
+    },
+    [keyValue]
+  )
+
+  const handleSearch = useCallback(async () => {
+    if (keyValue === "") {
+      getUsers()
+    } else {
+      searchUsers(keyValue)
+    }
+  }, [keyValue])
+
+  const handleCleanFilter = () => {
+    setKeyValue("")
     getUsers()
   }
 
   useEffect(() => {
-    getAllBootcamps()
+    getUsers()
   }, [])
+
   return (
     <>
-      <UsersBackoffceView users={users} />
+      <UsersBackoffceView
+        users={users}
+        keyValue={keyValue}
+        onChangeKey={handleChangeKey}
+        onClickSearch={handleSearch}
+        onClickCleanFilter={handleCleanFilter}
+      />
     </>
   )
 }
