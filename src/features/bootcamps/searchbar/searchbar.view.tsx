@@ -1,5 +1,7 @@
 import { Button, Input } from "@/components/ui"
-import { Filter, Paintbrush, Search } from "lucide-react"
+import { UserType } from "@/enum/users/usertype.enum"
+import { UserModel } from "@/models/user.model"
+import { BookPlus, Filter, Paintbrush, Search } from "lucide-react"
 import { FC } from "react"
 
 interface Props {
@@ -7,6 +9,7 @@ interface Props {
   onChangeKey: (key: string) => void
   onClickSearch: () => void
   onClickCleanFilter: () => void
+  user: UserModel
 }
 
 const SearchBarView: FC<Props> = ({
@@ -14,6 +17,7 @@ const SearchBarView: FC<Props> = ({
   onClickSearch,
   onChangeKey,
   onClickCleanFilter,
+  user,
 }) => {
   return (
     <>
@@ -48,6 +52,11 @@ const SearchBarView: FC<Props> = ({
           <Button size={"sm"} className="text-xs" variant="outline">
             <Filter className="mr-2 h-4 w-4" />
           </Button>
+          {user?.role === UserType.ADMIN ? (
+            <Button size={"sm"} className="text-xs" variant="outline">
+              <BookPlus className="mr-2 h-4 w-4" />
+            </Button>
+          ) : undefined}
         </div>
       </div>
     </>

@@ -1,9 +1,11 @@
+import { useAuthStore } from "@/stores/auth/auth.store"
 import useBootcampStore from "@/stores/bootcamps/bootcamps.store"
 import { useCallback, useState } from "react"
 import SearchBarView from "./searchbar.view"
 
 const SearchBarContainer = () => {
   const { searchBootcamps, getBootcamps } = useBootcampStore((state) => state)
+  const { user } = useAuthStore((state) => state)
 
   const [keyValue, setKeyValue] = useState("")
 
@@ -34,6 +36,7 @@ const SearchBarContainer = () => {
         onChangeKey={handleChangeKey}
         onClickSearch={handleSearch}
         onClickCleanFilter={handleCleanFilter}
+        user={user}
       />
     </>
   )
