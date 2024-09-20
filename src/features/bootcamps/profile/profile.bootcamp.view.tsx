@@ -1,4 +1,5 @@
 // En BootcampProfileView.tsx
+import ModalContainer from "@/components/modal/modal.container"
 import NavbarContainer from "@/components/navbar/navbar.container"
 import {
   Accordion,
@@ -51,8 +52,8 @@ interface PropsInterface {
   reviews: ReviewModel[]
   termsAndConditions: string
   isDialogOpen: boolean
-  closeDialog: () => void
   setDialogOpen: (value: boolean) => void
+  controlDialog: () => void
 }
 
 const ProfileBootcampView: FC<PropsInterface> = ({
@@ -61,8 +62,8 @@ const ProfileBootcampView: FC<PropsInterface> = ({
   avatar,
   termsAndConditions,
   isDialogOpen,
-  closeDialog,
   setDialogOpen,
+  controlDialog,
 }) => {
   return (
     <>
@@ -175,26 +176,17 @@ const ProfileBootcampView: FC<PropsInterface> = ({
         {/* Subcard Reviews */}
         <h4 className=" font-semibold my-8">Reviews</h4>
 
-        <div>
-          <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
-            <DialogTrigger>
-              <Button size="xs">
-                <MessageSquarePlus width="16" height="16" className="mr-1 " />
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Agregar Review</DialogTitle>
-                <DialogDescription>
-                  <AddReviewContainer
-                    bootcampId={bootcamp.id}
-                    closeDialog={closeDialog}
-                  />
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-        </div>
+        <Button onClick={controlDialog} size="xs">
+          <MessageSquarePlus width="16" height="16" />
+        </Button>
+
+        <ModalContainer
+          isDialogOpen={isDialogOpen}
+          setDialogOpen={setDialogOpen}
+          title="Agregar Review"
+        >
+          <AddReviewContainer bootcampId={bootcamp.id} />
+        </ModalContainer>
 
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3  justify-center">
           {Array.isArray(reviews) &&

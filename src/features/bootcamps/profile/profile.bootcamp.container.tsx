@@ -20,7 +20,9 @@ const ProfileBootcampContainer = () => {
 
   const [isDialogOpen, setDialogOpen] = useState(false)
 
-  const closeDialog = () => setDialogOpen(false)
+  const controlDialog = () => {
+    setDialogOpen(!isDialogOpen)
+  }
 
   const [termsAndConditions, setTermsAndConditions] = useState<string>("")
 
@@ -59,8 +61,8 @@ const ProfileBootcampContainer = () => {
         avatar={getBootcampAvatar}
         termsAndConditions={termsAndConditions}
         isDialogOpen={isDialogOpen}
-        closeDialog={closeDialog}
         setDialogOpen={setDialogOpen}
+        controlDialog={controlDialog}
       />
     </>
   )
