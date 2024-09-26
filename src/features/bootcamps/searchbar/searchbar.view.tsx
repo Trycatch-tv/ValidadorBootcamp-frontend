@@ -1,5 +1,7 @@
+import ModalContainer from "@/components/modal/modal.container"
 import { Button, Input } from "@/components/ui"
 import { UserType } from "@/enum/users/usertype.enum"
+import CreateBootcampBackofficeContainer from "@/features/backoffice/bootcamps/create/create.bootcamp.backoffice.container"
 import { UserModel } from "@/models/user.model"
 import { BookPlus, Filter, Paintbrush, Search } from "lucide-react"
 import { FC } from "react"
@@ -10,6 +12,9 @@ interface Props {
   onClickSearch: () => void
   onClickCleanFilter: () => void
   user: UserModel
+  controlDialog: () => void
+  isDialogOpen: boolean
+  setDialogOpen: (value: boolean) => void
 }
 
 const SearchBarView: FC<Props> = ({
@@ -18,6 +23,9 @@ const SearchBarView: FC<Props> = ({
   onChangeKey,
   onClickCleanFilter,
   user,
+  controlDialog,
+  isDialogOpen,
+  setDialogOpen,
 }) => {
   return (
     <>
@@ -53,9 +61,24 @@ const SearchBarView: FC<Props> = ({
             <Filter className="mr-2 h-4 w-4" />
           </Button>
           {user?.role === UserType.ADMIN ? (
-            <Button size={"sm"} className="text-xs" variant="outline">
-              <BookPlus className="mr-2 h-4 w-4" />
-            </Button>
+            <>
+              <Button
+                size={"sm"}
+                className="text-xs"
+                variant="outline"
+                onClick={controlDialog}
+              >
+                <BookPlus className="mr-2 h-4 w-4" />
+              </Button>
+
+              <ModalContainer
+                isDialogOpen={isDialogOpen}
+                setDialogOpen={setDialogOpen}
+                title="Crear Bootcamp"
+              >
+                <CreateBootcampBackofficeContainer />
+              </ModalContainer>
+            </>
           ) : undefined}
         </div>
       </div>

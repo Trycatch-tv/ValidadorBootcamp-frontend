@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/stores/auth/auth.store"
 import useBootcampStore from "@/stores/bootcamps/bootcamps.store"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import SearchBarView from "./searchbar.view"
 
 const SearchBarContainer = () => {
@@ -8,6 +8,7 @@ const SearchBarContainer = () => {
   const { user } = useAuthStore((state) => state)
 
   const [keyValue, setKeyValue] = useState("")
+  const [isDialogOpen, setDialogOpen] = useState(false)
 
   const handleChangeKey = useCallback(
     (keyValue: string) => {
@@ -29,6 +30,16 @@ const SearchBarContainer = () => {
     getBootcamps()
   }
 
+  const controlDialog = () => {
+    setDialogOpen(!isDialogOpen)
+  }
+
+  useEffect(() => {
+    if (isDialogOpen === false) {
+      getBootcamps()
+    }
+  }, [isDialogOpen])
+
   return (
     <>
       <SearchBarView
@@ -37,6 +48,9 @@ const SearchBarContainer = () => {
         onClickSearch={handleSearch}
         onClickCleanFilter={handleCleanFilter}
         user={user}
+        controlDialog={controlDialog}
+        isDialogOpen={isDialogOpen}
+        setDialogOpen={setDialogOpen}
       />
     </>
   )
