@@ -28,4 +28,8 @@ export class BootcampController {
   findOneTermsAndConditions(id: string = ""): string {
     return this.bootcampService.findOneTermsAndConditions(id)
   }
+
+  async createOne(bootcamp: Partial<BootcampModel>): Promise<BootcampModel> {
+    return this.bootcampService.createOne(bootcamp)
+  }
 }
