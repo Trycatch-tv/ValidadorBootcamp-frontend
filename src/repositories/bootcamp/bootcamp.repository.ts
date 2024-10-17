@@ -38,4 +38,11 @@ export class BootcampRepository {
   findOneTermsAndConditions(id: string): string {
     return `${apiUrl}/bootcamps/terms-and-conditions/${id}`
   }
+
+  async createOne(bootcamp: Partial<BootcampModel>): Promise<BootcampModel> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const createResponse = await this.httpClient.post("/", bootcamp)
+    return createResponse.data
+  }
 }
