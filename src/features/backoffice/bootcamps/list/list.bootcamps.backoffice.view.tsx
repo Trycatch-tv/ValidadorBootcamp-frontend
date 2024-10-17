@@ -1,5 +1,4 @@
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -8,14 +7,19 @@ import {
   TableRow,
 } from "@/components/ui"
 import { BootcampModel } from "@/models/bootcamp.model"
+import { Eye, RotateCw } from "lucide-react"
 import { FC } from "react"
 import { Link } from "react-router-dom"
 
 interface Props {
   bootcamps: BootcampModel[]
+  onRecalculateScore: (id: string) => void
 }
 
-const ListBootcampsBackofficeView: FC<Props> = ({ bootcamps }) => {
+const ListBootcampsBackofficeView: FC<Props> = ({
+  bootcamps,
+  onRecalculateScore,
+}) => {
   return (
     <>
       <div className="mt-4">
@@ -65,11 +69,15 @@ const ListBootcampsBackofficeView: FC<Props> = ({ bootcamps }) => {
                 <TableCell>
                   {bootcamp.is_active ? "Activo" : "Inactivo"}
                 </TableCell>
-                <TableCell>
+                <TableCell className="flex justify-between">
+                  <RotateCw
+                    onClick={() => {
+                      onRecalculateScore(bootcamp.id)
+                    }}
+                    className="cursor-pointer"
+                  />
                   <Link to={`/bootcamp/${bootcamp.id}`}>
-                    <Button size={"sm"} className="text-xs">
-                      Administrar
-                    </Button>
+                    <Eye />
                   </Link>
                 </TableCell>
               </TableRow>

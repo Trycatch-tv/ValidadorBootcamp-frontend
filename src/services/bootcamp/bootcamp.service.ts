@@ -32,4 +32,8 @@ export class BootcampService {
   async createOne(bootcamp: Partial<BootcampModel>): Promise<BootcampModel> {
     return this.bootcampRepository.createOne(bootcamp)
   }
+
+  async recalculateScoreAverage(id: string): Promise<BootcampModel> {
+    return this.bootcampRepository.recalculateScoreAverage(id)
+  }
 }
