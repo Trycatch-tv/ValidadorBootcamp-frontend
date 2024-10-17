@@ -1,5 +1,6 @@
 import { ReviewController } from "@/controllers/review/review.controller"
 import { useAuthStore } from "@/stores/auth/auth.store"
+import { useGlobalStore } from "@/stores/global/global.store"
 import { showAlert } from "@/utils/alerts/alert.util"
 import { FC, useState } from "react"
 import { CreateOneReviewDto } from "../../../dtos/review/createOneReview.dto"
@@ -7,10 +8,9 @@ import AddBootcampView from "./add.review.view"
 
 interface Props {
   bootcampId: string
-  closeDialog: () => void
 }
 
-const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
+const AddReviewContainer: FC<Props> = ({ bootcampId }) => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [scoreOverall, setScoreOverall] = useState(0)
@@ -18,6 +18,7 @@ const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
   const [scoreJobSupport, setScoreJobSupport] = useState(0)
 
   const { user } = useAuthStore((state) => state)
+  const { setModalState } = useGlobalStore((state) => state)
 
   const reviewController = new ReviewController()
 
@@ -56,7 +57,7 @@ const AddReviewContainer: FC<Props> = ({ bootcampId, closeDialog }) => {
 
     if (response) {
       showAlert("Reseña", "Reseña creada", "success")
-      closeDialog()
+      setModalState("cerrar_modal")
     } else {
       showAlert("Error", "Error creando reseña", "error")
     }

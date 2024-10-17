@@ -1,3 +1,4 @@
+import { UserType } from "@/enum/users/usertype.enum"
 import { useAuthStore } from "@/stores/auth/auth.store"
 import { FC } from "react"
 import { useNavigate } from "react-router-dom"
@@ -7,12 +8,12 @@ const routes = [
   {
     name: "Ranking",
     path: "/ranking",
-    roles: ["user", "admin"],
+    roles: [UserType.USER, UserType.ADMIN],
   },
   {
     name: "Backoffice",
     path: "/backoffice",
-    roles: ["admin"],
+    roles: [UserType.ADMIN],
   },
 ]
 
