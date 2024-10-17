@@ -45,4 +45,13 @@ export class BootcampRepository {
     const createResponse = await this.httpClient.post("/", bootcamp)
     return createResponse.data
   }
+
+  async recalculateScoreAverage(id: string): Promise<BootcampModel> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const recalculateResponse = await this.httpClient.post(
+      `/score/recalculate/${id}`
+    )
+    return recalculateResponse.data
+  }
 }
