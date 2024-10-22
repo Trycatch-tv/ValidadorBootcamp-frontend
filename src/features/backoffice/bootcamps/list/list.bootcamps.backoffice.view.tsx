@@ -1,3 +1,4 @@
+import ModalContainer from "@/components/modal/modal.container"
 import {
   Table,
   TableBody,
@@ -7,21 +8,42 @@ import {
   TableRow,
 } from "@/components/ui"
 import { BootcampModel } from "@/models/bootcamp.model"
-import { Eye, RotateCw } from "lucide-react"
+import { Eye, Pencil, RotateCw } from "lucide-react"
 import { FC } from "react"
 import { Link } from "react-router-dom"
+import EditBootcampBackofficeContainer from "../edit/edit.bootcamp.backoffice.container"
 
 interface Props {
   bootcamps: BootcampModel[]
   onRecalculateScore: (id: string) => void
+  isDialogOpen: boolean
+  setDialogOpen: (value: boolean) => void
+  controlDialog: (bootcamp: BootcampModel) => void
+  bootcampSelected?: BootcampModel
+  getAvatar: (id: string) => string
 }
 
 const ListBootcampsBackofficeView: FC<Props> = ({
   bootcamps,
   onRecalculateScore,
+  isDialogOpen,
+  setDialogOpen,
+  controlDialog,
+  bootcampSelected,
+  getAvatar,
 }) => {
   return (
     <>
+      <ModalContainer
+        isDialogOpen={isDialogOpen}
+        setDialogOpen={setDialogOpen}
+        title="Editar Bootcamp"
+      >
+        <EditBootcampBackofficeContainer
+          bootcamp={bootcampSelected ?? ({} as BootcampModel)}
+        />
+        {/* <h2> Editar Bootcamp {bootcampSelected?.name}</h2> */}
+      </ModalContainer>
       <div className="mt-4">
         <Table className="table table-bordered table-striped">
           <TableHeader>
@@ -47,7 +69,7 @@ const ListBootcampsBackofficeView: FC<Props> = ({
                 <TableCell>
                   {bootcamp.avatar ? (
                     <img
-                      src={bootcamp.avatar}
+                      src={getAvatar(bootcamp.id)}
                       alt={bootcamp.name}
                       className="h-10 w-10 rounded-full"
                     />
@@ -79,6 +101,12 @@ const ListBootcampsBackofficeView: FC<Props> = ({
                   <Link to={`/bootcamp/${bootcamp.id}`}>
                     <Eye />
                   </Link>
+                  <Pencil
+                    className="cursor-pointer"
+                    onClick={() => {
+                      controlDialog(bootcamp)
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             ))}

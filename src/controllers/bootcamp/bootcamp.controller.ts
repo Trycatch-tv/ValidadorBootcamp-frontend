@@ -36,4 +36,15 @@ export class BootcampController {
   async recalculateScoreAverage(id: string): Promise<BootcampModel> {
     return this.bootcampService.recalculateScoreAverage(id)
   }
+
+  async updateOne(
+    id: string,
+    bootcamp: Partial<BootcampModel>
+  ): Promise<BootcampModel> {
+    return this.bootcampService.updateOne(id, bootcamp)
+  }
+
+  async uploadAvatar(bootcampId: string, file: File): Promise<BootcampModel> {
+    return this.bootcampService.uploadAvatar(bootcampId, file)
+  }
 }
