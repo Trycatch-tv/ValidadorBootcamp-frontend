@@ -79,7 +79,11 @@ const EditBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
   const handleAvatar = async (file: File) => {
     const bootcampController = new BootcampController()
     if (file === null || file === undefined) {
-      alert("No file selected")
+      showAlert(
+        "No file selected",
+        "You need to select an image to upload",
+        "error"
+      )
     }
 
     setForm((currentState) => ({ ...currentState, selectedFile: file }))
