@@ -4,69 +4,19 @@ import { ShieldCheck } from "lucide-react"
 import { ChangeEvent, FC } from "react"
 
 interface Props {
-  handleName: (value: string) => void
-  handleDescription: (value: string) => void
-  handleWebsite: (value: string) => void
-  handleFacebook: (value: string) => void
-  handleInstagram: (value: string) => void
-  handleCountry: (value: string) => void
-  handleIsoCountry: (value: string) => void
-  handleEmail: (value: string) => void
-  handlePhone: (value: string) => void
-  handleIsEndorsed: (value: boolean) => void
-  handleEndorsedBy: (value: string) => void
-  handleIsVerified: (value: boolean) => void
   handleEditBootcamp: () => void
-  handleMode: (value: string) => void
-  isEndorsed: boolean
-  isVerified: boolean
-  endorsedBy: string
-  name: string
-  description: string
-  website: string
-  facebook: string
-  instagram: string
-  country: string
-  isoCountry: string
-  email: string
-  phone: string
-  mode: string
-  enableEndorsedBy: boolean
   onAvatarChange: (file: File) => void
-  selectedFile: File | null
+  selectedFile: File | undefined
+  onUpdateForm: (changes: object) => void
+  form: any
 }
 
 const EditBootcampBackofficeView: FC<Props> = ({
-  handleName,
-  handleDescription,
-  handleWebsite,
-  handleFacebook,
-  handleInstagram,
-  handleCountry,
-  handleIsoCountry,
-  handleEmail,
-  handlePhone,
-  handleIsEndorsed,
-  handleEndorsedBy,
-  handleIsVerified,
   handleEditBootcamp,
-  handleMode,
-  isEndorsed,
-  isVerified,
-  endorsedBy,
-  name,
-  description,
-  website,
-  facebook,
-  instagram,
-  country,
-  isoCountry,
-  email,
-  phone,
-  mode,
-  enableEndorsedBy,
   onAvatarChange,
   selectedFile,
+  onUpdateForm,
+  form,
 }) => {
   return (
     <>
@@ -101,9 +51,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
               type="text"
               placeholder="Nombre del bootcamp"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleName(e.target.value)
+                onUpdateForm({ name: e.target.value })
               }}
-              value={name}
+              value={form.name}
               required
             />
           </div>
@@ -114,9 +64,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
             </label>
             <Textarea
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                handleDescription(e.target.value)
+                onUpdateForm({ description: e.target.value })
               }}
-              value={description}
+              value={form.description}
               required
             />
           </div>
@@ -130,9 +80,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
               placeholder="Url del sitio web"
               required
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleWebsite(e.target.value)
+                onUpdateForm({ website: e.target.value })
               }}
-              value={website}
+              value={form.website}
             />
           </div>
 
@@ -146,9 +96,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
                 placeholder="Url de facebook"
                 required
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleFacebook(e.target.value)
+                  onUpdateForm({ facebook: e.target.value })
                 }}
-                value={facebook}
+                value={form.facebook}
               />
             </div>
             <div className="my-2">
@@ -160,9 +110,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
                 placeholder="Url de instagram"
                 required
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleInstagram(e.target.value)
+                  onUpdateForm({ instagram: e.target.value })
                 }}
-                value={instagram}
+                value={form.instagram}
               />
             </div>
           </div>
@@ -177,9 +127,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
                 placeholder="Colombia"
                 required
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleCountry(e.target.value)
+                  onUpdateForm({ country: e.target.value })
                 }}
-                value={country}
+                value={form.country}
               />
             </div>
             <div className="my-2">
@@ -191,9 +141,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
                 placeholder="CO"
                 required
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleIsoCountry(e.target.value)
+                  onUpdateForm({ isoCountry: e.target.value })
                 }}
-                value={isoCountry}
+                value={form.isoCountry}
               />
             </div>
             <div className="my-2">
@@ -205,9 +155,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
                 placeholder="correo@glasscamp.com"
                 required
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handleEmail(e.target.value)
+                  onUpdateForm({ email: e.target.value })
                 }}
-                value={email}
+                value={form.email}
               />
             </div>
             <div className="my-2">
@@ -219,9 +169,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
                 placeholder="300 123 4567"
                 required
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  handlePhone(e.target.value)
+                  onUpdateForm({ phone: e.target.value })
                 }}
-                value={phone}
+                value={form.phone}
               />
             </div>
           </div>
@@ -236,19 +186,19 @@ const EditBootcampBackofficeView: FC<Props> = ({
                   className="border-none px-0 size-6 mr-1"
                   type="checkbox"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    handleIsEndorsed(e.target.checked)
+                    onUpdateForm({ isEndorsed: e.target.checked })
                   }}
-                  checked={isEndorsed}
+                  checked={form.isEndorsed}
                 />
                 <ShieldCheck className="size-8 text-orange-400 fill-orange-200 ml-0.5" />
                 <Input
                   type="text"
                   placeholder="Respaldado por"
-                  disabled={enableEndorsedBy}
+                  disabled={form.enableEndorsedBy}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    handleEndorsedBy(e.target.value)
+                    onUpdateForm({ endorsedBy: e.target.value })
                   }}
-                  value={endorsedBy}
+                  value={form.endorsedBy}
                 />
               </div>
             </div>
@@ -261,13 +211,13 @@ const EditBootcampBackofficeView: FC<Props> = ({
                   className="border-none px-0 size-5 mr-1"
                   type="checkbox"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    handleIsVerified(e.target.checked)
+                    onUpdateForm({ isVerified: e.target.checked })
                   }}
-                  checked={isVerified}
+                  checked={form.isVerified}
                 />
                 <div className="size-12 flex items-center w-full">
                   <ShieldCheck className="text-blue-400 fill-blue-200 ml-0.5" />
-                  <span>{name}</span>
+                  <span>{form.name}</span>
                 </div>
               </div>
             </div>
@@ -280,9 +230,9 @@ const EditBootcampBackofficeView: FC<Props> = ({
             <select
               className="w-full"
               onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                handleMode(e.target.value)
+                onUpdateForm({ mode: e.target.value })
               }}
-              value={mode}
+              value={form.mode}
             >
               <option value="presencial">Presencial</option>
               <option value="virtual">Virtual</option>
@@ -295,14 +245,14 @@ const EditBootcampBackofficeView: FC<Props> = ({
               type="button"
               className="w-full"
               disabled={
-                !name ||
-                !description ||
-                !website ||
-                !country ||
-                !isoCountry ||
-                !email ||
-                !phone ||
-                !mode
+                !form.name ||
+                !form.description ||
+                !form.website ||
+                !form.country ||
+                !form.isoCountry ||
+                !form.email ||
+                !form.phone ||
+                !form.mode
               }
               onClick={handleEditBootcamp}
             >

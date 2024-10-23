@@ -6,20 +6,27 @@ import { useState } from "react"
 import CreateBootcampBackofficeView from "./create.bootcamp.backoffice.view"
 
 const CreateBootcampBackofficeContainer = () => {
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [website, setWebsite] = useState("")
-  const [facebook, setFacebook] = useState("")
-  const [instagram, setInstagram] = useState("")
-  const [country, setCountry] = useState("")
-  const [isoCountry, setIsoCountry] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
-  const [isEndorsed, setIsEndorsed] = useState(false)
-  const [endorsedBy, setEndorsedBy] = useState("")
-  const [isVerified, setIsVerified] = useState(false)
-  const [mode, setMode] = useState("")
-  const [enableEndorsedBy, setEnableEndorsedBy] = useState(true)
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    website: "",
+    facebook: "",
+    instagram: "",
+    country: "",
+    isoCountry: "",
+    email: "",
+    phone: "",
+    isEndorsed: false,
+    endorsedBy: "",
+    isVerified: false,
+    avatar: "",
+    mode: "",
+    enableEndorsedBy: false,
+  })
+
+  const handleUpdateForm = (changes: object) => {
+    setForm((currentState) => ({ ...currentState, ...changes }))
+  }
 
   const { user } = useAuthStore((state) => state)
   const { setModalState } = useGlobalStore((state) => state)
@@ -28,19 +35,19 @@ const CreateBootcampBackofficeContainer = () => {
     const bootcampController = new BootcampController()
 
     const newBootcamp = {
-      name,
-      description,
-      url: website,
-      facebook_url: facebook,
-      instragram_url: instagram,
-      country_name: country,
-      country_iso: isoCountry,
-      email,
-      phone,
-      is_endorsed: isEndorsed,
-      endorsed_by: endorsedBy,
-      is_verified: isVerified,
-      mode,
+      name: form.name,
+      description: form.description,
+      url: form.website,
+      facebook_url: form.facebook,
+      instragram_url: form.instagram,
+      country_name: form.country,
+      country_iso: form.isoCountry,
+      email: form.email,
+      phone: form.phone,
+      is_endorsed: form.isEndorsed,
+      endorsed_by: form.endorsedBy,
+      is_verified: form.isVerified,
+      mode: form.mode,
       user_id: user.id,
     }
 
@@ -61,96 +68,23 @@ const CreateBootcampBackofficeContainer = () => {
     }
   }
 
-  const handleName = (value: string) => {
-    setName(value)
-  }
-
-  const handleDescription = (value: string) => {
-    setDescription(value)
-  }
-
-  const handleWebsite = (value: string) => {
-    setWebsite(value)
-  }
-
-  const handleFacebook = (value: string) => {
-    setFacebook(value)
-  }
-
-  const handleInstagram = (value: string) => {
-    setInstagram(value)
-  }
-
-  const handleCountry = (value: string) => {
-    setCountry(value)
-  }
-
-  const handleIsoCountry = (value: string) => {
-    setIsoCountry(value)
-  }
-
-  const handleEmail = (value: string) => {
-    setEmail(value)
-  }
-
-  const handlePhone = (value: string) => {
-    setPhone(value)
-  }
-
   const handleIsEndorsed = (value: boolean) => {
-    setIsEndorsed(value)
-
+    handleUpdateForm({ isEndorsed: value })
     if (value) {
-      setEnableEndorsedBy(false)
+      handleUpdateForm({ enableEndorsedBy: false })
     } else {
-      setEnableEndorsedBy(true)
-      setEndorsedBy("")
+      handleUpdateForm({ enableEndorsedBy: true })
+      handleUpdateForm({ endorsedBy: "" })
     }
-  }
-
-  const handleEndorsedBy = (value: string) => {
-    setEndorsedBy(value)
-  }
-
-  const handleIsVerified = (value: boolean) => {
-    setIsVerified(value)
-  }
-
-  const handleMode = (value: string) => {
-    setMode(value)
   }
 
   return (
     <>
       <CreateBootcampBackofficeView
-        handleName={handleName}
-        handleDescription={handleDescription}
-        handleWebsite={handleWebsite}
-        handleFacebook={handleFacebook}
-        handleInstagram={handleInstagram}
-        handleCountry={handleCountry}
-        handleIsoCountry={handleIsoCountry}
-        handleEmail={handleEmail}
-        handlePhone={handlePhone}
-        handleIsEndorsed={handleIsEndorsed}
-        handleEndorsedBy={handleEndorsedBy}
-        handleIsVerified={handleIsVerified}
         handleCreateBootcamp={createBootcamp}
-        handleMode={handleMode}
-        isEndorsed={isEndorsed}
-        isVerified={isVerified}
-        endorsedBy={endorsedBy}
-        name={name}
-        description={description}
-        website={website}
-        facebook={facebook}
-        instagram={instagram}
-        country={country}
-        isoCountry={isoCountry}
-        email={email}
-        phone={phone}
-        mode={mode}
-        enableEndorsedBy={enableEndorsedBy}
+        onUpdateForm={handleUpdateForm}
+        onIsEndorsed={handleIsEndorsed}
+        form={form}
       />
     </>
   )
