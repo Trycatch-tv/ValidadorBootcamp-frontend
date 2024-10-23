@@ -17,13 +17,14 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
+import { UserType } from "@/enum/users/usertype.enum"
 import ListProgramContainer from "@/features/program/list/list.program.container"
 import AddReviewContainer from "@/features/review/add/add.review.container"
 import CardReviewContainer from "@/features/review/card/card.review.container"
 import { BootcampModel } from "@/models/bootcamp.model"
 import { ReviewModel } from "@/models/review.model"
+import { UserModel } from "@/models/user.model"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -42,7 +43,7 @@ import {
   MessageSquarePlus,
   ShieldCheck,
 } from "lucide-react"
-import { FC } from "react"
+import { ChangeEvent, FC } from "react"
 import { LazyLoadComponent } from "react-lazy-load-image-component"
 import { Link } from "react-router-dom"
 
@@ -54,6 +55,11 @@ interface PropsInterface {
   isDialogOpen: boolean
   setDialogOpen: (value: boolean) => void
   controlDialog: () => void
+  onTermsAndCondsChange: (file: File) => void
+  selectedFile: File | undefined
+  user: UserModel
+  isTermsAndCondsDialogOpen: boolean
+  openTermsAndCondsDialog: () => void
 }
 
 const ProfileBootcampView: FC<PropsInterface> = ({
@@ -64,6 +70,11 @@ const ProfileBootcampView: FC<PropsInterface> = ({
   isDialogOpen,
   setDialogOpen,
   controlDialog,
+  onTermsAndCondsChange,
+  selectedFile,
+  user,
+  isTermsAndCondsDialogOpen,
+  openTermsAndCondsDialog,
 }) => {
   return (
     <>
@@ -215,9 +226,14 @@ const ProfileBootcampView: FC<PropsInterface> = ({
                 <div className="w-full">
                   <div className="w-full mt-2">
                     <div className="px-2 py-2.5 flex flex-col items-center justify-center">
-                      <Dialog>
-                        <DialogTrigger>
-                          <Button size="xs">
+                      <Dialog open={isTermsAndCondsDialogOpen}>
+                        {bootcamp.terms_and_conditions ? (
+                          <Button
+                            size="xs"
+                            onClick={() => {
+                              openTermsAndCondsDialog()
+                            }}
+                          >
                             <BookmarkIcon
                               width="16"
                               height="16"
@@ -227,7 +243,32 @@ const ProfileBootcampView: FC<PropsInterface> = ({
                               Ver Términos y Condiciones
                             </span>
                           </Button>
-                        </DialogTrigger>
+                        ) : (
+                          <>
+                            <div>
+                              Aún no se han cargado términos y condiciones
+                            </div>
+                          </>
+                        )}
+                        {user.role === UserType.ADMIN ? (
+                          <>
+                            <input
+                              className="mt-2"
+                              type="file"
+                              accept=".pdf"
+                              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                onTermsAndCondsChange(e.target.files![0])
+                              }}
+                            />
+                            {selectedFile ? (
+                              <>{selectedFile.name}</>
+                            ) : (
+                              "PDF no seleccionado"
+                            )}
+                          </>
+                        ) : (
+                          ""
+                        )}
                         <DialogContent>
                           <DialogHeader>
                             <DialogTitle>Términos y Condiciones</DialogTitle>

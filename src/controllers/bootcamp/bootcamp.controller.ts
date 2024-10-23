@@ -47,4 +47,11 @@ export class BootcampController {
   async uploadAvatar(bootcampId: string, file: File): Promise<BootcampModel> {
     return this.bootcampService.uploadAvatar(bootcampId, file)
   }
+
+  async uploadTermsAndConditions(
+    bootcampId: string,
+    file: File
+  ): Promise<BootcampModel> {
+    return this.bootcampService.uploadTermsAndConditions(bootcampId, file)
+  }
 }

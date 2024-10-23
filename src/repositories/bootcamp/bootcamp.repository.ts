@@ -78,4 +78,21 @@ export class BootcampRepository {
     )
     return uploadResponse.data
   }
+
+  async uploadTermsAndConditions(
+    bootcampId: string,
+    file: File
+  ): Promise<BootcampModel> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    this.httpClient.setContentType("form-data")
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("bootcampId", bootcampId)
+    const uploadResponse = await this.httpClient.post(
+      `/terms-and-conditions/upload`,
+      formData
+    )
+    return uploadResponse.data
+  }
 }
