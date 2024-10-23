@@ -54,4 +54,28 @@ export class BootcampRepository {
     )
     return recalculateResponse.data
   }
+
+  async updateOne(
+    id: string,
+    bootcamp: Partial<BootcampModel>
+  ): Promise<BootcampModel> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const updateResponse = await this.httpClient.put(`/update/${id}`, bootcamp)
+    return updateResponse.data
+  }
+
+  async uploadAvatar(bootcampId: string, file: File): Promise<BootcampModel> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    this.httpClient.setContentType("form-data")
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("bootcampId", bootcampId)
+    const uploadResponse = await this.httpClient.post(
+      `/avatar/upload`,
+      formData
+    )
+    return uploadResponse.data
+  }
 }

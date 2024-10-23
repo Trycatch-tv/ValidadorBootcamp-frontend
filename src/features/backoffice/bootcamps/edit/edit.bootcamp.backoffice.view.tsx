@@ -4,22 +4,45 @@ import { ShieldCheck } from "lucide-react"
 import { ChangeEvent, FC } from "react"
 
 interface Props {
-  handleCreateBootcamp: () => void
+  handleEditBootcamp: () => void
+  onAvatarChange: (file: File) => void
+  selectedFile: File | undefined
   onUpdateForm: (changes: object) => void
   form: any
-  onIsEndorsed: (value: boolean) => void
 }
 
-const CreateBootcampBackofficeView: FC<Props> = ({
-  handleCreateBootcamp,
+const EditBootcampBackofficeView: FC<Props> = ({
+  handleEditBootcamp,
+  onAvatarChange,
+  selectedFile,
   onUpdateForm,
   form,
-  onIsEndorsed,
 }) => {
   return (
     <>
       <section>
         <div className="container ">
+          <div className="my-2">
+            <label className="text-gray-700 text-xs font-semibold block my-1">
+              Avatar
+            </label>
+
+            <input
+              type="file"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                onAvatarChange(e.target.files![0])
+              }}
+            />
+            {selectedFile ? (
+              <img
+                src={URL.createObjectURL(selectedFile)}
+                alt="Avatar"
+                className="w-96 rounded-md mt-4"
+              />
+            ) : (
+              "Imagen no seleccionada"
+            )}
+          </div>
           <div className="my-2">
             <label className="text-gray-700 text-xs font-semibold block my-1">
               Nombre
@@ -163,7 +186,7 @@ const CreateBootcampBackofficeView: FC<Props> = ({
                   className="border-none px-0 size-6 mr-1"
                   type="checkbox"
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    onIsEndorsed(e.target.checked)
+                    onUpdateForm({ isEndorsed: e.target.checked })
                   }}
                   checked={form.isEndorsed}
                 />
@@ -231,9 +254,9 @@ const CreateBootcampBackofficeView: FC<Props> = ({
                 !form.phone ||
                 !form.mode
               }
-              onClick={handleCreateBootcamp}
+              onClick={handleEditBootcamp}
             >
-              Crear
+              Actualizar
             </Button>
           </div>
         </div>
@@ -242,4 +265,4 @@ const CreateBootcampBackofficeView: FC<Props> = ({
   )
 }
 
-export default CreateBootcampBackofficeView
+export default EditBootcampBackofficeView

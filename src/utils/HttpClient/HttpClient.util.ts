@@ -3,18 +3,24 @@ import axios, { AxiosInstance } from "axios"
 export default class HttpClient {
   private http: AxiosInstance
   private token: string | null = null
+  private contentType: object = {}
 
   constructor(baseURL: string) {
     this.http = axios.create({
       baseURL,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
     })
   }
 
   setToken(token: string) {
     this.token = token
+  }
+
+  setContentType(type: "json" | "form-data") {
+    this.contentType = {
+      "Content-Type":
+        type === "json" ? "application/json" : "multipart/form-data",
+    }
   }
 
   getAuthHeader() {
@@ -25,6 +31,7 @@ export default class HttpClient {
     return this.http.get(url, {
       ...config,
       headers: {
+        ...this.contentType,
         ...this.getAuthHeader(),
       },
     })
@@ -34,6 +41,7 @@ export default class HttpClient {
     return this.http.post(url, data, {
       ...config,
       headers: {
+        ...this.contentType,
         ...this.getAuthHeader(),
       },
     })
@@ -43,6 +51,7 @@ export default class HttpClient {
     return this.http.put(url, data, {
       ...config,
       headers: {
+        ...this.contentType,
         ...this.getAuthHeader(),
       },
     })
@@ -52,6 +61,7 @@ export default class HttpClient {
     return this.http.patch(url, data, {
       ...config,
       headers: {
+        ...this.contentType,
         ...this.getAuthHeader(),
       },
     })
@@ -61,6 +71,7 @@ export default class HttpClient {
     return this.http.delete(url, {
       ...config,
       headers: {
+        ...this.contentType,
         ...this.getAuthHeader(),
       },
     })
