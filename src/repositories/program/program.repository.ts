@@ -17,4 +17,16 @@ export class ProgramRepository {
   findOneContent(id: string): string {
     return `${apiUrl}/programs/content/${id}`
   }
+
+  async createOne(program: Partial<ProgramModel>): Promise<ProgramModel> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const createOneResponse = await this.httpClient.post("/", program)
+    return createOneResponse.data
+  }
+
+  async findAll(): Promise<ProgramModel[]> {
+    const findAllResponse = await this.httpClient.get("/list")
+    return findAllResponse.data
+  }
 }

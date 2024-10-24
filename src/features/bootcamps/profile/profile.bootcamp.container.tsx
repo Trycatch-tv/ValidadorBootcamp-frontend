@@ -25,11 +25,22 @@ const ProfileBootcampContainer = () => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined)
 
   const [isDialogOpen, setDialogOpen] = useState(false)
+  const [isDialogCreateProgramOpen, setIsDialogCreateProgramOpen] =
+    useState(false)
   const [isTermsAndCondsDialogOpen, setTermsAndCondsDialogOpen] =
     useState(false)
 
-  const controlDialog = () => {
-    setDialogOpen(!isDialogOpen)
+  const controlDialog = (modal: string) => {
+    switch (modal) {
+      case "add_review":
+        setDialogOpen(!isDialogOpen)
+        break
+      case "add_program":
+        setIsDialogCreateProgramOpen(!isDialogCreateProgramOpen)
+        break
+      default:
+        break
+    }
   }
 
   const openTermsAndCondsDialog = () => {
@@ -104,6 +115,8 @@ const ProfileBootcampContainer = () => {
         user={user}
         isTermsAndCondsDialogOpen={isTermsAndCondsDialogOpen}
         openTermsAndCondsDialog={openTermsAndCondsDialog}
+        isDialogCreateProgramOpen={isDialogCreateProgramOpen}
+        setIsDialogCreateProgramOpen={setIsDialogCreateProgramOpen}
       />
     </>
   )

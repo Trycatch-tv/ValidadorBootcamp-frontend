@@ -19,6 +19,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { UserType } from "@/enum/users/usertype.enum"
+import CreateProgramContainer from "@/features/program/create/create.program.container"
 import ListProgramContainer from "@/features/program/list/list.program.container"
 import AddReviewContainer from "@/features/review/add/add.review.container"
 import CardReviewContainer from "@/features/review/card/card.review.container"
@@ -41,6 +42,7 @@ import {
   Link2,
   ListOrdered,
   MessageSquarePlus,
+  PlusCircle,
   ShieldCheck,
 } from "lucide-react"
 import { ChangeEvent, FC } from "react"
@@ -54,12 +56,14 @@ interface PropsInterface {
   termsAndConditions: string
   isDialogOpen: boolean
   setDialogOpen: (value: boolean) => void
-  controlDialog: () => void
+  controlDialog: (modal: string) => void
   onTermsAndCondsChange: (file: File) => void
   selectedFile: File | undefined
   user: UserModel
   isTermsAndCondsDialogOpen: boolean
   openTermsAndCondsDialog: () => void
+  isDialogCreateProgramOpen: boolean
+  setIsDialogCreateProgramOpen: (value: boolean) => void
 }
 
 const ProfileBootcampView: FC<PropsInterface> = ({
@@ -75,6 +79,8 @@ const ProfileBootcampView: FC<PropsInterface> = ({
   user,
   isTermsAndCondsDialogOpen,
   openTermsAndCondsDialog,
+  isDialogCreateProgramOpen,
+  setIsDialogCreateProgramOpen,
 }) => {
   return (
     <>
@@ -187,7 +193,7 @@ const ProfileBootcampView: FC<PropsInterface> = ({
         {/* Subcard Reviews */}
         <h4 className=" font-semibold my-8">Reviews</h4>
 
-        <Button onClick={controlDialog} size="xs">
+        <Button onClick={() => controlDialog("add_review")} size="xs">
           <MessageSquarePlus width="16" height="16" />
         </Button>
 
@@ -213,6 +219,22 @@ const ProfileBootcampView: FC<PropsInterface> = ({
                 Programas (Falta agregar el campo precio al programa)
               </AccordionTrigger>
               <AccordionContent>
+                {user.role === UserType.ADMIN ? (
+                  <PlusCircle
+                    className="cursor-pointer"
+                    onClick={() => controlDialog("add_program")}
+                  />
+                ) : (
+                  ""
+                )}
+
+                <ModalContainer
+                  isDialogOpen={isDialogCreateProgramOpen}
+                  setDialogOpen={setIsDialogCreateProgramOpen}
+                  title="Agregar Programa"
+                >
+                  <CreateProgramContainer bootcampId={bootcamp.id} />
+                </ModalContainer>
                 <ListProgramContainer bootcampId={bootcamp.id} />
               </AccordionContent>
             </AccordionItem>
