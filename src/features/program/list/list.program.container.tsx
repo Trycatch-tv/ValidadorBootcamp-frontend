@@ -1,6 +1,5 @@
-import { ProgramModel } from "@/models/program.model"
-import { FC, useEffect, useState } from "react"
-import { ProgramController } from "../../../controllers/program/program.controller"
+import { FC, useEffect } from "react"
+import { useProgramStore } from "../../../stores/programs/programs.store"
 import ListProgramView from "./list.program.view"
 
 interface Props {
@@ -8,13 +7,11 @@ interface Props {
 }
 
 const ListProgramContainer: FC<Props> = ({ bootcampId }) => {
-  const programController = new ProgramController()
-  const [programs, setPrograms] = useState<ProgramModel[]>([])
+  const { programsByBootcamp, getProgramsByBootcamp } = useProgramStore(
+    (state) => state
+  )
   const getPrograms = async () => {
-    const getProgramsResponse = await programController.findManyByBootcampId(
-      bootcampId
-    )
-    setPrograms(getProgramsResponse)
+    await getProgramsByBootcamp(bootcampId)
   }
 
   useEffect(() => {
@@ -23,7 +20,7 @@ const ListProgramContainer: FC<Props> = ({ bootcampId }) => {
 
   return (
     <>
-      <ListProgramView programs={programs} />
+      <ListProgramView programs={programsByBootcamp} />
     </>
   )
 }
