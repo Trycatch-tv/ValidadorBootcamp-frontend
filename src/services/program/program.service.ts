@@ -20,4 +20,8 @@ export class ProgramService {
   async findAll() {
     return this.programRepository.findAll()
   }
+
+  async uploadContent(programId: string, file: File): Promise<ProgramModel> {
+    return this.programRepository.uploadContent(programId, file)
+  }
 }

@@ -215,9 +215,7 @@ const ProfileBootcampView: FC<PropsInterface> = ({
           {/* Subcard Contenido */}
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger>
-                Programas (Falta agregar el campo precio al programa)
-              </AccordionTrigger>
+              <AccordionTrigger>Programas</AccordionTrigger>
               <AccordionContent>
                 {user.role === UserType.ADMIN ? (
                   <PlusCircle
@@ -240,15 +238,16 @@ const ProfileBootcampView: FC<PropsInterface> = ({
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
-            {/* Subcard Términos y Condiciones */}
-
             <AccordionItem value="item-2">
               <AccordionTrigger>Términos y Condiciones</AccordionTrigger>
               <AccordionContent>
                 <div className="w-full">
                   <div className="w-full mt-2">
                     <div className="px-2 py-2.5 flex flex-col items-center justify-center">
-                      <Dialog open={isTermsAndCondsDialogOpen}>
+                      <Dialog
+                        open={isTermsAndCondsDialogOpen}
+                        onOpenChange={() => controlDialog("terms_and_conds")}
+                      >
                         {bootcamp.terms_and_conditions ? (
                           <Button
                             size="xs"
