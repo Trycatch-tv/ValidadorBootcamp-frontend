@@ -1,4 +1,5 @@
 import { ProgramController } from "@/controllers/program/program.controller"
+import { CurrencyType } from "@/enum/program/currencytype.enum"
 import { TypeModeProgram } from "@/enum/program/typemodeprogram.enum"
 import { useAuthStore } from "@/stores/auth/auth.store"
 import { useGlobalStore } from "@/stores/global/global.store"
@@ -18,6 +19,8 @@ const CreateProgramContainer: FC<Props> = ({ bootcampId }) => {
     name: "",
     mode: TypeModeProgram.VIRTUAL,
     duration: 0,
+    price: 0,
+    currency: CurrencyType.COP,
   })
 
   const handleUpdateForm = (changes: object) => {
@@ -36,6 +39,8 @@ const CreateProgramContainer: FC<Props> = ({ bootcampId }) => {
       duration: form.duration,
       bootcamp_id: bootcampId,
       user_id: user.id,
+      price: form.price,
+      currency: form.currency,
     }
 
     const newProgramResponse = await programController.createOne(newProgram)

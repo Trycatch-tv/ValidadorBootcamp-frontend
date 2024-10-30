@@ -1,4 +1,6 @@
 import { Button, Input } from "@/components/ui"
+import { CurrencyType } from "@/enum/program/currencytype.enum"
+import { TypeModeProgram } from "@/enum/program/typemodeprogram.enum"
 import { ChangeEvent, FC } from "react"
 
 interface Props {
@@ -33,6 +35,39 @@ const CreateProgramView: FC<Props> = ({
 
           <div className="my-2">
             <label className="text-gray-700 text-xs font-semibold block my-1">
+              Precio
+            </label>
+            <Input
+              type="number"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                onUpdateForm({ price: e.target.value })
+              }}
+              value={form.price}
+              required
+            />
+          </div>
+
+          <div className="md:my-5 my-3">
+            <label className="text-gray-700 text-xs font-semibold block my-1">
+              Moneda
+            </label>
+            <select
+              className="w-full"
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                onUpdateForm({ currency: e.target.value })
+              }}
+              value={form.currency}
+            >
+              {Object.values(CurrencyType).map((currency) => (
+                <option key={currency} value={currency}>
+                  {currency}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="my-2">
+            <label className="text-gray-700 text-xs font-semibold block my-1">
               Duración (meses)
             </label>
             <Input
@@ -56,9 +91,11 @@ const CreateProgramView: FC<Props> = ({
               }}
               value={form.mode}
             >
-              <option value="presencial">Presencial</option>
-              <option value="virtual">Virtual</option>
-              <option value="hibrida">Híbrida</option>
+              {Object.values(TypeModeProgram).map((typeModeProgram) => (
+                <option key={typeModeProgram} value={typeModeProgram}>
+                  {typeModeProgram}
+                </option>
+              ))}
             </select>
           </div>
 

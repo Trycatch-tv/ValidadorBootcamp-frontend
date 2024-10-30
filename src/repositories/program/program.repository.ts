@@ -29,4 +29,18 @@ export class ProgramRepository {
     const findAllResponse = await this.httpClient.get("/list")
     return findAllResponse.data
   }
+
+  async uploadContent(programId: string, file: File): Promise<ProgramModel> {
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("programId", programId)
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    this.httpClient.setContentType("form-data")
+    const uploadContentResponse = await this.httpClient.post(
+      `/content/upload`,
+      formData
+    )
+    return uploadContentResponse.data
+  }
 }

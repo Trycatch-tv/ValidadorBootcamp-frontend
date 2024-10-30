@@ -38,6 +38,9 @@ const ProfileBootcampContainer = () => {
       case "add_program":
         setIsDialogCreateProgramOpen(!isDialogCreateProgramOpen)
         break
+      case "terms_and_conds":
+        setTermsAndCondsDialogOpen(!isTermsAndCondsDialogOpen)
+        break
       default:
         break
     }
