@@ -8,9 +8,10 @@ import {
   TableRow,
 } from "@/components/ui"
 import { BootcampModel } from "@/models/bootcamp.model"
-import { Eye, Pencil, RotateCw } from "lucide-react"
+import { BookCheck, Eye, Pencil, RotateCw } from "lucide-react"
 import { FC } from "react"
 import { Link } from "react-router-dom"
+import ListAssessmentBootcampBackofficeContainer from "../assesments/list/list.assessment.bootcamp.backoffice.container"
 import EditBootcampBackofficeContainer from "../edit/edit.bootcamp.backoffice.container"
 
 interface Props {
@@ -18,9 +19,11 @@ interface Props {
   onRecalculateScore: (id: string) => void
   isDialogOpen: boolean
   setDialogOpen: (value: boolean) => void
-  controlDialog: (bootcamp: BootcampModel) => void
+  controlDialog: (modal: string, bootcamp: BootcampModel) => void
   bootcampSelected?: BootcampModel
   getAvatar: (id: string) => string
+  isAssesstmentDialogOpen: boolean
+  setAssesstmentDialogOpen: (value: boolean) => void
 }
 
 const ListBootcampsBackofficeView: FC<Props> = ({
@@ -31,9 +34,12 @@ const ListBootcampsBackofficeView: FC<Props> = ({
   controlDialog,
   bootcampSelected,
   getAvatar,
+  isAssesstmentDialogOpen,
+  setAssesstmentDialogOpen,
 }) => {
   return (
     <>
+      ----{bootcampSelected?.id}---
       <ModalContainer
         isDialogOpen={isDialogOpen}
         setDialogOpen={setDialogOpen}
@@ -42,7 +48,15 @@ const ListBootcampsBackofficeView: FC<Props> = ({
         <EditBootcampBackofficeContainer
           bootcamp={bootcampSelected ?? ({} as BootcampModel)}
         />
-        {/* <h2> Editar Bootcamp {bootcampSelected?.name}</h2> */}
+      </ModalContainer>
+      <ModalContainer
+        isDialogOpen={isAssesstmentDialogOpen}
+        setDialogOpen={setAssesstmentDialogOpen}
+        title="Evaluar Bootcamp"
+      >
+        <ListAssessmentBootcampBackofficeContainer
+          bootcamp={bootcampSelected ?? ({} as BootcampModel)}
+        />
       </ModalContainer>
       <div className="mt-4">
         <Table className="table table-bordered table-striped">
@@ -104,7 +118,13 @@ const ListBootcampsBackofficeView: FC<Props> = ({
                   <Pencil
                     className="cursor-pointer"
                     onClick={() => {
-                      controlDialog(bootcamp)
+                      controlDialog("edit_bootcamp", bootcamp)
+                    }}
+                  />
+                  <BookCheck
+                    className="cursor-pointer"
+                    onClick={() => {
+                      controlDialog("assesstment_bootcamp", bootcamp)
                     }}
                   />
                 </TableCell>

@@ -12,11 +12,20 @@ interface Props {
 const ListBootcampsBackofficeContainer: FC<Props> = ({ bootcamps }) => {
   const { getBootcamps } = useBootcampStore((state) => state)
   const [isDialogOpen, setDialogOpen] = useState(false)
+  const [isAssesstmentDialogOpen, setAssesstmentDialogOpen] = useState(false)
   const [bootcampSelected, setBootcampSelected] = useState<BootcampModel>()
 
-  const controlDialog = (bootcamp: BootcampModel) => {
-    setDialogOpen(!isDialogOpen)
-    setBootcampSelected(bootcamp)
+  const controlDialog = (modal: string, bootcamp: BootcampModel) => {
+    switch (modal) {
+      case "edit_bootcamp":
+        setDialogOpen(!isDialogOpen)
+        setBootcampSelected(bootcamp)
+        break
+      case "assesstment_bootcamp":
+        setAssesstmentDialogOpen(!isAssesstmentDialogOpen)
+        setBootcampSelected(bootcamp)
+        break
+    }
   }
 
   const handleRecalculateScore = async (id: string) => {
@@ -57,6 +66,8 @@ const ListBootcampsBackofficeContainer: FC<Props> = ({ bootcamps }) => {
         controlDialog={controlDialog}
         bootcampSelected={bootcampSelected}
         getAvatar={getAvatar}
+        isAssesstmentDialogOpen={isAssesstmentDialogOpen}
+        setAssesstmentDialogOpen={setAssesstmentDialogOpen}
       />
     </>
   )
