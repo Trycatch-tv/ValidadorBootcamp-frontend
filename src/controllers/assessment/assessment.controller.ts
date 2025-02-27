@@ -1,3 +1,4 @@
+import { AssessmentModel } from "@/models/assessment.model"
 import { AssessmentService } from "../../services/asessment/assessment.service"
 
 export class AssessmentController {
@@ -6,5 +7,12 @@ export class AssessmentController {
 
   async findAllByBootcampId(bootcampId: string) {
     return await this.assessmentService.findAllByBootcampId(bootcampId)
+  }
+
+  async createMany(
+    bootcampId: string,
+    assessments: Partial<AssessmentModel[]>
+  ) {
+    return await this.assessmentService.createMany(bootcampId, assessments)
   }
 }

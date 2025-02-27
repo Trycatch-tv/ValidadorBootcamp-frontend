@@ -13,11 +13,21 @@ interface Props {
   resultadosVerificados: any
   experienciaFormativa: any
   confianza: any
+  viewMode: string
+  onChangeResultadosVerificados: (value: string, criteria_id: string) => void
+  onChangeExperienciaFormativa: (value: string, criteria_id: string) => void
+  onChangeConfianza: (value: string, criteria_id: string) => void
+  onSubmit: () => void
 }
 const ListAssessmentBootcampBackofficeView: FC<Props> = ({
   resultadosVerificados,
   experienciaFormativa,
   confianza,
+  viewMode,
+  onChangeResultadosVerificados,
+  onChangeExperienciaFormativa,
+  onChangeConfianza,
+  onSubmit,
 }) => {
   return (
     <>
@@ -53,11 +63,13 @@ const ListAssessmentBootcampBackofficeView: FC<Props> = ({
                   key={index}
                   id={`score_${item.code}`}
                   className="col-span-3"
-                  // onChange={onChangeScoreOverall}
-                  // value={scoreOverall}
+                  onChange={(e: any) => {
+                    onChangeResultadosVerificados(e, item.code)
+                  }}
+                  value={resultadosVerificados[index].weight}
                 >
                   {item.score.map((score: any, index: number) => (
-                    <option key={index} value={score.value}>
+                    <option key={index} value={index}>
                       {score.scoreDescription}
                     </option>
                   ))}
@@ -98,11 +110,13 @@ const ListAssessmentBootcampBackofficeView: FC<Props> = ({
                   key={index}
                   id={`score_${item.code}`}
                   className="col-span-3"
-                  // onChange={onChangeScoreOverall}
-                  // value={scoreOverall}
+                  onChange={(e: any) => {
+                    onChangeExperienciaFormativa(e, item.code)
+                  }}
+                  value={experienciaFormativa[index].weight}
                 >
                   {item.score.map((score: any, index: number) => (
-                    <option key={index} value={score.value}>
+                    <option key={index} value={index}>
                       {score.scoreDescription}
                     </option>
                   ))}
@@ -143,11 +157,13 @@ const ListAssessmentBootcampBackofficeView: FC<Props> = ({
                   key={index}
                   id={`score_${item.code}`}
                   className="col-span-3"
-                  // onChange={onChangeScoreOverall}
-                  // value={scoreOverall}
+                  onChange={(e: any) => {
+                    onChangeConfianza(e, item.code)
+                  }}
+                  value={confianza[index].weight}
                 >
                   {item.score.map((score: any, index: number) => (
-                    <option key={index} value={score.value}>
+                    <option key={index} value={index}>
                       {score.scoreDescription}
                     </option>
                   ))}
@@ -159,7 +175,7 @@ const ListAssessmentBootcampBackofficeView: FC<Props> = ({
       </div>
       <div className="items-center justify-center flex ">
         <Button
-          // onClick={onSubmit}
+          onClick={onSubmit}
           size="lg"
           // disabled={
           //   !title ||
@@ -169,7 +185,7 @@ const ListAssessmentBootcampBackofficeView: FC<Props> = ({
           //   !scoreJobSupport
           // }
         >
-          Crear
+          {viewMode === "create" ? "Crear" : "Actualizar"}
         </Button>
       </div>
     </>

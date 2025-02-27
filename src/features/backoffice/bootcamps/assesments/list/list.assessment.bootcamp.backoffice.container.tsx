@@ -1,6 +1,7 @@
 import { AssessmentController } from "@/controllers/assessment/assessment.controller"
 import { BootcampModel } from "@/models/bootcamp.model"
 import { useAuthStore } from "@/stores/auth/auth.store"
+import { showAlert } from "@/utils/alerts/alert.util"
 import { FC, useEffect, useState } from "react"
 import ListAssessmentBootcampBackofficeView from "./list.assessment.bootcamp.backoffice.view"
 
@@ -8,12 +9,14 @@ interface Props {
   bootcamp: BootcampModel
 }
 const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
-  const resultadosVerificados = [
+  let resultadosVerificadosRaw = [
     {
       code: "RV01",
       criteriaDescription:
         "Tasa de éxito: (total ubicados / total cupos ofertados)*100",
       weight: 0.0,
+      category_id: 1,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -46,6 +49,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       criteriaDescription:
         "Velocidad de inserción: meses promedio en conseguir trabajo luego de terminar",
       weight: 0.0,
+      category_id: 1,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -78,6 +83,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       criteriaDescription:
         "Salario promedio de entrada: primer salario promedio al engancharse",
       weight: 0.0,
+      category_id: 1,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -110,6 +117,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       criteriaDescription:
         "Rol de entrada conseguido: primer rol con el que se engancha el egresado",
       weight: 0.0,
+      category_id: 1,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -139,12 +148,14 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     },
   ]
 
-  const experienciaFormativa = [
+  let experienciaFormativaRaw = [
     {
       code: "EF01",
       criteriaDescription:
         "Costo vs Retorno: inversión requerida vs retribución",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -176,6 +187,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF02",
       criteriaDescription: "Antes: Requisitos de ingreso",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -207,6 +220,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF03",
       criteriaDescription: "Antes: Proceso de admisión",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -238,6 +253,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF04",
       criteriaDescription: "Durante: Calidad y actualidad de Contenidos",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -269,6 +286,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF05",
       criteriaDescription: "Durante: Enfoque práctico",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -300,6 +319,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF06",
       criteriaDescription: "Durante: Calidad de Docentes",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -331,6 +352,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF07",
       criteriaDescription: "Durante: Mentoría",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -362,6 +385,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF08",
       criteriaDescription: "Durante: Networking",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -393,6 +418,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF09",
       criteriaDescription: "Después: Talleres de inserción laboral",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -424,6 +451,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "EF10",
       criteriaDescription: "Después: Contacto con empresas",
       weight: 0.0,
+      category_id: 2,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -453,11 +482,13 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     },
   ]
 
-  const confianza = [
+  let confianzaRaw = [
     {
       code: "CF01",
       criteriaDescription: "Transparencia: Términos y condiciones",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -489,6 +520,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF02",
       criteriaDescription: "Transparencia: Requisitos de admisión",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -520,6 +553,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF03",
       criteriaDescription: "Transparencia: Condiciones de salida",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -551,6 +586,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF04",
       criteriaDescription: "Transparencia: Canales de contacto",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -582,6 +619,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF05",
       criteriaDescription: "Soporte: Sponsors, instituciones aliadas",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -613,6 +652,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF06",
       criteriaDescription: "Demanda Externa: Perfiles requeridos",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -644,6 +685,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF07",
       criteriaDescription: "Demanda Externa: Puestos disponibles",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -675,6 +718,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       code: "CF08",
       criteriaDescription: "Testimonios Auditados: De egresados",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -707,6 +752,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       criteriaDescription:
         "Testimonios Auditados: De organizaciones referentes",
       weight: 0.0,
+      category_id: 3,
+      bootcamp_id: bootcamp.id,
       score: [
         {
           score: 0.0,
@@ -736,6 +783,24 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     },
   ]
 
+  const [resultadosVerificados, setResultadosVerificados] = useState(
+    resultadosVerificadosRaw
+  )
+
+  const [experienciaFormativa, setExperienciaFormativa] = useState(
+    experienciaFormativaRaw
+  )
+
+  const [confianza, setConfianza] = useState(confianzaRaw)
+
+  const [viewMode, setViewMode] = useState("create")
+
+  enum AssessmentCategories {
+    RESULTADOS_VERIFICADOS = 1,
+    EXPERIENCIA_FORMATIVA = 2,
+    CONFIANZA = 3,
+  }
+
   const [form, setForm] = useState({
     bootcamp_id: bootcamp.id,
     category_id: 0,
@@ -755,12 +820,89 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     const assesstmentsResponse = await assessmentController.findAllByBootcampId(
       bootcamp.id
     )
-    console.log(assesstmentsResponse, "assesstmentsResponse")
     if (assesstmentsResponse.length > 0) {
       // variable de nombre del boton es Actualizar assesstment
       // asignar los valores de assesstmentsResponse a form
+      setViewMode("update")
     } else {
       // variable de nombre del boton es Crear assesstment
+      setViewMode("create")
+    }
+  }
+
+  const handleResultadosVerificados = (value: any, criteria_id: any) => {
+    if (viewMode === "create") {
+      const newResultadosVerificados = resultadosVerificados.map(
+        (item: any) => {
+          if (item.code === criteria_id) {
+            item.weight = Number(value.target.value)
+          }
+          return item
+        }
+      )
+      setResultadosVerificados(newResultadosVerificados)
+      console.log(resultadosVerificados)
+    }
+  }
+
+  const handleExperienciaFormativa = (value: any, criteria_id: any) => {
+    if (viewMode === "create") {
+      const newExperienciaFormativa = experienciaFormativa.map((item: any) => {
+        if (item.code === criteria_id) {
+          item.weight = value.target.selectedIndex
+        }
+        return item
+      })
+      setExperienciaFormativa(newExperienciaFormativa)
+    }
+  }
+
+  const handleConfianza = (value: any, criteria_id: any) => {
+    if (viewMode === "create") {
+      const newConfianza = confianza.map((item: any) => {
+        if (item.code === criteria_id) {
+          item.weight = value.target.selectedIndex
+        }
+        return item
+      })
+      setConfianza(newConfianza)
+      console.log(confianza)
+    }
+  }
+
+  const handleSubmit = async () => {
+    const assessmentController = new AssessmentController()
+    if (viewMode === "create") {
+      const allCriteria = [
+        ...resultadosVerificados,
+        ...experienciaFormativa,
+        ...confianza,
+      ]
+      console.log("****************************")
+      console.log(resultadosVerificados)
+      console.log(experienciaFormativa)
+      console.log(confianza)
+      console.log("****************************")
+      const allCriteriaFlatMap = allCriteria
+        .flatMap((item) => item)
+        .map((item) => {
+          return {
+            bootcamp_id: bootcamp.id,
+            category_id: item.category_id,
+            criteria_id: item.code,
+            weight: item.weight,
+          }
+        })
+      try {
+        await assessmentController.createMany(bootcamp.id, allCriteriaFlatMap)
+        showAlert(
+          "Assessment created successfully",
+          "The assessment was created successfully",
+          "success"
+        )
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -812,6 +954,11 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
         resultadosVerificados={resultadosVerificados}
         experienciaFormativa={experienciaFormativa}
         confianza={confianza}
+        viewMode={viewMode}
+        onChangeResultadosVerificados={handleResultadosVerificados}
+        onChangeExperienciaFormativa={handleExperienciaFormativa}
+        onChangeConfianza={handleConfianza}
+        onSubmit={handleSubmit}
       />
     </>
   )

@@ -1,3 +1,4 @@
+import { AssessmentModel } from "@/models/assessment.model"
 import { AssessmentRepository } from "../../repositories/assesstment/assessment.repository"
 
 export class AssessmentService {
@@ -7,5 +8,12 @@ export class AssessmentService {
 
   async findAllByBootcampId(bootcampId: string) {
     return await this.assessmentRepository.findAllByBootcampId(bootcampId)
+  }
+
+  async createMany(
+    bootcampId: string,
+    assessments: Partial<AssessmentModel[]>
+  ) {
+    return await this.assessmentRepository.createMany(bootcampId, assessments)
   }
 }

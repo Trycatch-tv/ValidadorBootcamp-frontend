@@ -39,7 +39,6 @@ const ListBootcampsBackofficeView: FC<Props> = ({
 }) => {
   return (
     <>
-      ----{bootcampSelected?.id}---
       <ModalContainer
         isDialogOpen={isDialogOpen}
         setDialogOpen={setDialogOpen}
