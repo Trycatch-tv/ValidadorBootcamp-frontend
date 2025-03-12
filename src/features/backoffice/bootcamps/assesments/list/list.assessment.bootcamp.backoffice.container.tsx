@@ -822,7 +822,49 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     )
     if (assesstmentsResponse.length > 0) {
       // variable de nombre del boton es Actualizar assesstment
-      // asignar los valores de assesstmentsResponse a form
+      console.log(assesstmentsResponse, assesstmentsResponse.length)
+
+      // Recorrer resultadosVerificados y asignar el valor de weight de assesstmentsResponse a resultadosVerificados
+      const resultadosVerificadosActualizados = resultadosVerificados.map(
+        (item: any) => {
+          const assesstment = assesstmentsResponse.find(
+            (assesstment: any) => assesstment.criteria_id === item.code
+          )
+          if (assesstment) {
+            item.weight = assesstment.weight
+          }
+          return item
+        }
+      )
+
+      setResultadosVerificados(resultadosVerificadosActualizados)
+
+      const experienciaFormativaActualizada = experienciaFormativa.map(
+        (item: any) => {
+          const assesstment = assesstmentsResponse.find(
+            (assesstment: any) => assesstment.criteria_id === item.code
+          )
+          if (assesstment) {
+            item.weight = assesstment.weight
+          }
+          return item
+        }
+      )
+
+      setExperienciaFormativa(experienciaFormativaActualizada)
+
+      const confianzaActualizada = confianza.map((item: any) => {
+        const assesstment = assesstmentsResponse.find(
+          (assesstment: any) => assesstment.criteria_id === item.code
+        )
+        if (assesstment) {
+          item.weight = assesstment.weight
+        }
+        return item
+      })
+
+      setConfianza(confianzaActualizada)
+
       setViewMode("update")
     } else {
       // variable de nombre del boton es Crear assesstment
@@ -831,78 +873,81 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
   }
 
   const handleResultadosVerificados = (value: any, criteria_id: any) => {
-    if (viewMode === "create") {
-      const newResultadosVerificados = resultadosVerificados.map(
-        (item: any) => {
-          if (item.code === criteria_id) {
-            item.weight = Number(value.target.value)
-          }
-          return item
-        }
-      )
-      setResultadosVerificados(newResultadosVerificados)
-      console.log(resultadosVerificados)
-    }
+    const newResultadosVerificados = resultadosVerificados.map((item: any) => {
+      if (item.code === criteria_id) {
+        item.weight = Number(value.target.value)
+      }
+      return item
+    })
+    setResultadosVerificados(newResultadosVerificados)
   }
 
   const handleExperienciaFormativa = (value: any, criteria_id: any) => {
-    if (viewMode === "create") {
-      const newExperienciaFormativa = experienciaFormativa.map((item: any) => {
-        if (item.code === criteria_id) {
-          item.weight = value.target.selectedIndex
-        }
-        return item
-      })
-      setExperienciaFormativa(newExperienciaFormativa)
-    }
+    const newExperienciaFormativa = experienciaFormativa.map((item: any) => {
+      if (item.code === criteria_id) {
+        item.weight = value.target.selectedIndex
+      }
+      return item
+    })
+    setExperienciaFormativa(newExperienciaFormativa)
   }
 
   const handleConfianza = (value: any, criteria_id: any) => {
-    if (viewMode === "create") {
-      const newConfianza = confianza.map((item: any) => {
-        if (item.code === criteria_id) {
-          item.weight = value.target.selectedIndex
-        }
-        return item
-      })
-      setConfianza(newConfianza)
-      console.log(confianza)
-    }
+    const newConfianza = confianza.map((item: any) => {
+      if (item.code === criteria_id) {
+        item.weight = value.target.selectedIndex
+      }
+      return item
+    })
+    setConfianza(newConfianza)
   }
 
   const handleSubmit = async () => {
     const assessmentController = new AssessmentController()
-    if (viewMode === "create") {
-      const allCriteria = [
-        ...resultadosVerificados,
-        ...experienciaFormativa,
-        ...confianza,
-      ]
-      console.log("****************************")
-      console.log(resultadosVerificados)
-      console.log(experienciaFormativa)
-      console.log(confianza)
-      console.log("****************************")
-      const allCriteriaFlatMap = allCriteria
-        .flatMap((item) => item)
-        .map((item) => {
-          return {
-            bootcamp_id: bootcamp.id,
-            category_id: item.category_id,
-            criteria_id: item.code,
-            weight: item.weight,
-          }
-        })
-      try {
+    const allCriteria = [
+      ...resultadosVerificados,
+      ...experienciaFormativa,
+      ...confianza,
+    ]
+    console.log("****************************")
+    console.log(resultadosVerificados)
+    console.log(experienciaFormativa)
+    console.log(confianza)
+    console.log("****************************")
+    const allCriteriaFlatMap = allCriteria
+      .flatMap((item) => item)
+      .map((item) => {
+        return {
+          bootcamp_id: bootcamp.id,
+          category_id: item.category_id,
+          criteria_id: item.code,
+          weight: item.weight,
+        }
+      })
+    try {
+      if (viewMode === "create") {
         await assessmentController.createMany(bootcamp.id, allCriteriaFlatMap)
         showAlert(
           "Assessment created successfully",
           "The assessment was created successfully",
           "success"
         )
-      } catch (error) {
-        console.log(error)
+      } else if (viewMode == "update") {
+        await assessmentController.updateMany(bootcamp.id, allCriteriaFlatMap)
+        showAlert(
+          "Assessment updated successfully",
+          "The assessment was updated successfully",
+          "success"
+        )
       }
+    } catch (error) {
+      showAlert(
+        `Error ${viewMode == "create" ? "Creating" : "Updating"} assessment`,
+        `There was an error ${
+          viewMode == "create" ? "creating" : "updating"
+        } the assessment`,
+        "error"
+      )
     }
   }
 

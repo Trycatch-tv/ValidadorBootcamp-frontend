@@ -15,4 +15,11 @@ export class AssessmentController {
   ) {
     return await this.assessmentService.createMany(bootcampId, assessments)
   }
+
+  async updateMany(
+    bootcampId: string,
+    assessments: Partial<AssessmentModel[]>
+  ) {
+    return await this.assessmentService.updateMany(bootcampId, assessments)
+  }
 }

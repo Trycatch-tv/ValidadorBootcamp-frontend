@@ -29,6 +29,19 @@ export class AssessmentRepository {
     return createManyResponse.data
   }
 
+  async updateMany(
+    bootcampId: string,
+    assessments: Partial<AssessmentModel[]>
+  ): Promise<AssessmentModel[]> {
+    const getToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
+    this.httpClient.setToken(getToken.state.token)
+    const updateManyResponse = await this.httpClient.put(
+      `/bootcamp/many/${bootcampId}`,
+      assessments
+    )
+    return updateManyResponse.data
+  }
+
   // async updateOne(
   //   id: string,
   //   bootcamp: Partial<BootcampModel>
