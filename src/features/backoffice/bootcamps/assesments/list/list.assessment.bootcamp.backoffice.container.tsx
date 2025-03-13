@@ -1,6 +1,7 @@
 import { AssessmentController } from "@/controllers/assessment/assessment.controller"
+import { CriteriaInterface } from "@/interfaces/assessments/criteria.interface"
+import { AssessmentModel } from "@/models/assessment.model"
 import { BootcampModel } from "@/models/bootcamp.model"
-import { useAuthStore } from "@/stores/auth/auth.store"
 import { showAlert } from "@/utils/alerts/alert.util"
 import { FC, useEffect, useState } from "react"
 import ListAssessmentBootcampBackofficeView from "./list.assessment.bootcamp.backoffice.view"
@@ -8,8 +9,9 @@ import ListAssessmentBootcampBackofficeView from "./list.assessment.bootcamp.bac
 interface Props {
   bootcamp: BootcampModel
 }
+
 const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
-  let resultadosVerificadosRaw = [
+  const resultadosVerificadosRaw: CriteriaInterface[] = [
     {
       code: "RV01",
       criteriaDescription:
@@ -148,7 +150,7 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     },
   ]
 
-  let experienciaFormativaRaw = [
+  const experienciaFormativaRaw: CriteriaInterface[] = [
     {
       code: "EF01",
       criteriaDescription:
@@ -482,7 +484,7 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     },
   ]
 
-  let confianzaRaw = [
+  const confianzaRaw: CriteriaInterface[] = [
     {
       code: "CF01",
       criteriaDescription: "Transparencia: Términos y condiciones",
@@ -795,25 +797,6 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
 
   const [viewMode, setViewMode] = useState("create")
 
-  enum AssessmentCategories {
-    RESULTADOS_VERIFICADOS = 1,
-    EXPERIENCIA_FORMATIVA = 2,
-    CONFIANZA = 3,
-  }
-
-  const [form, setForm] = useState({
-    bootcamp_id: bootcamp.id,
-    category_id: 0,
-    criteria_id: 0,
-    weight: 0,
-  })
-
-  const handleUpdateForm = (changes: object) => {
-    setForm((currentState) => ({ ...currentState, ...changes }))
-  }
-
-  const { user } = useAuthStore((state) => state)
-
   const getAssesstments = async () => {
     const assessmentController = new AssessmentController()
 
@@ -821,14 +804,12 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       bootcamp.id
     )
     if (assesstmentsResponse.length > 0) {
-      // variable de nombre del boton es Actualizar assesstment
-      console.log(assesstmentsResponse, assesstmentsResponse.length)
-
       // Recorrer resultadosVerificados y asignar el valor de weight de assesstmentsResponse a resultadosVerificados
       const resultadosVerificadosActualizados = resultadosVerificados.map(
-        (item: any) => {
+        (item: CriteriaInterface) => {
           const assesstment = assesstmentsResponse.find(
-            (assesstment: any) => assesstment.criteria_id === item.code
+            (assesstment: AssessmentModel) =>
+              assesstment.criteria_id === item.code
           )
           if (assesstment) {
             item.weight = assesstment.weight
@@ -840,9 +821,10 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       setResultadosVerificados(resultadosVerificadosActualizados)
 
       const experienciaFormativaActualizada = experienciaFormativa.map(
-        (item: any) => {
+        (item: CriteriaInterface) => {
           const assesstment = assesstmentsResponse.find(
-            (assesstment: any) => assesstment.criteria_id === item.code
+            (assesstment: AssessmentModel) =>
+              assesstment.criteria_id === item.code
           )
           if (assesstment) {
             item.weight = assesstment.weight
@@ -853,9 +835,10 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
 
       setExperienciaFormativa(experienciaFormativaActualizada)
 
-      const confianzaActualizada = confianza.map((item: any) => {
+      const confianzaActualizada = confianza.map((item: CriteriaInterface) => {
         const assesstment = assesstmentsResponse.find(
-          (assesstment: any) => assesstment.criteria_id === item.code
+          (assesstment: AssessmentModel) =>
+            assesstment.criteria_id === item.code
         )
         if (assesstment) {
           item.weight = assesstment.weight
@@ -867,33 +850,45 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
 
       setViewMode("update")
     } else {
-      // variable de nombre del boton es Crear assesstment
       setViewMode("create")
     }
   }
 
-  const handleResultadosVerificados = (value: any, criteria_id: any) => {
-    const newResultadosVerificados = resultadosVerificados.map((item: any) => {
-      if (item.code === criteria_id) {
-        item.weight = Number(value.target.value)
+  const handleResultadosVerificados = (
+    value: React.ChangeEvent<HTMLSelectElement>,
+    criteria_id: string
+  ) => {
+    const newResultadosVerificados = resultadosVerificados.map(
+      (item: CriteriaInterface) => {
+        if (item.code === criteria_id) {
+          item.weight = Number(value.target.value)
+        }
+        return item
       }
-      return item
-    })
+    )
     setResultadosVerificados(newResultadosVerificados)
   }
 
-  const handleExperienciaFormativa = (value: any, criteria_id: any) => {
-    const newExperienciaFormativa = experienciaFormativa.map((item: any) => {
-      if (item.code === criteria_id) {
-        item.weight = value.target.selectedIndex
+  const handleExperienciaFormativa = (
+    value: React.ChangeEvent<HTMLSelectElement>,
+    criteria_id: string
+  ) => {
+    const newExperienciaFormativa = experienciaFormativa.map(
+      (item: CriteriaInterface) => {
+        if (item.code === criteria_id) {
+          item.weight = value.target.selectedIndex
+        }
+        return item
       }
-      return item
-    })
+    )
     setExperienciaFormativa(newExperienciaFormativa)
   }
 
-  const handleConfianza = (value: any, criteria_id: any) => {
-    const newConfianza = confianza.map((item: any) => {
+  const handleConfianza = (
+    value: React.ChangeEvent<HTMLSelectElement>,
+    criteria_id: string
+  ) => {
+    const newConfianza = confianza.map((item: CriteriaInterface) => {
       if (item.code === criteria_id) {
         item.weight = value.target.selectedIndex
       }
@@ -909,11 +904,6 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
       ...experienciaFormativa,
       ...confianza,
     ]
-    console.log("****************************")
-    console.log(resultadosVerificados)
-    console.log(experienciaFormativa)
-    console.log(confianza)
-    console.log("****************************")
     const allCriteriaFlatMap = allCriteria
       .flatMap((item) => item)
       .map((item) => {
@@ -954,44 +944,6 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
   useEffect(() => {
     getAssesstments()
   }, [])
-
-  // const assesstBootcamp = async () => {
-  // TODO: Esto es para ejecutar el endpoint de updated usando el upsertAssessment
-  //   const assessmentController = new AssessmentController()
-
-  //   const upsertAssessment = {
-  //     name: form.name,
-  //     description: form.description,
-  //     url: form.website,
-  //     facebook_url: form.facebook,
-  //     instragram_url: form.instagram,
-  //     country_name: form.country,
-  //     country_iso: form.isoCountry,
-  //     email: form.email,
-  //     phone: form.phone,
-  //     is_endorsed: form.isEndorsed,
-  //     endorsed_by: form.endorsedBy,
-  //     is_verified: form.isVerified,
-  //     mode: form.mode,
-  //     user_id: user.id,
-  //   }
-
-  //   const newBootcampResponse = await bootcampController.createOne(newBootcamp)
-  //   if (newBootcampResponse.id) {
-  //     showAlert(
-  //       "Bootcamp created successfully",
-  //       "The bootcamp was created successfully",
-  //       "success"
-  //     )
-  //     setModalState("cerrar_modal")
-  //   } else {
-  //     showAlert(
-  //       "Error creating bootcamp",
-  //       "There was an error creating the bootcamp",
-  //       "error"
-  //     )
-  //   }
-  // }
 
   return (
     <>
