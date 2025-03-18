@@ -2,6 +2,7 @@ import { AssessmentController } from "@/controllers/assessment/assessment.contro
 import { CriteriaInterface } from "@/interfaces/assessments/criteria.interface"
 import { AssessmentModel } from "@/models/assessment.model"
 import { BootcampModel } from "@/models/bootcamp.model"
+import useBootcampStore from "@/stores/bootcamps/bootcamps.store"
 import { showAlert } from "@/utils/alerts/alert.util"
 import { FC, useEffect, useState } from "react"
 import ListAssessmentBootcampBackofficeView from "./list.assessment.bootcamp.backoffice.view"
@@ -793,6 +794,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
     experienciaFormativaRaw
   )
 
+  const { getBootcamps } = useBootcampStore((state) => state)
+
   const [confianza, setConfianza] = useState(confianzaRaw)
 
   const [viewMode, setViewMode] = useState("create")
@@ -930,6 +933,8 @@ const ListAssessmentBootcampBackofficeContainer: FC<Props> = ({ bootcamp }) => {
           "success"
         )
       }
+      getBootcamps()
+      getAssesstments()
     } catch (error) {
       showAlert(
         `Error ${viewMode == "create" ? "Creating" : "Updating"} assessment`,
