@@ -40,13 +40,13 @@ import {
   Globe,
   Instagram,
   Link2,
-  ListOrdered,
   MessageSquarePlus,
   PlusCircle,
   ShieldCheck,
 } from "lucide-react"
 import { ChangeEvent, FC } from "react"
 import { LazyLoadComponent } from "react-lazy-load-image-component"
+import Rating from "react-rating-stars-component"
 import { Link } from "react-router-dom"
 
 interface PropsInterface {
@@ -168,13 +168,18 @@ const ProfileBootcampView: FC<PropsInterface> = ({
               </div>
             </div>
           </div>
-          <Badge
-            className="h-[22px] text-gray-700 bg-green-300"
-            variant={"secondary"}
-          >
-            <ListOrdered className="size-4 mr-1" />{" "}
-            {bootcamp?.score?.toFixed(4)}
-          </Badge>
+          {bootcamp.score ? (
+            <Rating
+              count={5}
+              value={bootcamp.score}
+              size={16}
+              isHalf={true}
+              activeColor="#fcc11e"
+              edit={false}
+            />
+          ) : (
+            ""
+          )}
         </div>
         {/* Descripción y Insignias */}
         <div>

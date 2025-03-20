@@ -1,13 +1,14 @@
-import {FC} from 'react'
-import CardBootcampView from './card.bootcamp.view'
+import { BootcampModel } from "@/models/bootcamp.model"
+import { FC } from "react"
+import CardBootcampView from "./card.bootcamp.view"
 
 interface Props {
-    bootcamp: any
+  bootcamp: Partial<BootcampModel>
 }
-const CardBootcampContainer:FC<Props> = ({bootcamp}) => {
+const CardBootcampContainer: FC<Props> = ({ bootcamp }) => {
   return (
     <>
-      <CardBootcampView bootcamp={bootcamp}/>
+      <CardBootcampView bootcamp={bootcamp} />
     </>
   )
 }
