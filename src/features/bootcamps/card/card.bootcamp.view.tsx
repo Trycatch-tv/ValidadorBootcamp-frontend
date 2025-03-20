@@ -6,31 +6,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui"
-import { Star } from "lucide-react"
+import { BootcampModel } from "@/models/bootcamp.model"
 import { FC } from "react"
+import Rating from "react-rating-stars-component"
 import { Link } from "react-router-dom"
 
-type BootcampTypes = {
-  id: number
-  name: string
-  description: string
-}
 interface Props {
-  bootcamp: BootcampTypes
+  bootcamp: Partial<BootcampModel>
 }
 const CardBootcampView: FC<Props> = ({ bootcamp }) => {
   return (
     <Card className=" mb-4 min-w-[300px] max-w-[300px]">
-      <CardHeader className="flex-row justify-between">
+      <CardHeader className="flex-row justify-between items-center">
         <CardTitle className="text-lg">{bootcamp.name}</CardTitle>
-        <div className="flex">
-          {[1, 2, 3].map(() => (
-            <Star fill="#fcc11e" className="h-4 w-4 text-yellow-500" />
-          ))}
-          {[1, 2].map(() => (
-            <Star className="h-4 w-4 text-gray-500" />
-          ))}
-        </div>
+        <Rating
+          count={5}
+          value={bootcamp.score}
+          size={16}
+          isHalf={true}
+          activeColor="#fcc11e"
+          edit={false}
+        />
       </CardHeader>
       <CardContent className="card-body min-h-[70px] ">
         <p className="whitespace-break-spaces text-gray-400 text-xs">
