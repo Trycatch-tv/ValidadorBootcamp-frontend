@@ -3,7 +3,7 @@ import { Button, Input } from "@/components/ui"
 import { UserType } from "@/enum/users/usertype.enum"
 import CreateBootcampBackofficeContainer from "@/features/backoffice/bootcamps/create/create.bootcamp.backoffice.container"
 import { UserModel } from "@/models/user.model"
-import { BookPlus, Filter, Paintbrush, Search } from "lucide-react"
+import { BookPlus, Paintbrush, Search } from "lucide-react"
 import { FC } from "react"
 
 interface Props {
@@ -57,9 +57,9 @@ const SearchBarView: FC<Props> = ({
           >
             <Paintbrush className="mr-2 h-4 w-4" />
           </Button>
-          <Button size={"sm"} className="text-xs" variant="outline">
+          {/* <Button size={"sm"} className="text-xs" variant="outline">
             <Filter className="mr-2 h-4 w-4" />
-          </Button>
+          </Button> */}
           {user?.role === UserType.ADMIN ? (
             <>
               <Button

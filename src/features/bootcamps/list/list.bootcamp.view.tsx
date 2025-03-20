@@ -13,7 +13,7 @@ const ListBootcampView: FC<Props> = ({ bootcamps }) => {
           <h1 className="text-2xl text-gray-400">No hay bootcamps</h1>
         </div>
       )}
-      <div className="flex flex-wrap gap-4 mt-16">
+      <div className="flex flex-wrap gap-4 mt-16 overflow-y-auto max-h-[66vh] overflow-hidden mb-16">
         {bootcamps.map((bootcamp: BootcampModel) => (
           <CardBootcampContainer bootcamp={bootcamp} />
         ))}
