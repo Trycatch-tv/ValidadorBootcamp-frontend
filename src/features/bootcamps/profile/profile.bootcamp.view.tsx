@@ -46,8 +46,8 @@ import {
 } from "lucide-react"
 import { ChangeEvent, FC } from "react"
 import { LazyLoadComponent } from "react-lazy-load-image-component"
-import Rating from "react-rating-stars-component"
 import { Link } from "react-router-dom"
+import { Rating } from "react-simple-star-rating"
 
 interface PropsInterface {
   bootcamp: BootcampModel
@@ -170,12 +170,13 @@ const ProfileBootcampView: FC<PropsInterface> = ({
           </div>
           {bootcamp.score ? (
             <Rating
-              count={5}
-              value={bootcamp.score}
-              size={16}
-              isHalf={true}
-              activeColor="#fcc11e"
-              edit={false}
+              initialValue={bootcamp.score}
+              size={20}
+              readonly={true}
+              allowFraction={true}
+              fillColor={"#fcc11e"}
+              emptyColor={"#e4e4e7"}
+              transition
             />
           ) : (
             ""

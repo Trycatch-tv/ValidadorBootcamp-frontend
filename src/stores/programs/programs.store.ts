@@ -9,12 +9,12 @@ export const useProgramStore = create<ProgramsState>((set) => ({
   getPrograms: async () => {
     const programsController = new ProgramController()
     const programsResponse = await programsController.findAll()
-    set((state) => ({ programs: programsResponse }))
+    set(() => ({ programs: programsResponse }))
   },
   getProgramsByBootcamp: async (id: string) => {
     const programsController = new ProgramController()
     const programResponse = await programsController.findManyByBootcampId(id)
-    set((state) => ({ programsByBootcamp: programResponse }))
+    set(() => ({ programsByBootcamp: programResponse }))
   },
 }))
 

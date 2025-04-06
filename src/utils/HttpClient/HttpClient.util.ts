@@ -14,7 +14,7 @@ export default class HttpClient {
 
     this.http.interceptors.request.use((config) => {
       const accessToken = JSON.parse(localStorage.getItem("auth") ?? "{}")
-      if (accessToken) {
+      if (accessToken.state) {
         config.headers.Authorization = `Bearer ${accessToken.state.token}`
       }
       return config
