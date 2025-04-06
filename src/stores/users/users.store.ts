@@ -9,11 +9,11 @@ export const useUserStore = create<UserState>((set) => ({
   getUsers: async () => {
     const usersController = new UserController()
     const usersResponse = await usersController.findAll()
-    set((state) => ({ users: usersResponse }))
+    set(() => ({ users: usersResponse }))
   },
   searchUsers: async (query: string) => {
     const usersController = new UserController()
     const usersResponse = await usersController.search(query)
-    set((state) => ({ users: usersResponse }))
+    set(() => ({ users: usersResponse }))
   },
 }))

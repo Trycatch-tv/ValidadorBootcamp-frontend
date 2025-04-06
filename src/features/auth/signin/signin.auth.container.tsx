@@ -10,7 +10,7 @@ const SigninContainer = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { signIn, isAuth, user } = useAuthStore()
+  const { signIn, isAuth } = useAuthStore()
 
   const handlerShowPassword = () => setShowPassword(!showPassword)
 

@@ -15,16 +15,16 @@ export const useAuthStore = create(
       signIn: async (email: string, password: string) => {
         const authController = new AuthController()
         const signInResponse = await authController.signIn({ email, password })
-        set((state: Partial<AuthState>) => ({ user: signInResponse.data }))
-        set((state: Partial<AuthState>) => ({
+        set(() => ({ user: signInResponse.data }))
+        set(() => ({
           token: signInResponse.data.token,
         }))
       },
       signOut: () => {
-        set((state: Partial<AuthState>) => ({
+        set(() => ({
           user: new Object() as UserModel,
         }))
-        set((state: Partial<AuthState>) => ({
+        set(() => ({
           token: null,
         }))
       },

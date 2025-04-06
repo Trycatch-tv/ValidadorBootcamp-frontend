@@ -7,12 +7,12 @@ export const useBootcampStore = create<BootcampsState>((set) => ({
   getBootcamps: async () => {
     const bootcampsController = new BootcampController()
     const bootcampsResponse = await bootcampsController.findAll()
-    set((state) => ({ bootcamps: bootcampsResponse }))
+    set(() => ({ bootcamps: bootcampsResponse }))
   },
   searchBootcamps: async (query: string) => {
     const bootcampsController = new BootcampController()
     const bootcampsResponse = await bootcampsController.search(query)
-    set((state) => ({ bootcamps: bootcampsResponse }))
+    set(() => ({ bootcamps: bootcampsResponse }))
   },
 }))
 
